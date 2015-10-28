@@ -1,0 +1,281 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+
+a, a:visited, a:hover, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+
+#images {
+  float: left;
+  width: 100%;
+
+}
+
+#images2 {
+  width: 50%;
+}
+
+#basicInfo {
+  float: right;
+  width: 45%;
+}
+
+#amenities {
+  float: left;
+  width: 100%;
+
+} 
+
+table {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+span {
+  font-size: 20px;
+}
+
+#prevNext {
+  margin-top: 5px;
+}
+
+
+/*AMENITIES BUTTONS*/
+
+#pool {
+  background-color: aqua;
+  width: 140px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+
+#waterfront {
+  background-color: #329932;
+  width: 140px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-weight: bolder;
+ border-radius: 5px;
+  margin-top: 2px;
+}
+
+#separateStudy {
+  background-color: #8c8c8c;
+  width: 140px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#masterMain {
+  background-color: #E59400;
+  width: 140px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#price {
+  background-color: #a6a6a6;
+  width: 140px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+
+/*searchPage*/
+
+#buttons {
+margin-bottom: -27px;
+width: 100%;
+
+}
+
+
+#picture {
+  float:left;
+  width: 100%;
+
+}
+/*
+#listing {
+  width: 100%;
+  border: solid 1px;
+  padding: 2px;
+}*/
+
+#houseImage {
+  max-width: 80%;
+  border-radius: 20px;
+  min-width: 50%;
+  float: left;
+  margin-top: -10px;
+}
+
+#none {
+  color: black;
+}
+
+#new {
+  color: white;
+  background-color: green;
+}
+
+#description {
+  max-width: 60%;
+}
+
+
+
+td {
+  max-width: 600px;
+  min-width: 250px;
+}
+
+
+#prev {
+  float: left;
+}
+
+#next {
+  float: right;
+}
+
+/*MEDIA CSS*/
+
+@media screen and (max-width: 450px) {
+
+span {
+  font-size: 20px;
+  margin-left: -30px;
+}
+
+.price {
+  font-size: 15px;
+  margin-left: -10px; 
+}
+
+
+    #pool {
+  background-color: aqua;
+  width: 120px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: .9em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+    #waterfront {
+  background-color: #329932;
+  width: 120px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: .9em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#separateStudy {
+  background-color: #BFBFBF;
+  width: 120px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: .9em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#masterMain {
+  background-color: #E59400;
+  width: 120px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: .9em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#price {
+  background-color: #a6a6a6;
+  width: 120px;
+  height: 50px;
+  border: none;
+  color: black;
+  font-size: .9em;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+
+td {
+  float: center;
+  max-width: 250px;
+  min-width: 250px;
+}
+
+table {
+margin-left: -30px;
+}
+
+#images {
+  margin-left: -30px;
+  float: left;
+  min-width: 275px;
+  max-width: 400px;
+
+}
+
+
+#images2 {
+  float: left;
+  min-width: 275px;
+}
+
+#houseImage {
+  max-width: 100%;
+  border-radius: 20px;
+  min-width: 50%;
+  float: left;
+  margin-top: -10px;
+}
+
+
+}
+
+

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class='BACK'>
+  <head>
+    <title>QUAD CITIES SEARCH</title>
+    <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+      <link rel='stylesheet' href='/stylesheets/style3.css' />
+       <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    
+
+  </head>
+  <body class='quadCities' id="searchPageBody">
+    <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href='/'>HOME</a>
+      <a class="navbar-brand">QUAD CITIES</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/quadCities">Search<span class="sr-only">(current)</span></a></li>
+        <!-- <li><a href="new">Sell My Home</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="tel:5122709688">309-429-0826</a></li>
+        <li><a href="login">Login/Register</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+    <form action="/searchQC" method="post">
+     <div class="topSpacer">
+        <div class="col-md-2 col-md-offset-3">
+        </div>
+    </div>
+    <div class="row cityRow">
+        <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
+          <label for"city">Select City</label><br>
+          <select multiple id="city" name="city">
+              <option value="Bettendorf" selected>Bettendorf</option>
+              <option value="Davenport">Davenport</option>
+              <option value="East Molin">East Moline</option>
+              <option value="Moline">Moline</option>
+              <option value="Rock Islan">Rock Island</option>
+              <option value="Silvis">Silvis</option>
+              <option value="Coal Valle">Coal Valley</option>
+              <option value="Colona">Colona</option>
+              <option value="Geneseo">Geneseo</option>
+              <option value="Milan">Milan</option>
+              <option value="Orion">Orion</option>
+              <option value="Port Byron">Port Byron</option>
+              <option value="Rapids Cit">Rapids City</option>
+              <option value="Sherrard">Sherrard</option>
+          </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minPrice">
+          <label for="minprice">Min $</label><br>
+            <select id="minprice" name="minprice">
+                <option value="0">Any</option>
+                <option value="100000">$100k</option>
+                <option value="125000">$125k</option>
+                <option value="150000">$150k</option>
+                <option value="175000">$175k</option>
+                <option value="200000">$200k</option>
+                <option value="225000">$225k</option>
+                <option value="250000">$250k</option>
+                <option value="275000">$275k</option>
+                <option value="300000">$300k</option>
+                <option value="325000">$325k</option>
+                <option value="350000">$350k</option>
+                <option value="375000">$375k</option>
+                <option value="400000">$400k</option>
+                <option value="425000">$425k</option>
+                <option value="450000">$450k</option>
+                <option value="475000">$475k</option>
+                <option value="500000">$500k</option>
+                <option value="550000">$550k</option>
+                <option value="600000">$600k</option>
+                <option value="650000">$650k</option>
+                <option value="700000">$700k</option>
+                <option value="750000">$750k</option>
+                <option value="800000">$800k</option>
+                <option value="850000">$850k</option>
+                <option value="900000">$900k</option>
+                <option value="950000">$950k</option>
+                <option value="1000000">$1 Million</option>
+                <option value="1500000">$1.5 Million</option>
+                <option value="2000000">$2 Million</option>
+                <option value="2500000">$2.5 Million</option>
+                <option value="3000000">$3 Million</option>
+            </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 maxPrice">
+          <label for="maxprice">Max $</label><br>
+             <select id="maxprice" name="maxprice">
+              <option value="999999999">Any</option>
+                <option value="100000">$100k</option>
+                <option value="125000">$125k</option>
+                <option value="150000">$150k</option>
+                <option value="175000">$175k</option>
+                <option value="200000">$200k</option>
+                <option value="225000">$225k</option>
+                <option value="250000">$250k</option>
+                <option value="275000">$275k</option>
+                <option value="300000">$300k</option>
+                <option value="325000">$325k</option>
+                <option value="350000">$350k</option>
+                <option value="375000">$375k</option>
+                <option value="400000">$400k</option>
+                <option value="425000">$425k</option>
+                <option value="450000">$450k</option>
+                <option value="475000">$475k</option>
+                <option value="500000">$500k</option>
+                <option value="550000">$550k</option>
+                <option value="600000">$600k</option>
+                <option value="650000">$650k</option>
+                <option value="700000">$700k</option>
+                <option value="750000">$750k</option>
+                <option value="800000">$800k</option>
+                <option value="850000">$850k</option>
+                <option value="900000">$900k</option>
+                <option value="950000">$950k</option>
+                <option value="1000000">$1 Million</option>
+                <option value="1500000">$1.5 Million</option>
+                <option value="2000000">$2 Million</option>
+                <option value="2500000">$2.5 Million</option>
+                <option value="3000000">$3 Million</option>
+            </select>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 bedrooms">
+          <label for"bedsmin">Beds</label><br>
+          <select id="bedsmin" name="bedsmin">
+              <option value="0">Any</option>
+              <option value="1">1</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+              <option value="6">6+</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-6 bathrooms">
+          <label for"bathsmin">Baths</label><br>
+          <select id="bathsmin" name="bathsmin">
+              <option value="0">Any</option>
+              <option value="1">1</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minSqft">
+          <label for="minsqft">Min SqFt</label><br>
+              <select id="minsqft" name="minsqft">
+                <option value="100" selected>Any</option>
+                <option value="800">800</option>
+                <option value="1000">1000</option>
+                <option value="1200">1200</option>
+                <option value="1400">1400</option>
+                <option value="1600">1600</option>
+                <option value="1800">1800</option>
+                <option value="2000">2000</option>
+                <option value="2200">2200</option>
+                <option value="2400">2400</option>
+                <option value="2600">2600</option>
+                <option value="2800">2800</option>
+                <option value="3000">3000</option>
+                <option value="3200">3200</option>
+                <option value="3400">3400</option>
+                <option value="3600">3600</option>
+                <option value="3800">3800</option>
+                <option value="4000">4000</option>
+                <option value="4500">4500</option>
+                <option value="5000">5000</option>
+              </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 maxSqft">
+          <label for="maxsqft">Max SqFt</label><br>
+             <select id="maxsqft" name="maxsqft">
+              <option value="99999" selected>Any</option>
+              <option value="800">800</option>
+              <option value="1000">1000</option>
+              <option value="1200">1200</option>
+              <option value="1400">1400</option>
+              <option value="1600">1600</option>
+              <option value="1800">1800</option>
+              <option value="2000">2000</option>
+              <option value="2200">2200</option>
+              <option value="2400">2400</option>
+              <option value="2600">2600</option>
+              <option value="2800">2800</option>
+              <option value="3000">3000</option>
+              <option value="3200">3200</option>
+              <option value="3400">3400</option>
+              <option value="3600">3600</option>
+              <option value="3800">3800</option>
+              <option value="4000">4000</option>
+              <option value="4500">4500</option>
+              <option value="5000">5000</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
+        <!-- <label for"stories">Stories</label><br>
+          <select id="stories" name="stories">
+              <option value="3">Any</option>
+              <option value="1">1</option>  
+              <option value="2">2</option>
+          </select> -->
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 garages">
+          <label for"garages">Garages</label><br>
+          <select id="garages" name="garages">
+              <option value="1">Any</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 submit">
+          <input class="btn-primary" type="submit" value="Search">
+        </div>
+    </div>
+    </form>
+     <div class="row bottomSpacer"></div>
+         <div id="phoneFloatHomePage">
+  <div class="justListed text-center">Just Listed Today</div>
+  <div id="container">
+          <% listings.forEach(function(listing) { %>
+          <% if (listing.DOM <= 100) { %>
+          <div class="col-lg-3  col-md-4 col-sm-6 well HOME">
+       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == '1_0') { %> Active <%}  %><% if (listing.status == '1_1') { %> Active <%}  %><% if (listing.status == '1_2') { %> Contingent <%}  %><% if (listing.status == '1_3') { %> New <%}  %><% if (listing.status == '1_4') { %> Reduced <%}  %></button><% if (listing.DOM <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
+      <div class="listingImage"><a href="/quadcities/<%= listing._id %>"><img class="image" src="/images/house.jpg" height="200px" width="250px"></a></div>
+      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+      <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= listing.DOM %> Days on Market</div>
+      <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
+      <div><%= listing.address %> in <%= listing.city %>, <%= listing.state %></div>
+      <div>Subdiv: <strong><%= listing.subdivision %></strong></div>
+       <div><span class='listingOffice'>Listed by <%= listing.listOffice %></span></div><br>
+     </div>
+ <div class='amenities'><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.amenities.indexOf([7]) >= 0 || listing.amenities.indexOf([8]) >= 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.basement.indexOf([5]) >= 0 || listing.basement.indexOf([6]) >= 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><% } else { %><% } %><% if (listing.acreage !== 'NA') { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"> <%= listing.acreage %> Acres</button><% } else { %><% } %><button id="none" disabled="true"><img src="images/hammer-icon.png" height="20px" width="20px"> Built <%= listing.yearBuilt %></button><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSqft %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:3094290826'>309-429-0826</a> <br> <a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+
+
+
+</div>
+<% } %>
+<% }) %>
+</div>
+</div>
+
+
+<footer class="footer"> 
+      <div class="container">
+        <p class="text-muted">Copyright info and disclaimers.</p>
+      </div>
+    </footer>
+
+ <script src='/javascripts/javascript.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+  </body>

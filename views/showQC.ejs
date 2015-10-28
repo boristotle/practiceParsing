@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QC SHOW</title>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <link rel='stylesheet' href='/stylesheets/style2.css' />
+    <link rel='stylesheet' href='/stylesheets/showPage.css' />
+      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href='/' class="navbar-brand">HOME</a>
+      <a class="navbar-brand">QUAD CITIES</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/quadCities">Search<span class="sr-only">(current)</span></a></li>
+        <!-- <li><a href="new">Sell My Home</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="tel:5122709688">512-270-9688</a></li>
+        <li><a href="login">Login/Register</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+   <div class='container'>
+    <div class='row'>
+      <div class='container-fluid'>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="/images/austin-skyline.jpg">
+    </div>
+    <div class="item">
+      <img src="/images/house.jpg" alt="...">
+    </div>
+     <div class="item">
+      <img src="/images/house2.jpg" alt="...">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+  </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+        <h2 id='h2'>DESCRIPTION</h2>
+        <div><%= theListing.remarks %></div>
+        </div>
+    </div>
+     <div class='SHOW'>
+    <div class='row'>
+      <div class='col-md-6'>
+          <h2 id='h2'>BASICS</h2>
+          <div><strong><span class="price"><%= theListing.price %></span></strong></div>
+          <div><%= theListing.DOM %> Days on Market</div>
+          <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
+          <div class='add'><%= theListing.address %> in <%= theListing.city %>, <%= theListing.state %></div>
+      </div>
+      <div class='col-md-6'>
+        <h2 id='h2'>MORE INFO</h2>
+        <div><% if (theListing.garage > 0) { %><button id='none' disabled='true'><%= theListing.garage %> Garage</button><% } else { %><% } %><% if (theListing.amenities.indexOf([7]) >= 0 || theListing.amenities.indexOf([8]) >= 0) { %>Pool</button><% } else { %><% } %><% if (theListing.basement.indexOf([5]) >= 0 || theListing.basement.indexOf([6]) >= 0) { %><button id="none" disabled="true">Basement</button><% } else { %><% } %><% if (theListing.fireplace > 0) { %><% } else { %><% } %><% if (theListing.acreage != 'NA') { %><button id="none" disabled="true"><%= theListing.acreage %> Acres</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <h2 id='h2'>SCHOOLS</h2>
+        <div><%= theListing.schoolDistrict %></div>
+        <div>Elem: <%= theListing.elemSchool %> [rating]</div>
+        <div>Middle: <%= theListing.middleSchool %> [rating]</div>
+        <div>High School: <%= theListing.highSchool %> [rating]</div>
+      </div>
+      <div class='col-md-6'>
+          <h2 id='h2'>NEIGHBORHOOD</h2>
+          <div><%= theListing.subdivision %></div>
+      </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-6'>
+        <h2 id='h2'>FINANCIALS</h2>
+        <div>Taxes: $<%= theListing.taxes %></div>
+        <div>Price/SQFT: $<%= theListing.priceSqft %></div>
+        <div class='est'> </div>
+        </div>
+
+      <div class='col-md-6'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Darrin Bennett</div>
+        <div>AGENT PHOTO PLACEHOLDER</div>
+        <div><a href='tel:3094290826'>309-429-0826</a></div>
+        <div><a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a></div>
+      </div>
+    </div>
+    <div class='row'>
+      <div><form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form></div>
+    </div>
+    <div class='row'>
+      <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
+    </div>
+    <div class='row'>
+        <div id="map"></div>
+    </div>
+
+  
+
+
+
+  </div>
+   </div>
+<script src='/javascripts/javascript.js'></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>

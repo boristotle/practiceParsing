@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html class='BACK'>
+  <head>
+    <title>CHICAGO SEARCH</title>
+    <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+      <link rel='stylesheet' href='/stylesheets/style3.css' />
+       <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+   
+
+  </head>
+  <body id="searchPageBody" class='orlando'>
+    <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href='/'>HOME</a>
+      <a class="navbar-brand">CHICAGO</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/chicago">Search<span class="sr-only">(current)</span></a></li>
+        <!-- <li><a href="new">Sell My Home</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="tel:3094290826">309-429-0826</a></li>
+        <li><a href="login">Login/Register</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+    <form action="/searchChicago" method="post">
+     <div class="topSpacer">
+        <div class="col-md-2 col-md-offset-3">
+        </div>
+    </div>
+    <div class="row cityRow">
+        <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
+          <label for"city">Select City</label><br>
+          <select multiple id="city" name="city">
+              <option value="ADDISON" selected>Addison</option>
+              <option value="ALBANY PARK">ALBANY PARK</option>
+              <option value="ALGONQUIN">ALGONQUIN</option>
+              <option value="ALSIP">ALSIP</option>
+              <option value="ANTIOCH">ANTIOCH</option>
+              <option value="ARLINGTON HEIGHTS">ARLINGTON HEIGHTS</option>
+              <option value="ASHBURN">ASHBURN</option>
+              <option value="AUBURN GRESHAM">AUBURN GRESHAM</option>
+              <option value="AURORA">AURORA</option>
+              <option value="AUSTIN">AUSTIN</option>
+              <option value="AVONDALE">AVONDALE</option>
+              <option value="BARRINGTON">BARRINGTON</option>
+              <option value="BARRINGTON HILLS">BARRINGTON HILLS</option>
+              <option value="BARTLETT">BARTLETT</option>
+              <option value="BATAVIA">BATAVIA</option>
+              <option value="BOLINGBROOK">BOLINGBROOK</option>
+              <option value="BRAIDWOOD">BRAIDWOOD</option>
+              <option value="BRIDGEPORT">BRIDGEPORT</option>
+              <option value="BRIDGEVIEW">BRIDGEVIEW</option>
+              <option value="BRIGHTON PARK">BRIGHTON PARK</option>
+              <option value="BROOKFIELD">BROOKFIELD</option>
+              <option value="BUFFALO GROVE">BUFFALO GROVE</option>
+              <option value="BURBANK">BURBANK</option>
+              <option value="BURR RIDGE">BURR RIDGE</option>
+              <option value="CALUMET CITY">CALUMET CITY</option>
+              <option value="CALUMET HEIGHTS">CALUMET HEIGHTS</option>
+              <option value="CALUMENT PARK">CALUMENT PARK</option>
+              <option value="CAROL STREAM">CAROL STREAM</option>
+              <option value="CARPENTERSVILLE">CARPENTERSVILLE</option>
+              <option value="CARY">CARY</option>
+              <option value="CHANNAHON">CHANNAHON</option>
+              <option value="CHATHAM">CHATHAM</option>
+              <option value="CHICAGO HEIGHTS">Chicago Heights</option>
+              <option value="CHICAGO LAWN">CHICAGO LAWN</option>
+              <option value="CHICAGO RIDGE">CHICAGO RIDGE</option>
+              <option value="CICERO">CICERO</option>
+              <option value="CLARENDON HILLS">CLARENDON HILLS</option>
+              <option value="CLEARING">CLEARING</option>
+              <option value="COAL CITY">COAL CITY</option>
+              <option value="COUNTRY CLUB HILLS">COUNTRY CLUB HILLS</option>
+              <option value="CREST HILL">CREST HILL</option>
+              <option value="CRESTWOOD">CRESTWOOD</option>
+              <option value="CRETE">CRETE</option>
+              <option value="CRYSTAL LAKE">CRYSTAL LAKE</option>
+              <option value="DARIEN">DARIEN</option>
+              <option value="DEERFIELD">DEERFIELD</option>
+              <option value="DES PLAINES">DES PLAINES</option>
+              <option value="DOLTON">DOLTON</option>
+              <option value="DOWNERS GROVE">DOWNERS GROVE</option>
+              <option value="DUNNING">DUNNING</option>
+              <option value="EAST GARFIELD PARK">EAST GARFIELD PARK</option>
+              <option value="EAST SIDE">EAST SIDE</option>
+              <option value="EDGEWATER">EDGEWATER</option>
+              <option value="EDISON PARK">EDISON PARK</option>
+              <option value="ELBURN">ELBURN</option>
+              <option value="ELGIN">ELGIN</option>
+              <option value="ELK GROVE VILLAGE">ELK GROVE VILLAGE</option>
+              <option value="ELMHURTS">ELMHURTS</option>
+              <option value="ELMWOOD PARK">ELMWOOD PARK</option>
+              <option value="ELWOOD">ELWOOD</option>
+              <option value="ENGLEWOOD">ENGLEWOOD</option>
+              <option value="EVANSTON">EVANSTON</option>
+              <option value="EVERGREEN PARK">EVERGREEN PARK</option>
+              <option value="FLOSSMOOR">FLOSSMOOR</option>
+              <option value="FOREST GLEN">FOREST GLEN</option>
+              <option value="FOREST PARK">FOREST PARK</option>
+              <option value="FOX LAKE">FOX LAKE</option>
+              <option value="FRANKFORT">FRANKFORT</option>
+              <option value="FRANKLIN PARK">FRANKLIN PARK</option>
+              <option value="GAGE PARK">GAGE PARK</option>
+              <option value="GARFIELD RIDGE">GARFIELD RIDGE</option>
+              <option value="GENEVA">GENEVA</option>
+              <option value="GILBERTS">GILBERTS</option>
+              <option value="GLEN ELLYN">GLEN ELLYN</option>
+              <option value="GLENCOE">Glencoe</option>
+              <option value="GLENDALE HEIGHTS">GLENDALE HEIGHTS</option>
+              <option value="GLENVIEW">GLENVIEW</option>
+              <option value="GLENWOOD">GLENWOOD</option>
+              <option value="GRAND BOULEVARD">GRAND BOULEVARD</option>
+              <option value="GRAYSLAKE">GRAYSLAKE</option>
+              <option value="GREATER GRAND CROSSING">GREATER GRAND CROSSING</option>
+              <option value="GURNEE">GURNEE</option>
+              <option value="HAMPSHIRE">HAMPSHIRE</option>
+              <option value="HANOVER PARK">HANOVER PARK</option>
+              <option value="HARVARD">HARVARD</option>
+              <option value="HARVEY">HARVEY</option>
+              <option value="HAWTHORN WOODS">HAWTHORN WOODS</option>
+              <option value="HAZELCREST">HAZELCREST</option>
+              <option value="HEGEWISCH">HEGEWISCH</option>
+              <option value="HERMOSA">HERMOSA</option>
+              <option value="HICKORY HILLS">HICKORY HILLS</option>
+              <option value="HIGHLAND PARK">HIGHLAND PARK</option>
+              <option value="HILLSIDE">HILLSIDE</option>
+              <option value="HINSDALE">HINSDALE</option>
+              <option value="HOFFMAN ESTATES">HOFFMAN ESTATES</option>
+              <option value="HOMER GLEN">HOMER GLEN</option>
+              <option value="HOMEWOOD">HOMEWOOD</option>
+              <option value="HUMBOLDT PARK">HUMBOLDT PARK</option>
+              <option value="HUNTLEY">HUNTLEY</option>
+              <option value="HYDE PARK">HYDE PARK</option>
+              <option value="INGLESIDE">INGLESIDE</option>
+              <option value="INVERNESS">INVERNESS</option>
+              <option value="IRVING PARK">IRVING PARK</option>
+              <option value="ISLAND LAKE">ISLAND LAKE</option>
+              <option value="ITASCA">ITASCA</option>
+              <option value="JEFFERSON PARK">JEFFERSON PARK</option>
+              <option value="JOHNSBURN">JOHNSBURN</option>
+              <option value="JOLIET">JOLIET</option>
+              <option value="JUSTICE">JUSTICE</option>
+              <option value="KENILWORTH">KENILWORTH</option>
+              <option value="KENWOOD">KENWOOD</option>
+              <option value="KILDEER">KILDEER</option>
+              <option value="LA GRANGE">LA GRANGE</option>
+              <option value="LA GRANGE PARK">LA GRANGE PARK</option>
+              <option value="LAKE BLUFF">LAKE BLUFF</option>
+              <option value="LAKE FOREST">LAKE FOREST</option>
+              <option value="LAKE VIEW">LAKE VIEW</option>
+              <option value="LAKE VILLA">LAKE VILLA</option>
+              <option value="LAKE ZURICH">LAKE ZURICH</option>
+              <option value="LAKE IN THE HILLS">LAKE IN THE HILLS</option>
+              <option value="LAKEMOOR">LAKEMOOR</option>
+              <option value="LAKEWOOD">LAKEWOOD</option>
+              <option value="LANSING">LANSING</option>
+              <option value="LEMONT">LEMONT</option>
+              <option value="LIBERTYVILLE">LIBERTYVILLE</option>
+              <option value="LINCOLN PARK">LINCOLN PARK</option>
+              <option value="LINCOLN SQUARE">LINCOLN SQUARE</option>
+              <option value="LINCOLNSHIRE">LINCOLNSHIRE</option>
+              <option value="LINCOLNWOOD">LINCOLNWOOD</option>
+              <option value="LINDENHURST">LINDENHURST</option>
+              <option value="LISLE">LISLE</option>
+              <option value="LOCKPORT">LOCKPORT</option>
+              <option value="LOGAN SQUARE">LOGAN SQUARE</option>
+              <option value="LOMBARD">LOMBARD</option>
+              <option value="LONG GROVE">LONG GROVE</option>
+              <option value="LOOP">LOOP</option>
+              <option value="LOWER WEST SIDE">LOWER WEST SIDE</option>
+              <option value="LYNWOOD">LYNWOOD</option>
+              <option value="LYONS">LYONS</option>
+              <option value="MANHATTAN">MANHATTAN</option>
+              <option value="MARENGO">MARENGO</option>
+              <option value="MARKHAM">MARKHAM</option>
+              <option value="MATTESON">MATTESON</option>
+              <option value="MAYWOOD">MAYWOOD</option>
+              <option value="MAZON">MAZON</option>
+              <option value="MCKINLEY PARK">MCKINLEY PARK</option>
+              <option value="MCHENRY">MCHENRY</option>
+              <option value="MELROSE PARK">MELROSE PARK</option>
+              <option value="MIDLOTHIAN">MIDLOTHIAN</option>
+              <option value="MINOOKA">MINOOKA</option>
+              <option value="MOKENA">MOKENA</option>
+              <option value="MONEE">MONEE</option>
+              <option value="MONTCLARE">MONTCLARE</option>
+              <option value="MONTGOMERY">MONTGOMERY</option>
+              <option value="MORGAN PARK">MORGAN PARK</option>
+              <option value="MORRIS">MORRIS</option>
+              <option value="MORRISON">MORRISON</option>
+              <option value="MORTON GROVE">MORTON GROVE</option>
+              <option value="MOUNT GREENWOOD">MOUNT GREENWOOD</option>
+              <option value="MOUNT PROSPECT">MOUNT PROSPECT</option>
+              <option value="PROSPECT">PROSPECT</option>
+              <option value="MUNDELEIN">MUNDELEIN</option>
+              <option value="NORTH AURORA">NORTH AURORA</option>
+              <option value="NAPERVILLE">NAPERVILLE</option>
+              <option value="NEAR NORTH SIDE">NEAR NORTH SIDE</option>
+              <option value="NEAR SOUTH SIDE">NEAR SOUTH SIDE</option>
+              <option value="NEAR WEST SIDE">NEAR WEST SIDE</option>
+              <option value="NEW CITY">NEW CITY</option>
+              <option value="NEW LENNOX">NEW LENNOX</option>
+              <option value="NILES">NILES</option>
+              <option value="NORTH CENTER">NORTH CENTER</option>
+              <option value="NORTH CHICAGO">NORTH CHICAGO</option>
+              <option value="NORTH LAWNDALE">NORTH LAWNDALE</option>
+              <option value="NORTH PARK">NORTH PARK</option>
+              <option value="NORTHBROOK">NORTHBROOK</option>
+              <option value="NORTHFIELD">NORTHFIELD</option>
+              <option value="NORWOOD PARK">NORWOOD PARK</option>
+              <option value="O'HARE">O'HARE</option>
+              <option value="OAK BROOK">OAK BROOK</option>
+              <option value="OAK FOREST">OAK FOREST</option>
+              <option value="OAK LAWN">OAK LAWN</option>
+              <option value="OAK PARK">OAK PARK</option>
+              <option value="OAKLAND">OAKLAND</option>
+              <option value="OAKWOOD HILLS">OAKWOOD HILLS</option>
+              <option value="OLYMPIA FIELDS">OLYMPIA FIELDS</option>
+              <option value="ORLAND HILLS">ORLAND HILLS</option>
+              <option value="ORLAND PARK">ORLAND PARK</option>
+              <option value="OSWEGO">OSWEGO</option>
+              <option value="PALATINE">PALATINE</option>
+              <option value="PALOS HEIGHTS">PALOS HEIGHTS</option>
+              <option value="PALOS HILLS">PALOS HILLS</option>
+              <option value="PALOS PARK">PALOS PARK</option>
+              <option value="PARK FOREST">PARK FOREST</option>
+              <option value="PARK RIDGE">PARK RIDGE</option>
+              <option value="PEOTONE">PEOTONE</option>
+              <option value="PINGREE GROVE">PINGREE GROVE</option>
+              <option value="PLAINFIELD">PLAINFIELD</option>
+              <option value="PLANO">PLANO</option>
+              <option value="PORTAGE PARK">PORTAGE PARK</option>
+              <option value="PROSPECT PARK">PROSPECT PARK</option>
+              <option value="PROSPECT HEIGHTS">PROSPECT HEIGHTS</option>
+              <option value="RICHMOND">RICHMOND</option>
+              <option value="RICHTON PARK">RICHTON PARK</option>
+              <option value="RIVER FOREST">RIVER FOREST</option>
+              <option value="RIVERDALE">RIVERDALE</option>
+              <option value="RIVERSIDE">RIVERSIDE</option>
+              <option value="RIVERWOODS">RIVERWOODS</option>
+              <option value="ROGERS PARK">ROGERS PARK</option>
+              <option value="ROLLING MEADOWS">ROLLING MEADOWS</option>
+              <option value="ROMEOVILLE">ROMEOVILLE</option>
+              <option value="ROSELAND">ROSELAND</option>
+              <option value="ROSELLE">ROSELLE</option>
+              <option value="ROUND LAKE">ROUND LAKE</option>
+              <option value="ROUND LAKE BEACH">ROUND LAKE BEACH</option>
+              <option value="SAUK VILLAGE">SAUK VILLAGE</option>
+              <option value="SCHAUMBURG">SCHAUMBURG</option>
+              <option value="SCHILLER PARK">SCHILLER PARK</option>
+              <option value="SHOREWOOD">SHOREWOOD</option>
+              <option value="SKOKIE">SKOKIE</option>
+              <option value="SOUTH BARRINGTON">SOUTH BARRINGTON</option>
+              <option value="SOUTH CHICAGO">SOUTH CHICAGO</option>
+              <option value="SOUTH CHICAGO HEIGHTS">SOUTH CHICAGO HEIGHTS</option>
+              <option value="SOUTH DEERING">SOUTH DEERING</option>
+              <option value="SOUTH ELGIN">SOUTH ELGIN</option>
+              <option value="SOUTH HOLLAND">SOUTH HOLLAND</option>
+              <option value="SOUTH SHORE">SOUTH SHORE</option>
+              <option value="SPRING GROVE">SPRING GROVE</option>
+              <!-- <option value="ST.CHARLES">ST.CHARLES</option> -->
+              <option value="STEGER">STEGER</option>
+              <option value="STICKNEY">STICKNEY</option>
+              <option value="STREAMWOOD">STREAMWOOD</option>
+              <option value="SUGAR GROVE">SUGAR GROVE</option>
+              <option value="SUMMIT">SUMMIT</option>
+              <option value="TINLEY PARK">TINLEY PARK</option>
+              <option value="UNIVERSITY PARK">UNIVERSITY PARK</option>
+              <option value="UPTOWN">UPTOWN</option>
+              <option value="VERNON HILLS">VERNON HILLS</option>
+              <option value="VILLA PARK">VILLA PARK</option>
+              <option value="VOLO">VOLO</option>
+              <option value="WADSWORTH">WADSWORTH</option>
+              <option value="WARRENVILLE">WARRENVILLE</option>
+              <option value="WOODRIDGE">WASHINGTON</option>
+              <option value="WASHINGTON PARK">WASHINGTON PARK</option>
+              <option value="WAUCONDA">WAUCONDA</option>
+              <option value="WAUKEGAN">WAUKEGAN</option>
+              <option value="WAYNE">WAYNE</option>
+              <option value="WEST CHICAGO">WEST CHICAGO</option>
+              <option value="WEST DUNDEE">WEST DUNDEE</option>
+              <option value="WEST ELSDON">WEST ELSDON</option>
+              <option value="WEST ENGLEWOOD">WEST ENGLEWOOD</option>
+              <option value="WEST GARFIELD PARK">WEST GARFIELD PARK</option>
+              <option value="WEST LAWN">WEST LAWN</option>
+              <option value="WEST PULLMAN">WEST PULLMAN</option>
+              <option value="WEST RIDGE">WEST RIDGE</option>
+              <option value="WEST TOWN">WEST TOWN</option>
+              <option value="WESTCHESTER">WESTCHESTER</option>
+              <option value="WESTERN SPRINGS">WESTERN SPRINGS</option>
+              <option value="WESTMONT">WESTMONT</option>
+              <option value="WHEATON">WHEATON</option>
+              <option value="WHEELING">WHEELING</option>
+              <option value="WILLOW SPRINGS">WILLOW SPRINGS</option>
+              <option value="WILLOWBROOK">WILLOWBROOK</option>
+              <option value="WILMETTE">WILMETTE</option>
+              <option value="WILMINGTON">WILMINGTON</option>
+              <option value="WINFIELD">WINFIELD</option>
+              <option value="WINTHROP HARBOR">WINTHROP HARBOR</option>
+              <option value="WONDER LAKE">WONDER LAKE</option>
+              <option value="WOOD DALE">WOOD DALE</option>
+              <option value="WOODLAWN">WOODLAWN</option>
+              <option value="WOODRIDGE">WASHINGTON</option>
+              <option value="WOODSTOCK">WOODSTOCK</option>
+              <option value="WORTH">WORTH</option>
+              <option value="YORKVILLE">YORKVILLE</option>
+              <option value="ZION">ZION</option>
+          </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minPrice">
+          <label for="minprice">Min $</label><br>
+            <select id="minprice" name="minprice">
+                <option value="0">Any</option>
+                <option value="100000">$100k</option>
+                <option value="125000">$125k</option>
+                <option value="150000">$150k</option>
+                <option value="175000">$175k</option>
+                <option value="200000">$200k</option>
+                <option value="225000">$225k</option>
+                <option value="250000">$250k</option>
+                <option value="275000">$275k</option>
+                <option value="300000">$300k</option>
+                <option value="325000">$325k</option>
+                <option value="350000">$350k</option>
+                <option value="375000">$375k</option>
+                <option value="400000">$400k</option>
+                <option value="425000">$425k</option>
+                <option value="450000">$450k</option>
+                <option value="475000">$475k</option>
+                <option value="500000">$500k</option>
+                <option value="550000">$550k</option>
+                <option value="600000">$600k</option>
+                <option value="650000">$650k</option>
+                <option value="700000">$700k</option>
+                <option value="750000">$750k</option>
+                <option value="800000">$800k</option>
+                <option value="850000">$850k</option>
+                <option value="900000">$900k</option>
+                <option value="950000">$950k</option>
+                <option value="1000000">$1 Million</option>
+                <option value="1500000">$1.5 Million</option>
+                <option value="2000000">$2 Million</option>
+                <option value="2500000">$2.5 Million</option>
+                <option value="3000000">$3 Million</option>
+                <option value="3500000">$3.5 Million</option>
+                <option value="4000000">$4 Million</option>
+                <option value="4500000">$4.5 Million</option>
+                <option value="5000000">$5 Million</option>
+                <option value="7500000">$7.5 Million</option>
+                <option value="10000000">$10 Million</option>
+            </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 maxPrice">
+          <label for="maxprice">Max $</label><br>
+             <select id="maxprice" name="maxprice">
+              <option value="999999999">Any</option>
+                <option value="100000">$100k</option>
+                <option value="125000">$125k</option>
+                <option value="150000">$150k</option>
+                <option value="175000">$175k</option>
+                <option value="200000">$200k</option>
+                <option value="225000">$225k</option>
+                <option value="250000">$250k</option>
+                <option value="275000">$275k</option>
+                <option value="300000">$300k</option>
+                <option value="325000">$325k</option>
+                <option value="350000">$350k</option>
+                <option value="375000">$375k</option>
+                <option value="400000">$400k</option>
+                <option value="425000">$425k</option>
+                <option value="450000">$450k</option>
+                <option value="475000">$475k</option>
+                <option value="500000">$500k</option>
+                <option value="550000">$550k</option>
+                <option value="600000">$600k</option>
+                <option value="650000">$650k</option>
+                <option value="700000">$700k</option>
+                <option value="750000">$750k</option>
+                <option value="800000">$800k</option>
+                <option value="850000">$850k</option>
+                <option value="900000">$900k</option>
+                <option value="950000">$950k</option>
+                <option value="1000000">$1 Million</option>
+                <option value="1500000">$1.5 Million</option>
+                <option value="2000000">$2 Million</option>
+                <option value="2500000">$2.5 Million</option>
+                <option value="3000000">$3 Million</option>
+                <option value="3500000">$3.5 Million</option>
+                <option value="4000000">$4 Million</option>
+                <option value="4500000">$4.5 Million</option>
+                <option value="5000000">$5 Million</option>
+                <option value="7500000">$7.5 Million</option>
+                <option value="10000000">$10 Million</option>
+            </select>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 bedrooms">
+          <label for"bedsmin">Beds</label><br>
+          <select id="bedsmin" name="bedsmin">
+              <option value="0">Any</option>
+              <option value="1">1</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+              <option value="6">6+</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-6 bathrooms">
+          <label for"bathsmin">Baths</label><br>
+          <select id="bathsmin" name="bathsmin">
+              <option value="0">Any</option>
+              <option value="1">1</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minSqft">
+          <label for="minsqft">Min SqFt</label><br>
+              <select id="minsqft" name="minsqft">
+                <option value="100" selected>Any</option>
+                <option value="800">800</option>
+                <option value="1000">1000</option>
+                <option value="1200">1200</option>
+                <option value="1400">1400</option>
+                <option value="1600">1600</option>
+                <option value="1800">1800</option>
+                <option value="2000">2000</option>
+                <option value="2200">2200</option>
+                <option value="2400">2400</option>
+                <option value="2600">2600</option>
+                <option value="2800">2800</option>
+                <option value="3000">3000</option>
+                <option value="3200">3200</option>
+                <option value="3400">3400</option>
+                <option value="3600">3600</option>
+                <option value="3800">3800</option>
+                <option value="4000">4000</option>
+                <option value="4500">4500</option>
+                <option value="5000">5000</option>
+              </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 maxSqft">
+          <label for="maxsqft">Max SqFt</label><br>
+             <select id="maxsqft" name="maxsqft">
+              <option value="99999" selected>Any</option>
+              <option value="800">800</option>
+              <option value="1000">1000</option>
+              <option value="1200">1200</option>
+              <option value="1400">1400</option>
+              <option value="1600">1600</option>
+              <option value="1800">1800</option>
+              <option value="2000">2000</option>
+              <option value="2200">2200</option>
+              <option value="2400">2400</option>
+              <option value="2600">2600</option>
+              <option value="2800">2800</option>
+              <option value="3000">3000</option>
+              <option value="3200">3200</option>
+              <option value="3400">3400</option>
+              <option value="3600">3600</option>
+              <option value="3800">3800</option>
+              <option value="4000">4000</option>
+              <option value="4500">4500</option>
+              <option value="5000">5000</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
+        <label for"stories">Stories</label><br>
+          <select id="stories" name="stories">
+              <option value="4">Any</option>
+              <option value="1">1</option>
+              <option value="2">2</option>    
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 garages">
+          <label for"garages">Garages</label><br>
+          <select id="garages" name="garages">
+              <option value="1">Any</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 submit">
+          <input class="btn-primary" type="submit" value="Search">
+        </div>
+    </div>
+    </form>
+   <div class="row bottomSpacer"></div>
+         <div id="phoneFloatHomePage">
+  <div class="justListed text-center">Popular Listings</div>
+          <% listings.forEach(function(listing) { %>
+      <% if (listing.price >= 200000 && listing.price <= 300000) { %>
+          <div class="col-lg-3  col-md-4 col-sm-6 well HOME">
+      <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button><% if (((new Date - new Date(listing.listDate.trim())) / 86400000).toFixed(0) <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
+      <div class="listingImage"><a href="/chicago/<%= listing._id %>"><img class="image" src="/images/house.jpg" height="200px" width="250px"></a></div>
+      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+      <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date - new Date(listing.listDate.trim())) / 86400000).toFixed(0) %> Days on Market</div>
+      <div><%= listing.beds %> Bed, <%= listing.fullBaths %> Bath, <%= listing.appxsqft %> Sq.Ft.</div>
+      <div><span class='address'><%= listing.streetNumber %> <%= listing.streetName %> in <%= listing.city %>, <%= listing.state %></span></div>
+      <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
+      <div><span class='listingOffice'><%= listing.listOffice %></span></div><br>
+     </div>
+       <div class='amenities'>
+
+
+<!-- STORIES WORKS-->
+           <button id='none' disabled='true'><img src="images/stories-icon.png" height="20px" width="20px"><%= listing.stories %> Stories</button>
+
+<!-- GARAGE WORKS-->
+        <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button>
+
+<!-- FIREPLACE WORKS-->
+      <% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %>
+
+<!-- BASEMENT WORKS-->
+        <% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %>
+
+<!-- POOL -->
+        <% if (listing.pool === 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %>
+
+<!-- WATERFRONT -->
+        <% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %>
+
+        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+
+</div>
+<% } %>
+<% }) %>
+</div>
+</div>
+
+
+<footer class="footer"> 
+      <div class="container">
+        <p class="text-muted">Copyright info and disclaimers.</p>
+      </div>
+    </footer>
+
+ <script src='/javascripts/javascript.js'></script> 
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>

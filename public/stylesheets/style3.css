@@ -1,0 +1,109 @@
+
+#editDelete {
+  float: right;
+}
+
+
+
+
+.row {
+  height: 50px;
+}
+
+.minPrice, .maxPrice, .bedrooms, .bathrooms, .minSqft, .maxSqft, .stories, .garages, .submit {
+  background-color: black;
+  height: 50px;
+  text-align: center;
+  color: grey;
+  opacity: .85;
+}
+
+.city {
+  height: 100px;
+  background-color: black;
+  text-align: center;
+  color: grey;
+  opacity: .85;
+}
+.cityRow {
+  height: 100px;
+}
+.city > select {
+  width: 200px; 
+  text-align: center;
+  border: none;
+  outline: 0;
+/*  opacity: 0;*/
+background-color: black;
+}
+
+.minPrice > select, .maxPrice > select {
+  width: 70px;
+}
+.city {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.submit {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-primary {
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+select {
+  background-color: black;
+}
+
+.justListed {
+    font-size: 20px;
+}
+
+.bottomSpacer {
+  margin-top: 10px;
+}
+
+.topSpacer {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 800px) {
+.bottomSpacer {
+  margin-top: 10px;
+
+}
+
+.justListed {
+    font-size: 20px;
+}
+
+}
+
+
+@media screen and (max-width: 400px) {
+
+.bottomSpacer {
+  margin-top: -40px;
+
+}
+
+.city > select {
+  width: 150px; 
+  text-align: center;
+/*  opacity: 0;*/
+background-color: black;
+}
+
+.topSpacer {
+  margin-top: 0px;
+}
+
+.justListed {
+    font-size: 20px;
+    margin-left: 65px;
+}
+

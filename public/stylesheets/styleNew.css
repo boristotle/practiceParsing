@@ -1,0 +1,58 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+td, th, table {
+  text-align: center;
+  border: 1px solid;
+
+}
+
+img {
+  height: 40px;
+  width: 40px;
+}
+
+/*label {
+  font-weight: bold;
+}*/
+
+textarea {
+  resize: none;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.row {
+  height: 5px;
+}
+
+selection {
+  float: right;
+}
+legend {
+  font-family: times;
+  font-size: 8px;
+}
+
+  @media screen and (max-width: 400px) {
+
+.smartphone {
+
+  margin-left: -40px;
+}
+
+.well {
+  width: 280px;
+}
+
+
+}

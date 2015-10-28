@@ -1,0 +1,48 @@
+.container {
+  font-size: 18px;
+}
+
+#h2 {
+  color: #a6a6a6;
+}
+
+.price {
+  margin-left: 1px;
+}
+
+.LO {
+  margin-top: 10px;
+}
+
+button {
+  height: 40px;
+}
+
+#map {
+    min-width: 70%;
+    margin-top: 20px;
+    height: 400px;
+  }
+
+.FAVBTN {
+  margin-top: 10px;
+  margin-left: 14px;
+}
+
+
+@media screen and (max-width: 400px) {
+
+.container {
+  font-size: 16px;
+  float: left;
+}
+
+.carousel {
+  margin-left: -15%;
+}
+
+.SHOW {
+  margin-left: -35px;
+}
+
+}
