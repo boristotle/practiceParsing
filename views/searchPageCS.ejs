@@ -3,6 +3,9 @@
   <head>
     <title>COLLEGE STATION SEARCH</title>
     <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+     <!-- SLICK SLIDER CSS -->
+    <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel='stylesheet' href='/stylesheets/style3.css' />
        <link rel='stylesheet' href='/stylesheets/style.css' />
      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
@@ -200,7 +203,7 @@
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minSqft">
           <label for="minsqft">Min SqFt</label><br>
               <select id="minsqft" name="minsqft">
-                <option value="100" selected>Any</option>
+                <option value="0" selected>Any</option>
                 <option value="800">800</option>
                 <option value="1000">1000</option>
                 <option value="1200">1200</option>
@@ -250,18 +253,17 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
-        <!-- <label for"stories">Stories</label><br>
+        <label for"stories">Stories</label><br>
           <select id="stories" name="stories">
-              <option value="">Any</option>
-              <option value="1STORY">1</option>  
-              <option value="2">2</option>
-          </select> -->
+              <option value="1STORY,2andHalfSTORY,2STORYoMore,OTHER,SPLITLVL">Any</option>
+              <option value="1STORY">1</option>
+          </select>
         </div>
         <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 garages">
           <label for"garages">Garages</label><br>
           <select id="garages" name="garages">
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
+              <option value="NONE,1,2,3PLUS">Any</option>
+              <option value="2,3PLUS">2+</option>
               <option value="3PLUS">3+</option>
           </select>
         </div>
@@ -279,16 +281,21 @@
          <% if ((new Date() - listing.listContractDate) / 86400000 <= 10) { %>
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == 'A') { %> Active <% } %><% if (listing.status == 'AP') { %> Pending <% } %><% if (listing.status == 'CC') { %> Contingent <% } %><% if (listing.status == 'OPS') { %> Pending <% } %><% if ((new Date() - listing.listContractDate) / 86400000 <= 0) { %><button id="new" disabled="true">New!</button><% } %></div>
-      <div class="listingImage"><a href="/collegeStation/<%= listing._id %>"><img class="image" src="/images/house.jpg" height="200px" width="250px"></a></div>
-      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+      
+       <div class="listingImage rtl">
+          <% for (var i = 1; i <= listing.photoCount; i++) { %>
+        <a href="/collegeStation/<%= listing._id %>"><img class="image" src="/images/collegeStationImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <% } %>
+      </div>  
+
       <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date() - listing.listContractDate) / 86400000).toFixed(0) %> Days on Market</div>
-      <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
+      <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft.toFixed(0) %> Sq.Ft.</div>
       <div><span class='address'><%= listing.streetNumber %> <%= listing.streetName %> in <%= listing.city %>, <%= listing.state %></span></div>
       <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
       <div><span class='listingOffice'>Listed by <%= listing.listOffice %></span></div><br>
      </div>
 
-     <div class="amenities"><% if (listing.stories === '1STORY') { %><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> 1 Stories</button><% } %><% if (listing.stories === '2andHalfSTORY' || listing.stories === '2STORYoMore') { %><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> 2 Stories</button><% } %><% if (listing.acreage === '' || listing.acreage === "0.00") { %><% } else { %><button id='none' disabled='true'><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } %><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } %><% if (listing.garage == '3PLUS') { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"> 3+ Garage</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.amenities.indexOf('ABVGRNPL') >= 0 || listing.amenities.indexOf('INGRNDPL') >= 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.amenities.indexOf('CVRPTDE') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Covered Patio</button><% } else { %><% } %><% if (listing.amenities.indexOf('SPRNKSYS') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Sprinkler</button><% } else { %><% } %><% if (listing.amenities.indexOf('BRNSTBL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Barn/Stables</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('BACKPARK') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Backs to Park</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('CULDESAC') >= 0) { %><button id="none" disabled="true"><img src="images/cul-de-sac.png" height="20px" width="20px"> Cul-De-Sac</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('LAKE') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Lake</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="School District: <%= listing.schoolDistrict %>">Schools</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="$/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %> <%= listing.hoaTerm %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+     <div class="amenities"><% if (listing.stories === '1STORY') { %><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> 1 Stories</button><% } %><% if (listing.stories === '2andHalfSTORY' || listing.stories === '2STORYoMore') { %><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> 2 Stories</button><% } %><% if (listing.acreage === '' || listing.acreage === "0.00") { %><% } else { %><button id='none' disabled='true'><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } %><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } %><% if (listing.garage == '3PLUS') { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"> 3+ Garage</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.amenities.indexOf('ABVGRNPL') >= 0 || listing.amenities.indexOf('INGRNDPL') >= 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.amenities.indexOf('CVRPTDE') >= 0) { %><button id="none" disabled="true"><img src="images/covered-patio.png" height="20px" width="20px"> Covered Patio</button><% } else { %><% } %><% if (listing.amenities.indexOf('SPRNKSYS') >= 0) { %><button id="none" disabled="true"><img src="images/sprinkler.png" height="20px" width="20px"> Sprinkler</button><% } else { %><% } %><% if (listing.amenities.indexOf('BRNSTBL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Barn/Stables</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('BACKPARK') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Backs to Park</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('CULDESAC') >= 0) { %><button id="none" disabled="true"><img src="images/cul-de-sac.png" height="20px" width="20px"> Cul-De-Sac</button><% } else { %><% } %><% if (listing.lotDesc.indexOf('LAKE') >= 0) { %><button id="none" disabled="true"><img src="images/lake-icon.png" height="20px" width="20px"> Lake</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="School District: <%= listing.schoolDistrict %>">Schools</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="$/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %> <%= listing.hoaTerm %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
 
 
 
@@ -306,6 +313,8 @@
     </footer>
 
 
-    <script src='/javascripts/javascript.js'></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <script src='/javascripts/javascript.js'></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <!-- SLICK SLIDER SCRIPT -->
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>

@@ -45,17 +45,15 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/images/austin-skyline.jpg">
-    </div>
-    <div class="item">
-      <img src="/images/house.jpg" alt="...">
-    </div>
-     <div class="item">
-      <img src="/images/house2.jpg" alt="...">
-    </div>
+     <div class='item active'>
+        <img class="image" src="/images/chicagoImages/LargePhoto<%= theListing.matrixID %>-1.jpeg" height="400" width="800">
+      </div>
+      <% for (var i = 2; i <= theListing.photoCount; i++) { %>
+      <div class='item'>
+        <img class="image" src="/images/chicagoImages/LargePhoto<%= theListing.matrixID %>-<%= i %>.jpeg" height="400" width="800">
+      </div>
+        <% } %>
   </div>
-
   <!-- Controls -->
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -82,11 +80,14 @@
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= ((new Date - new Date(theListing.listDate.trim())) / 86400000).toFixed(0) %> Days on Market</div>
           <div><%= theListing.beds %> Bed, <%= theListing.fullBaths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
-          <div class='add'><%= theListing.streetNumber %> <%= theListing.streetName %> in <%= theListing.city %>, <%= theListing.state %></div>
+          <div class='add'><%= theListing.streetNumber %> <%= theListing.streetName %> <% if (theListing.unitNum !== 'NA') { %>Unit <%= theListing.unitNum %><% } %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
       <div class='col-md-6'>
         <h2 id='h2'>MORE INFO</h2>
-        <div><button id='none' disabled='true'><%= theListing.stories %> Stories</button><button id='none' disabled='true'><%= theListing.garage %> Garage</button><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } else { %><% } %><% if (theListing.basement.indexOf('N') < 0) { %><button id="none" disabled="true">Basement</button><% } else { %><% } %><% if (theListing.waterfront === 'Y') { %><button id="none" disabled="true">Waterfront</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.appxyearbuilt %></button>
+        <div>
+          <!-- STORIES -->
+
+          <button id="none" disabled="true"><%= theListing.garage %> Garage</button><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } else { %><% } %><% if (theListing.basement.indexOf('N') < 0) { %><button id="none" disabled="true">Basement</button><% } else { %><% } %><% if (theListing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true">Comm Pool</button><% } else { %><% } %><% if (theListing.remarks.indexOf('golf') >= 0 || theListing.remarks.indexOf('Golf') >= 0 || theListing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"> Golf Comm</button><% } else { %><% } %><% if (theListing.waterfront === 'Y') { %><button id="none" disabled="true">Waterfront</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.appxyearbuilt %></button>
         </div>
     </div>
   </div>
@@ -107,7 +108,7 @@
         <h2 id='h2'>FINANCIALS</h2>
         <div>Taxes: $<%= theListing.taxes %></div>
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
-        <div>HOA: $<%= theListing.hoaFee %></div>
+        <div>HOA: $<%= theListing.hoaFee %> Monthly</div>
         <div class='est'> </div>
         </div>
 

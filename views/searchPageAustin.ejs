@@ -3,6 +3,9 @@
   <head>
     <title>AUSTIN SEARCH</title>
     <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+     <!-- SLICK SLIDER CSS -->
+    <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel='stylesheet' href='/stylesheets/style3.css' />
        <link rel='stylesheet' href='/stylesheets/style.css' />
      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
@@ -204,7 +207,7 @@
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minSqft">
           <label for="minsqft">Min SqFt</label><br>
               <select id="minsqft" name="minsqft">
-                <option value="100" selected>Any</option>
+                <option value="0" selected>Any</option>
                 <option value="800">800</option>
                 <option value="1000">1000</option>
                 <option value="1200">1200</option>
@@ -256,7 +259,7 @@
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
         <label for"stories">Stories</label><br>
           <select id="stories" name="stories">
-              <option value="4">Any</option>
+              <option value="1,2,3,4">Any</option>
               <option value="1">1</option>  
               <option value="2">2</option>
           </select>
@@ -283,8 +286,13 @@
           <% if ((new Date() - listing.ListingContractDate) / 86400000 <= 8) { %>
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button><% if ((new Date() - listing.ListingContractDate) / 86400000 <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
-      <div class="listingImage"><a href="/austin/<%= listing._id %>"><img class="image" src="/images/house.jpg" height="200px" width="250px"></a></div>
-      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+      
+       <div class="listingImage rtl">
+          <% for (var i = 1; i <= listing.photoCount; i++) { %>
+        <a href="/austin/<%= listing._id %>"><img class="image" src="/images/austinImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <% } %>
+       </div> 
+      
       <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date() - listing.ListingContractDate) / 86400000).toFixed(0) %> Days on Market</div>
       <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
       <div class=''><%= listing.address %> in <%= listing.city %>, TX</div>
@@ -299,14 +307,16 @@
 </div> <!-- closes phone float -->
 </div>
 
-<footer class="footer"> 
+<div id="footer">
       <div class="container">
-        <p class="text-muted">Copyright info and disclaimers.</p>
+        <p class="text-muted credit">Copyright and Disclaimer info.</p>
       </div>
-    </footer>
+    </div>
 
 
 
  <script src='/javascripts/javascript.js'></script> 
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <!-- SLICK SLIDER SCRIPT -->
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>

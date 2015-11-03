@@ -45,15 +45,14 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/images/austin-skyline.jpg">
-    </div>
-    <div class="item">
-      <img src="/images/house.jpg" alt="...">
-    </div>
-     <div class="item">
-      <img src="/images/house2.jpg" alt="...">
-    </div>
+     <div class='item active'>
+        <img class="image" src="/images/collegeStationImages/LargePhoto<%= theListing.matrixID %>-1.jpeg" height="400" width="800">
+      </div>
+      <% for (var i = 2; i <= theListing.photoCount; i++) { %>
+      <div class='item'>
+        <img class="image" src="/images/collegeStationImages/LargePhoto<%= theListing.matrixID %>-<%= i %>.jpeg" height="400" width="800">
+      </div>
+        <% } %>
   </div>
 
   <!-- Controls -->

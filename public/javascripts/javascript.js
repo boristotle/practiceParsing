@@ -1,6 +1,17 @@
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({html: true}); 
 
+
+//     var greatSchoolsAPI_key = 'ipzksrs4y2qyffctvkxczaxx'
+
+// $.ajax({
+//   url: 'http://api.greatschools.org/school/tests/TX/1?key=' + greatSchoolsAPI_key + '',
+//   dataType: "json",
+//   success: function(data) {
+//       console.log(data)
+//   } 
+// })
+
 // this shows each house price in dollar format
 for (var i = 0; i <= $('.price').length; i++) {
 var commaPrice = Number($('.price').eq(i).html()).toLocaleString()
@@ -27,6 +38,15 @@ $.ajax({
   } 
 })
 
+// THIS IS THE SLICK SLIDER FUNCTIONALITY
+$('.rtl').slick({
+  infinite: true,
+  speed: 100,
+  fade: true,
+  cssEase: 'linear',
+  arrows: true
+});
+        
 
 
 // THIS FINDS THE LAT/LNG FOR THE ADDRESS ON THE SHOW PAGE and RENDERS THE MAP ON THE SHOW PAGE
@@ -84,6 +104,14 @@ $(".FAV").submit(function(event) {
 
 
 
+
+
+
+
+
+
+
+
 // SAVE FORM INPUTS TO LOCAL STORAGE
 
   // JQUERY: (saves the name input to local storage on change);
@@ -101,7 +129,6 @@ $(".FAV").submit(function(event) {
 //   console.log($(location).attr("href").split('/')[4]);
 
 // })
-
 
 
 

@@ -1,14 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var mongo = require('mongodb').ObjectId
+var mongo = require('mongodb').ObjectId;
+var dotenv = require('dotenv');
+var unirest = require('unirest');
 // var subdomain = require('express-subdomain');
 
 
-
+// THIS IS THE GREAT SCHOOLS API REQUEST
 router.get('/', function(req, res, next){
+    var API_KEY = process.env.API_KEY
+    // unirest.get('http://api.greatschools.org/school/tests/TX/1?key=' + API_KEY + '')
+    unirest.get('http://api.greatschools.org/search/schools?key=' + API_KEY + '&state=TX&q=Burnet')
+      .end(function (data) {
+        var dat1 = data.body.split('>')
+      console.log(dat1[14].charAt(0));
+      })
   res.render('home');
 })
+
+
 
 var userFavs = require('monk')('localhost/userFavs')
 var Favs = userFavs.get('favs');  
@@ -44,7 +55,7 @@ router.get('/qcFavs', function(req, res, next){
 })
 
 router.post('/removeFav', function(){
-  
+
 })
 
 
@@ -82,7 +93,7 @@ listings.insert({
      state: listing[15],
      subdivision: listing[16],
      baths: listing[17],
-     sqft: Number(listing[18]),
+     sqft: Number(listing[18]) || 0,
      yearBuilt: listing[19],
      zip: listing[20],
      price: Number(listing[21]),
@@ -127,7 +138,7 @@ router.post('/searchQC', function(req, res, next){
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
    
-}, function(err, listing){
+}, { limit : 10, skip : 0}, function(err, listing){
   if (listing.length == 0) {
     res.render('searchResultsQC', {listings: listing});
   }
@@ -143,7 +154,6 @@ router.get('/quadCities/:id', function(req, res, next){
     res.render('showQC', {theListing: listing})
   })
 })
-
 
 
 
@@ -167,7 +177,7 @@ for (var i = 0; i < listingsArray.length; i++) {
   var listing = listingsArray[i].split('|');
 
 listingsNashville.insert({
-     acreage: Number(listing[0]).toFixed(2),
+     acreage: Number(listing[0]).toFixed(2) || 'NA',
      hoaFees: listing[1] || 0,
      county: listing[2],
      elemSchool: listing[3],
@@ -184,7 +194,7 @@ listingsNashville.insert({
      photoCount: listing[14],
      pool: listing[15],
      primaryPicUrl: listing[16],
-     sqft: Number(listing[17]),
+     sqft: Number(listing[17]) || 0,
      state: listing[18],
      address: listing[19],
      subdivision: listing[20],
@@ -227,7 +237,7 @@ router.post('/searchNashville', function(req, res, next){
   {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
   {beds: {$gte: req.body.bedsmin}},
   {garage: {$gte: req.body.garages}},
-  // {stories: {$eq: req.body.stories}},
+  {stories: {$in: req.body.stories.split(',') } },
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
    
@@ -286,7 +296,7 @@ listingsCollegeStation.insert({
      photoCount: listing[13],
      zip: listing[14],
      schoolDistrict: listing[15],
-     sqft: (Number(listing[10]) / Number(listing[31])).toFixed(0),
+     sqft: Number(listing[10]) / Number(listing[31]) || 0,
      state: listing[17],
      status: listing[18],
      streetName: listing[19],
@@ -332,17 +342,17 @@ router.post('/searchCS', function(req, res, next){
   { city: req.body.city[25] }, { city: req.body.city[26] }, { city: req.body.city[27] },
   { city: req.body.city[28] }, { city: req.body.city[29] }]}, 
   {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  // {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
+  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
   {beds: {$gte: req.body.bedsmin}},
-  {garage: {$eq: req.body.garages}},
-  // {stories: {$lte: req.body.stories}},
+  {garage: { $in: req.body.garages.split(',') } },
+  {stories: { $in: req.body.stories.split(',') } },
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-  if (listing.length == 0) {
-    res.render('searchResultsCS', {listings: listing});
-  }
+  // if (listing.length === 0) {
+  //   res.render('searchResultsCS', {listings: listing});
+  // }
 
     res.render('searchResultsCS', {listings: listing});
   })
@@ -407,7 +417,7 @@ listingsAustin.insert({
      highSchool: listing[19],
      spa: listing[20],
      sprinkler: listing[21],
-     sqft: Number(listing[22]),
+     sqft: Number(listing[22]) || 0,
      state: listing[23],
      status: listing[24],
      stories: listing[25],
@@ -425,7 +435,7 @@ listingsAustin.insert({
      HOA: listing[37],
      ListingContractDate: new Date(listing[38]).getTime(),
      rooms: listing[39],
-     lotSize: listing[40],
+     lotSize: Number(listing[40]).toFixed(2) || 'NA',
      priceSQFT: (Number(listing[11]) / Number(listing[22])).toFixed(2)
    });
 }
@@ -459,7 +469,7 @@ router.post('/searchAustin', function(req, res, next){
   {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
   {beds: {$gte: req.body.bedsmin}},
   {garage: {$gte: req.body.garages}},
-  {stories: {$lte: req.body.stories}},
+  {stories: {$in: req.body.stories.split(',') } },
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
    
@@ -503,8 +513,8 @@ for (var i = 0; i < listingsArray.length; i++) {
 listingsOrlando.insert({
      listDate: listing[0],
      address: listing[1],
-     baths: Number(listing[2]).toFixed(0),
-     beds: listing[3],
+     baths: Number(listing[2]).toFixed(0) || 'NA',
+     beds: listing[3] || 'NA',
      amenities: listing[4],
      county: listing[5],
      price: Number(listing[6]),
@@ -514,7 +524,7 @@ listingsOrlando.insert({
      garage: listing[10],
      hoaFee: listing[11] || 0,
      hoaDuration: listing[12],
-     lotSize: listing[13] || 'NA',
+     lotSize: listing[13] || '0.00',
      // acreage: listing[14],
      middleSchool: listing[15] || 'NA',
      matrixID: listing[16],
@@ -527,14 +537,15 @@ listingsOrlando.insert({
      highSchool: listing[23] || 'NA',
      status: listing[24],
      zip: listing[25],
-     sqft: Number(listing[26]) || 'NA',
+     sqft: Number(listing[26]) || 0,
      subdivision: listing[27],
      city: listing[28],
      state: listing[29],
      remarks: listing[30],
      photoCount: listing[31],
      waterfront: listing[32],
-     priceSQFT: (Number(listing[6]) / Number(listing[26])).toFixed(2)
+     priceSQFT: (Number(listing[6]) / Number(listing[26])).toFixed(2),
+     propType: listing[33]
    });
 }
  res.send('hello');
@@ -562,11 +573,32 @@ router.post('/searchOrlando', function(req, res, next){
   { city: req.body.city[16] }, { city: req.body.city[17] }, { city: req.body.city[18] },
   { city: req.body.city[19] }, { city: req.body.city[20] }, { city: req.body.city[21] },
   { city: req.body.city[22] }, { city: req.body.city[23] }, { city: req.body.city[24] },
-  { city: req.body.city[25] } ]}, 
+   { city: req.body.city[25] }, { city: req.body.city[26] }, { city: req.body.city[27] },
+  { city: req.body.city[28] }, { city: req.body.city[29] }, { city: req.body.city[30] },
+  { city: req.body.city[31] }, { city: req.body.city[32] }, { city: req.body.city[33] },
+  { city: req.body.city[34] }, { city: req.body.city[35] }, { city: req.body.city[36] },
+  { city: req.body.city[37] }, { city: req.body.city[38] }, { city: req.body.city[39] },
+  { city: req.body.city[40] }, { city: req.body.city[41] }, { city: req.body.city[42] },
+  { city: req.body.city[43] }, { city: req.body.city[44] }, { city: req.body.city[45] },
+   { city: req.body.city[46] }, { city: req.body.city[47] }, { city: req.body.city[48] },
+  { city: req.body.city[49] }, { city: req.body.city[50] }, { city: req.body.city[51] },
+  { city: req.body.city[52] }, { city: req.body.city[53] }, { city: req.body.city[54] },
+  { city: req.body.city[55] }, { city: req.body.city[56] }, { city: req.body.city[57] },
+  { city: req.body.city[58] }, { city: req.body.city[59] }, { city: req.body.city[60] },
+  { city: req.body.city[61] }, { city: req.body.city[62] }, { city: req.body.city[63] },
+  { city: req.body.city[64] }, { city: req.body.city[65] }, { city: req.body.city[66] },
+   { city: req.body.city[67] }, { city: req.body.city[68] }, { city: req.body.city[69] },
+  { city: req.body.city[70] }, { city: req.body.city[71] }, { city: req.body.city[72] },
+  { city: req.body.city[73] }, { city: req.body.city[74] }, { city: req.body.city[75] },
+  { city: req.body.city[76] }, { city: req.body.city[77] }, { city: req.body.city[78] },
+  { city: req.body.city[79] }, { city: req.body.city[80] }, { city: req.body.city[81] },
+  { city: req.body.city[82] }, { city: req.body.city[83] }, { city: req.body.city[84] },
+  { city: req.body.city[85] }, { city: req.body.city[86] }, { city: req.body.city[87] },
+  { city: req.body.city[88] } ]}, 
   {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
   {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}},   
   {beds: {$gte: req.body.bedsmin}},
-  // {garage: {$gte: req.body.garages}},
+  {garage: {$in: req.body.garages.split(',') } },
   {stories: {$lte: req.body.stories}}, 
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
@@ -605,17 +637,18 @@ fs.readFile('/Users/DarrinBennett/documents/ChicagoListings Doc', 'utf8', functi
   var listingsArray = data.split('\n');
 for (var i = 0; i < listingsArray.length; i++) {
   var listing = listingsArray[i].split('|');
+
 listingsChicago.insert({
      garage: listing[0],
      fireplace: listing[1],
-     stories: listing[2],
+     stories: listing[2] || 0,
      acreage: listing[3],
-     appxsqft: Number(listing[4]) || 'NA',
+     appxsqft: Number(listing[4]) || 0,
      appxyearbuilt: listing[5],
      amenities: listing[6],
      basement: listing[7],
-     city: listing[8] ,
-     otherAmmenities: listing[9],
+     city: listing[8],
+     otherAmenities: listing[9],
      county: listing[10],
      elemSchool: listing[11] || 'NA',
      highSchool: listing[12] || 'NA',
@@ -643,7 +676,10 @@ listingsChicago.insert({
      beds: listing[34],
      listDate: listing[35],
      priceSQFT: (Number(listing[16]) / Number(listing[4])).toFixed(2) || 'NA',
-     hoaFee: listing[36] || 0
+     hoaFee: listing[36] || 0,
+     unitFloor: listing[37] || 'NA',
+     unitNum: listing[38] || 'NA',
+     propType: listing[39] || 'NA'
    });
 }
  res.send('hello');

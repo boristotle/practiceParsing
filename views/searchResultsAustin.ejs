@@ -2,6 +2,9 @@
 <html>
   <head>
     <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+     <!-- SLICK SLIDER CSS -->
+    <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     
@@ -42,8 +45,13 @@
           <% listings.forEach(function(listing) { %>
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == 'A') { %> Active <% } %><% if (listing.status == 'AC') { %> Active <% } %><% if (listing.status == 'PB') { %> Pending <% } %></button><% if ((new Date() - listing.ListingContractDate) / 86400000 <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
-      <div class="listingImage"><a href="/austin/<%= listing._id %>"><img class="image" src="images/house2.jpg" height="200px" width="250px"></a></div>
-      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+
+        <div class="listingImage rtl">
+          <% for (var i = 1; i <= listing.photoCount; i++) { %>
+        <a href="/austin/<%= listing._id %>"><img class="image" src="/images/austinImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <% } %>
+    </div> 
+
       <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date() - listing.ListingContractDate) / 86400000).toFixed(0) %> Days on Market</div>
       <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
       <div><span class=''><%= listing.address %>in <%= listing.city %>, <%= listing.state %></span></div>
@@ -59,9 +67,17 @@
 </div>
 </div>
 
+<div id="footer">
+      <div class="container">
+        <p class="text-muted credit">Copyright and Disclaimer info.</p>
+      </div>
+    </div>
 
- <script src='/javascripts/javascript.js'></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+
+  <script src='/javascripts/javascript.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- SLICK SLIDER SCRIPT -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>
 </html>
 

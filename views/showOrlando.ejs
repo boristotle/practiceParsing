@@ -45,15 +45,14 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/images/austin-skyline.jpg">
-    </div>
-    <div class="item">
-      <img src="/images/house.jpg" alt="...">
-    </div>
-     <div class="item">
-      <img src="/images/house2.jpg" alt="...">
-    </div>
+     <div class='item active'>
+        <img class="image" src="/images/orlandoImages/<%= theListing.matrixID %>-1.jpeg" height="400" width="800">
+      </div>
+      <% for (var i = 2; i <= theListing.photoCount; i++) { %>
+      <div class='item'>
+        <img class="image" src="/images/orlandoImages/<%= theListing.matrixID %>-<%= i %>.jpeg" height="400" width="800">
+      </div>
+        <% } %>
   </div>
 
   <!-- Controls -->
@@ -85,7 +84,7 @@
       </div>
       <div class='col-md-6'>
         <h2 id='h2'>MORE INFO</h2>
-        <div><button id='none' disabled='true'><%= theListing.stories %> Stories</button><% if (theListing.garage.indexOf('1CarGarage') >= 0) { %><button id='none' disabled='true'>1 Garage</button><% } %><% if (theListing.garage.indexOf('2CarGarage') >= 0) { %><button id='none' disabled='true'>2 Garage</button><% } %><% if (theListing.garage.indexOf('3CarGarage') >= 0) { %><button id='none' disabled='true'>3 Garage</button><% } %><% if (theListing.garage.indexOf('4CarGarage') >= 0) { %><button id='none' disabled='true'>4 Garage</button><% } %><% if (theListing.garage.indexOf('5PlusCarGarage') >= 0) { %><button id='none' disabled='true'>5+ Garage</button><% } %><% if (theListing.pool.indexOf('Private') >= 0) { %><button id="none" disabled="true">Pool</button><% } %><button id='none' disabled='true'><%= theListing.lotSize %> Acres</button><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } %><% if (theListing.waterfront > 0) { %><button id="none" disabled="true">Waterfront</button><% } %><% if (theListing.amenities.indexOf('GolfComm') >= 0) { %><button id="none" disabled="true">Golf Comm</button><% } %><% if (theListing.pool.indexOf('Community') >= 0) { %><button id="none" disabled="true">Comm Pool</button><% } %><% if (theListing.amenities.indexOf('GatedComm') >= 0) { %><button id="none" disabled="true">Gated Comm</button><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button></div>
+        <div><% if (theListing.propType ==='CondoHotel' || theListing.propType === 'Condo') { %><button id='none' disabled='true'>Floor #<%= theListing.stories %></button><% } else { %><button id='none' disabled='true'><%= theListing.stories %> Stories</button><% } %><% if (theListing.garage.indexOf('1CarGarage') >= 0) { %><button id='none' disabled='true'>1 Garage</button><% } %><% if (theListing.garage.indexOf('2CarGarage') >= 0) { %><button id='none' disabled='true'>2 Garage</button><% } %><% if (theListing.garage.indexOf('3CarGarage') >= 0) { %><button id='none' disabled='true'>3 Garage</button><% } %><% if (theListing.garage.indexOf('4CarGarage') >= 0) { %><button id='none' disabled='true'>4 Garage</button><% } %><% if (theListing.garage.indexOf('5PlusCarGarage') >= 0) { %><button id='none' disabled='true'>5+ Garage</button><% } %><% if (theListing.garage.indexOf('1CarCarport') >= 0) { %><button id='none' disabled='true'>1 Carport</button><% } %><% if (theListing.garage.indexOf('2CarCarport') >= 0) { %><button id='none' disabled='true'>2 Carport</button><% } %><% if (theListing.garage.indexOf('3CarCarport') >= 0) { %><button id='none' disabled='true'>3 Carport</button><% } %><% if (theListing.pool.indexOf('Private') >= 0) { %><button id="none" disabled="true">Pool</button><% } %><% if (theListing.lotSize != '0.00') { %><button id='none' disabled='true'><%= theListing.lotSize %> Acres</button><% } else { %><% } %><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } %><% if (theListing.waterfront > 0) { %><button id="none" disabled="true">Waterfront</button><% } %><% if (theListing.amenities.indexOf('GolfComm') >= 0) { %><button id="none" disabled="true">Golf Comm</button><% } %><% if (theListing.pool.indexOf('Community') >= 0) { %><button id="none" disabled="true">Comm Pool</button><% } %><% if (theListing.amenities.indexOf('GatedComm') >= 0) { %><button id="none" disabled="true">Gated Comm</button><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button></div>
     </div>
   </div>
     <div class='row'>

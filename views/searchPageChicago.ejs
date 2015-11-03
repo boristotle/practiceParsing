@@ -3,6 +3,9 @@
   <head>
     <title>CHICAGO SEARCH</title>
     <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+     <!-- SLICK SLIDER CSS -->
+    <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel='stylesheet' href='/stylesheets/style3.css' />
        <link rel='stylesheet' href='/stylesheets/style.css' />
      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
@@ -51,6 +54,7 @@
         <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
           <label for"city">Select City</label><br>
           <select multiple id="city" name="city">
+                <option value="CHICAGO">Chicago</option>
               <option value="ADDISON" selected>Addison</option>
               <option value="ALBANY PARK">ALBANY PARK</option>
               <option value="ALGONQUIN">ALGONQUIN</option>
@@ -66,6 +70,11 @@
               <option value="BARRINGTON HILLS">BARRINGTON HILLS</option>
               <option value="BARTLETT">BARTLETT</option>
               <option value="BATAVIA">BATAVIA</option>
+              <option value="BEECHER">Beecher</option>
+              <option value="BELVIDERE">Belvidere</option>
+              <option value="BENSENVILLE">Bensenville</option>
+              <option value="BERWYN">Berwyn</option>
+              <option value="BLOOMINGDALE">Bloomingdale</option>
               <option value="BOLINGBROOK">BOLINGBROOK</option>
               <option value="BRAIDWOOD">BRAIDWOOD</option>
               <option value="BRIDGEPORT">BRIDGEPORT</option>
@@ -97,6 +106,7 @@
               <option value="CRYSTAL LAKE">CRYSTAL LAKE</option>
               <option value="DARIEN">DARIEN</option>
               <option value="DEERFIELD">DEERFIELD</option>
+              <option value="DEKALB">Dekalb</option>
               <option value="DES PLAINES">DES PLAINES</option>
               <option value="DOLTON">DOLTON</option>
               <option value="DOWNERS GROVE">DOWNERS GROVE</option>
@@ -108,7 +118,7 @@
               <option value="ELBURN">ELBURN</option>
               <option value="ELGIN">ELGIN</option>
               <option value="ELK GROVE VILLAGE">ELK GROVE VILLAGE</option>
-              <option value="ELMHURTS">ELMHURTS</option>
+              <option value="ELMHURST">Elmhurst</option>
               <option value="ELMWOOD PARK">ELMWOOD PARK</option>
               <option value="ELWOOD">ELWOOD</option>
               <option value="ENGLEWOOD">ENGLEWOOD</option>
@@ -138,7 +148,7 @@
               <option value="HARVARD">HARVARD</option>
               <option value="HARVEY">HARVEY</option>
               <option value="HAWTHORN WOODS">HAWTHORN WOODS</option>
-              <option value="HAZELCREST">HAZELCREST</option>
+              <option value="HAZEL CREST">Hazel Crest</option>
               <option value="HEGEWISCH">HEGEWISCH</option>
               <option value="HERMOSA">HERMOSA</option>
               <option value="HICKORY HILLS">HICKORY HILLS</option>
@@ -165,6 +175,7 @@
               <option value="KILDEER">KILDEER</option>
               <option value="LA GRANGE">LA GRANGE</option>
               <option value="LA GRANGE PARK">LA GRANGE PARK</option>
+              <option value="LAKE BARRINGTON">Lake Barrington</option>
               <option value="LAKE BLUFF">LAKE BLUFF</option>
               <option value="LAKE FOREST">LAKE FOREST</option>
               <option value="LAKE VIEW">LAKE VIEW</option>
@@ -187,6 +198,7 @@
               <option value="LOMBARD">LOMBARD</option>
               <option value="LONG GROVE">LONG GROVE</option>
               <option value="LOOP">LOOP</option>
+              <option value="LOVES PARK">Loves Park</option>
               <option value="LOWER WEST SIDE">LOWER WEST SIDE</option>
               <option value="LYNWOOD">LYNWOOD</option>
               <option value="LYONS">LYONS</option>
@@ -233,6 +245,7 @@
               <option value="OAK FOREST">OAK FOREST</option>
               <option value="OAK LAWN">OAK LAWN</option>
               <option value="OAK PARK">OAK PARK</option>
+              <option value="OAKBROOK TERRACE">Oakbrook Terrace</option>
               <option value="OAKLAND">OAKLAND</option>
               <option value="OAKWOOD HILLS">OAKWOOD HILLS</option>
               <option value="OLYMPIA FIELDS">OLYMPIA FIELDS</option>
@@ -249,7 +262,9 @@
               <option value="PINGREE GROVE">PINGREE GROVE</option>
               <option value="PLAINFIELD">PLAINFIELD</option>
               <option value="PLANO">PLANO</option>
+              <option value="POPLAR GROVE">Poplar Grove</option>
               <option value="PORTAGE PARK">PORTAGE PARK</option>
+              <option value="PRINCETON">Princeton</option>
               <option value="PROSPECT PARK">PROSPECT PARK</option>
               <option value="PROSPECT HEIGHTS">PROSPECT HEIGHTS</option>
               <option value="RICHMOND">RICHMOND</option>
@@ -258,9 +273,11 @@
               <option value="RIVERDALE">RIVERDALE</option>
               <option value="RIVERSIDE">RIVERSIDE</option>
               <option value="RIVERWOODS">RIVERWOODS</option>
+              <option value="ROCKFORD">Rockford</option>
               <option value="ROGERS PARK">ROGERS PARK</option>
               <option value="ROLLING MEADOWS">ROLLING MEADOWS</option>
               <option value="ROMEOVILLE">ROMEOVILLE</option>
+              <option value="ROSCOE">Roscoe</option>
               <option value="ROSELAND">ROSELAND</option>
               <option value="ROSELLE">ROSELLE</option>
               <option value="ROUND LAKE">ROUND LAKE</option>
@@ -278,15 +295,18 @@
               <option value="SOUTH HOLLAND">SOUTH HOLLAND</option>
               <option value="SOUTH SHORE">SOUTH SHORE</option>
               <option value="SPRING GROVE">SPRING GROVE</option>
-              <!-- <option value="ST.CHARLES">ST.CHARLES</option> -->
+              <option value="ST. CHARLES">ST.CHARLES</option>
               <option value="STEGER">STEGER</option>
               <option value="STICKNEY">STICKNEY</option>
               <option value="STREAMWOOD">STREAMWOOD</option>
               <option value="SUGAR GROVE">SUGAR GROVE</option>
               <option value="SUMMIT">SUMMIT</option>
+              <option value="SYCAMORE">Sycamore</option>
               <option value="TINLEY PARK">TINLEY PARK</option>
+              <option value="TWIN LAKES">Twin Lakes</option>
               <option value="UNIVERSITY PARK">UNIVERSITY PARK</option>
               <option value="UPTOWN">UPTOWN</option>
+              <option value="UTICA">Utica</option>
               <option value="VERNON HILLS">VERNON HILLS</option>
               <option value="VILLA PARK">VILLA PARK</option>
               <option value="VOLO">VOLO</option>
@@ -446,7 +466,7 @@
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 minSqft">
           <label for="minsqft">Min SqFt</label><br>
               <select id="minsqft" name="minsqft">
-                <option value="100" selected>Any</option>
+                <option value="0" selected>Any</option>
                 <option value="800">800</option>
                 <option value="1000">1000</option>
                 <option value="1200">1200</option>
@@ -498,15 +518,14 @@
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
         <label for"stories">Stories</label><br>
           <select id="stories" name="stories">
-              <option value="4">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>    
+              <option value="200">Any</option>
+              <option value="1">1</option> 
           </select>
         </div>
         <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 garages">
           <label for"garages">Garages</label><br>
           <select id="garages" name="garages">
-              <option value="1">Any</option>
+              <option value="0">Any</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
           </select>
@@ -522,23 +541,28 @@
          <div id="phoneFloatHomePage">
   <div class="justListed text-center">Popular Listings</div>
           <% listings.forEach(function(listing) { %>
-      <% if (listing.price >= 200000 && listing.price <= 300000) { %>
+      <% if (listing.city === 'CHICAGO') { %>
           <div class="col-lg-3  col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button><% if (((new Date - new Date(listing.listDate.trim())) / 86400000).toFixed(0) <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
-      <div class="listingImage"><a href="/chicago/<%= listing._id %>"><img class="image" src="/images/house.jpg" height="200px" width="250px"></a></div>
-      <div class="prevNextFav"><button>Prev</button><button>Next</button><button><img src="images/favorite-icon.png" height="15px" width="15px"> Favorite</button></div>  
+      
+    <div class="listingImage rtl">
+          <% for (var i = 1; i <= listing.photoCount; i++) { %>
+        <a href="/chicago/<%= listing._id %>"><img class="image" src="/images/chicagoImages/LargePhoto<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <% } %>
+    </div>
+      
       <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date - new Date(listing.listDate.trim())) / 86400000).toFixed(0) %> Days on Market</div>
       <div><%= listing.beds %> Bed, <%= listing.fullBaths %> Bath, <%= listing.appxsqft %> Sq.Ft.</div>
-      <div><span class='address'><%= listing.streetNumber %> <%= listing.streetName %> in <%= listing.city %>, <%= listing.state %></span></div>
+      <div><span class='address'><%= listing.streetNumber %> <%= listing.streetName %> <% if (listing.unitNum !== 'NA') { %> Unit <%= listing.unitNum %><% } %> in <%= listing.city %>, <%= listing.state %></span></div>
       <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
       <div><span class='listingOffice'><%= listing.listOffice %></span></div><br>
      </div>
        <div class='amenities'>
+  
 
+<!-- STORIES-->
 
-<!-- STORIES WORKS-->
-           <button id='none' disabled='true'><img src="images/stories-icon.png" height="20px" width="20px"><%= listing.stories %> Stories</button>
-
+           
 <!-- GARAGE WORKS-->
         <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button>
 
@@ -548,13 +572,15 @@
 <!-- BASEMENT WORKS-->
         <% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %>
 
-<!-- POOL -->
-        <% if (listing.pool === 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %>
+<!-- COMM POOL WORKS-->
+        <% if (listing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %>
 
 <!-- WATERFRONT -->
         <% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %>
 
-        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+        <% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %>
+
+        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
 
 </div>
 <% } %>
@@ -563,12 +589,14 @@
 </div>
 
 
-<footer class="footer"> 
+<div id="footer">
       <div class="container">
-        <p class="text-muted">Copyright info and disclaimers.</p>
+        <p class="text-muted credit">Copyright and Disclaimer info.</p>
       </div>
-    </footer>
+    </div>
 
  <script src='/javascripts/javascript.js'></script> 
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <!-- SLICK SLIDER SCRIPT -->
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>

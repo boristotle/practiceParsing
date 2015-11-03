@@ -38,22 +38,21 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-   <div class='container'>
+ <div class='container'>
     <div class='row'>
       <div class='container-fluid'>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-
+  
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/images/austin-skyline.jpg">
-    </div>
-    <div class="item">
-      <img src="/images/house.jpg" alt="...">
-    </div>
-     <div class="item">
-      <img src="/images/house2.jpg" alt="...">
-    </div>
+     <div class='item active'>
+        <img class="image" src="/images/QCImages/LargePhoto<%= theListing.MLS %>-1.jpeg" height="400" width="800">
+      </div>
+      <% for (var i = 2; i <= theListing.photoCount; i++) { %>
+      <div class='item'>
+        <img class="image" src="/images/QCImages/LargePhoto<%= theListing.MLS %>-<%= i %>.jpeg" height="400" width="800">
+      </div>
+        <% } %>
   </div>
 
   <!-- Controls -->
@@ -69,6 +68,7 @@
 
   </div>
     </div>
+    <div class='SHOW'>
     <div class='row'>
         <div class='col-md-12'>
         <h2 id='h2'>DESCRIPTION</h2>
