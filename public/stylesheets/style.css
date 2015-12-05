@@ -5,6 +5,17 @@
   background-color: #2b3e50;
 }
 
+#navbar {
+  background-color: black;
+}
+
+.homepage {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('/images/austin-skyline.jpg') no-repeat;
+  background-size: 100% 450px;
+  background-color: #2b3e50;
+}
+
 .quadCities {
   background: url('/images/qc-bridge2.jpg') no-repeat;
   background-size: 100% 450px;
@@ -44,4 +55,23 @@ p {
 
 .BACK {
 background-color: #2b3e50;
+}
+
+.signin {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 450px) {
+
+ .homepage {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('/images/austin-skyline.jpg') no-repeat;
+  background-size: 100% 200px;
+  background-color: #2b3e50;
+ }
+
+ .topPadding {
+  margin-top: 200px;
+ }
+
 }

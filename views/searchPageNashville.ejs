@@ -15,7 +15,7 @@
   </head>
   <body class='nashville' id="searchPageBody">
     <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -25,8 +25,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href='/'>HOME</a>
-      <a class="navbar-brand">NASHVILLE</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">NASHVILLE</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,8 +36,10 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><% theUser.forEach(function(user){ if (user) { %><a href='/nashvilleFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
         <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -272,7 +274,7 @@
       
        <div class="listingImage rtl">
           <% for (var i = 1; i <= listing.photoCount; i++) { %>
-        <a href="/nashville/<%= listing._id %>"><img class="image" src="/images/nashvilleImages/<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <a href="/nashville/<%= listing.MLS %>"><img class="image" src="/images/nashvilleImages/<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
         <% } %>
     </div>
 
@@ -282,7 +284,7 @@
       <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
       <div><span class='listingOffice'>Listing provided courtesy of <%= listing.listOffice %></span></div><br>
      </div>
-            <div class='amenities'><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> <%= listing.stories %> Stories</button><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.acreage !== "0.00") { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="/images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool.indexOf('ABGRN') >= 0 || listing.pool.indexOf('IDOOR') >= 0 || listing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.waterfront.indexOf('LAKEFR') >= 0 || listing.waterfront.indexOf('RIVFR') >= 0 || listing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('GATED') >= 0) { %><button id="none" disabled="true"><img src="images/gate-icon.png" height="20px" width="20px"> Gated Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFees %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button><div class='nashIDX'><img src='/images/nashville-idximage-small.gif'></div></div></div>
+            <div class='amenities'><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> <%= listing.stories %> Stories</button><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.acreage !== "0.00") { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="/images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool.indexOf('ABGRN') >= 0 || listing.pool.indexOf('IDOOR') >= 0 || listing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.waterfront.indexOf('LAKEFR') >= 0 || listing.waterfront.indexOf('RIVFR') >= 0 || listing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('GATED') >= 0) { %><button id="none" disabled="true"><img src="images/gate-icon.png" height="20px" width="20px"> Gated Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFees %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Nathan Beach" data-content="<a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a> <br> Keller Williams Realty">Contact Agent</button><div class='nashIDX'><img src='/images/nashville-idximage-small.gif'></div></div></div>
 
 </div>
 <% } %>
@@ -290,16 +292,26 @@
 </div> <!-- closes phone float -->
 </div>
 
-<footer class="footer"> 
-      <div class="container">
-        <p class="text-muted">Copyright info and disclaimers.</p>
-      </div>
-    </footer>
+   <div class='row footerMargin'>
+    </div>
+
+     <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Copyright © 2000-2015 Keller Williams ® Realty. - a real estate franchise company. All information provided is deemed reliable but is not guaranteed and should be independently verified. Properties subject to prior sale or rental. Each brokerage is independently owned and operated.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
 
    
 
  <script src='/javascripts/javascript.js'></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <!-- SLICK SLIDER SCRIPT -->
+   <script src='/javascripts/slickSlider.js'></script>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>

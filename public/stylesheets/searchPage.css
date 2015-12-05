@@ -4,6 +4,14 @@ body {
   margin-bottom: 60px;
 }
 
+#navbar {
+  background-color: black;
+}
+
+/*.footerMargin {
+  margin-bottom: 5px;
+}*/
+
 .nashIDX {
   margin-top: 5px;
   margin-left: 42%;

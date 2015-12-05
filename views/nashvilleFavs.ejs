@@ -1,0 +1,91 @@
+  <!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/searchPage.css' />
+    <!-- ! SLICK SLIDER CSS -->
+        <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
+
+    <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+
+    <title>NASHVILLE FAVS</title>
+  </head>
+  <body>
+       <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">NASHVILLE</a> -->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/nashville">Search<span class="sr-only">(current)</span></a></li>
+        <!-- <li><a href="new">Sell My Home</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="tel:5122709688">309-429-0826</a></li>
+         <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>  
+
+   <div id="phoneFloatHomePage">
+  <div class="justListed text-center">My Favorites</div>
+          <% listings.forEach(function(listing) { %>
+          <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
+      <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button></div>
+      
+       <div class="listingImage rtl">
+          <% for (var i = 1; i <= listing.photoCount; i++) { %>
+        <a href="/nashville/<%= listing.MLS %>"><img class="image" src="/images/nashvilleImages/<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <% } %>
+    </div>
+
+      <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong></div>
+      <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
+      <div><span class='address'><%= listing.address %> in <%= listing.city %>, <%= listing.state %></span></div>
+      <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
+      <div><span class='listingOffice'>Listing provided courtesy of <%= listing.listOffice %></span></div><br>
+     </div>
+            <div class='amenities'><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> <%= listing.stories %> Stories</button><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.acreage !== "0.00") { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="/images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool.indexOf('ABGRN') >= 0 || listing.pool.indexOf('IDOOR') >= 0 || listing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.waterfront.indexOf('LAKEFR') >= 0 || listing.waterfront.indexOf('RIVFR') >= 0 || listing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('GATED') >= 0) { %><button id="none" disabled="true"><img src="images/gate-icon.png" height="20px" width="20px"> Gated Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFees %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Nathan Beach" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a> <br> Keller Williams Realty">Contact Agent</button><div class='nashIDX'><img src='/images/nashville-idximage-small.gif'></div></div></div>
+
+</div>
+<% }) %>
+</div> <!-- closes phone float -->
+</div>
+
+   <div class='row footerMargin'>
+    </div>
+
+   <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Copyright © 2000-2015 Keller Williams ® Realty. - a real estate franchise company. All information provided is deemed reliable but is not guaranteed and should be independently verified. Properties subject to prior sale or rental. Each brokerage is independently owned and operated.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+
+  <script src='/javascripts/javascript.js'></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- SLICK SLIDER SCRIPT -->
+  <script src='/javascripts/slickSlider.js'></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script> 
+  </body>
+</html>

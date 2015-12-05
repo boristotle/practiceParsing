@@ -11,7 +11,7 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,8 +21,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href='/' class="navbar-brand">HOME</a>
-      <a class="navbar-brand">ORLANDO</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">ORLANDO</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,7 +33,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -91,9 +92,9 @@
       <div class='col-md-6'>
         <h2 id='h2'>SCHOOLS</h2>
         <div><%= theListing.schoolDistrict %></div>
-        <div>Elem: <%= theListing.elemSchool %> [rating]</div>
-        <div>Middle: <%= theListing.middleSchool %> [rating]</div>
-        <div>High School: <%= theListing.highSchool %> [rating]</div>
+        <div>Elem: <%= theListing.elemSchool %></div>
+        <div>Middle: <%= theListing.middleSchool %></div>
+        <div>High School: <%= theListing.highSchool %></div>
       </div>
       <div class='col-md-6'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
@@ -111,14 +112,22 @@
 
       <div class='col-md-6'>
         <h2 id='h2'>SHOWING INFO</h2>
-        <div>Darrin Bennett</div>
-        <div>AGENT PHOTO PLACEHOLDER</div>
-        <div><a href='tel:3094290826'>309-429-0826</a></div>
-        <div><a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a></div>
+        <div>Wael Georgey</div>
+<!--          <div><img src='/images/wael-georgey-orlando.jpg' height='200px' width='200px' /></div> -->
+        <div><a href='tel:3094290826'>AGENT PHONE PLACEHOLDER</a></div>
+        <div><a href='mailto:Wael@MyHomesMatchmaker.com'>Wael@MyHomesMatchmaker.com</a></div>
+        <div>Properties In Town</div>
       </div>
     </div>
     <div class='row'>
-      <div><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></div>
+       <% if (favs) { %> 
+         <% if (favs >= 0) { %>
+        <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
     </div>
     <div class='row'>
       <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
@@ -133,7 +142,23 @@
 
   </div>
    </div>
-<script src='/javascripts/javascript.js'></script> 
+
+      <div class='row footerMargin'>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <p style='font-size: 10px'>This data is updated daily. Some properties appearing for sale on this web site may subsequently have sold and may no longer be available. The data relating to real estate for sale on this web site comes in part from the IDX program of My Florida Regional Multiple Listing Service, Inc., Copyright 2015. Real estate listings held by brokerage firms other than Properties in Town are marked with the Broker Reciprocity logo, IDX. All information contained herein is deemed reliable but not guaranteed. The information provided is for consumer, non-commercial use only and my not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+<script src='/javascripts/javascript.js'></script>
+<script src='/javascripts/googleAPI.js'></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

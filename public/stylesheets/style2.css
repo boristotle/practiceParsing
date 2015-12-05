@@ -9,6 +9,10 @@ a, a:visited, a:hover, a:active {
   text-decoration: none;
 }
 
+#navbar {
+  background-color: black;
+}
+
 
 #images {
   float: left;

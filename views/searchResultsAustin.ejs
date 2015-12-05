@@ -12,7 +12,7 @@
     <title>AUSTIN SEARCH RESULTS</title>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -22,8 +22,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href='/'>HOME</a>
-      <a class="navbar-brand">AUSTIN</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">AUSTIN</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +34,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -44,11 +45,11 @@
 <div id="container">
           <% listings.forEach(function(listing) { %>
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
-      <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == 'A') { %> Active <% } %><% if (listing.status == 'AC') { %> Active <% } %><% if (listing.status == 'PB') { %> Pending <% } %></button><% if ((new Date() - listing.ListingContractDate) / 86400000 <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
+      <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == 'A') { %> Active <% } %><% if (listing.status == 'AC') { %> Active <% } %><% if (listing.status == 'PB') { %> Taking Backups <% } %></button><% if ((new Date() - listing.ListingContractDate) / 86400000 <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
 
         <div class="listingImage rtl">
           <% for (var i = 1; i <= listing.photoCount; i++) { %>
-        <a href="/austin/<%= listing._id %>"><img class="image" src="/images/austinImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <a href="/austin/<%= listing.MLS %>"><img class="image" src="/images/austinImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
         <% } %>
     </div> 
 
@@ -59,7 +60,7 @@
       <div><span class=''><%= listing.listOffice %></span></div><br>
      </div>
 
-      <div class="amenities"><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool > 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.masterMain === '1') { %><button id="none" disabled="true"><img src="images/master-main-icon.ico" height="20px" width="20px"> Master Main</button><% } else { %><% } %><% if (listing.view.indexOf('GRENBELT') >= 0) { %><button id="none" disabled="true"><img src="images/trees-icon.png" height="20px" width="20px"> Greenbelt</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFPRIV') >= 0 || listing.amenities.indexOf('GOLFPUB') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOLCOMM') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.waterfront > 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('LAKEPRIV') >= 0) { %><button id="none" disabled="true"><img src="images/lake-icon.png" height="20px" width="20px"> Comm Lake</button><% } else { %><% } %><% if (listing.rooms.indexOf('RMOFS') >= 0) { %><button id='none' disabled='true'><img src="images/study-icon.png" height="20px" width="20px"> Study</button><% } else { %><% } %><% if (listing.rooms.indexOf('RMHTH') >= 0 || listing.rooms.indexOf('RMMED') >= 0)  { %><button id='none' disabled='true'><img src="images/media-room-icon.png" height="20px" width="20px"> Media Room</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> Tax Rate: <%= listing.taxRate %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %><% if (listing.hoaDuration === 'M') { %> Monthly <% } %><% if (listing.hoaDuration === 'A') { %> Annually <% } %><% if (listing.hoaDuration === 'Q') { %> Quarterly <% } %><% if (listing.hoaDuration ==='S') { %> Semi-Annually <% } %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+      <div class="amenities"><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool > 0) { %><button id="none" disabled="true"><img src="images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.masterMain === '1') { %><button id="none" disabled="true"><img src="images/master-main-icon.ico" height="20px" width="20px"> Master Main</button><% } else { %><% } %><% if (listing.view.indexOf('GRENBELT') >= 0) { %><button id="none" disabled="true"><img src="images/trees-icon.png" height="20px" width="20px"> Greenbelt</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFPRIV') >= 0 || listing.amenities.indexOf('GOLFPUB') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOLCOMM') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.waterfront > 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('LAKEPRIV') >= 0) { %><button id="none" disabled="true"><img src="images/lake-icon.png" height="20px" width="20px"> Comm Lake</button><% } else { %><% } %><% if (listing.rooms.indexOf('RMOFS') >= 0) { %><button id='none' disabled='true'><img src="images/study-icon.png" height="20px" width="20px"> Study</button><% } else { %><% } %><% if (listing.rooms.indexOf('RMHTH') >= 0 || listing.rooms.indexOf('RMMED') >= 0)  { %><button id='none' disabled='true'><img src="images/media-room-icon.png" height="20px" width="20px"> Media Room</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> Tax Rate: <%= listing.taxRate %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %><% if (listing.hoaDuration === 'M') { %> Monthly <% } %><% if (listing.hoaDuration === 'A') { %> Annually <% } %><% if (listing.hoaDuration === 'Q') { %> Quarterly <% } %><% if (listing.hoaDuration ==='S') { %> Semi-Annually <% } %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'><strong>512-270-9688</strong></a> <br> <a href='mailto:Darrin@MyHomesMatchmaker.com'>Darrin@MyHomesMatchmaker.com</a>">Contact Agent</button></div></div>
 
         
 </div>
@@ -67,16 +68,34 @@
 </div>
 </div>
 
-<div id="footer">
-      <div class="container">
-        <p class="text-muted credit">Copyright and Disclaimer info.</p>
-      </div>
+
+    <div class='row footerMargin'>
     </div>
+
+     <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Powered by VRG - <a href="#" id="disclaimer" target="_blank">Disclaimer</a></small>
+                    </div>
+                    <div class="col-md-6 text-right visible-lg visible-md">
+                        <div class="margin"></div>
+                        <small>&copy; 2015 - MyHomesMatchmaker</small>
+                    </div>
+                    <div class="col-md-6 visible-sm visible-xs">
+                        <div class="margin"></div>
+                        <small>&copy; 2015 - MyHomesMatchmaker</small>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
 
   <script src='/javascripts/javascript.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <!-- SLICK SLIDER SCRIPT -->
+  <script src='/javascripts/slickSlider.js'></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>
 </html>

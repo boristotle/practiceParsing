@@ -11,7 +11,7 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,8 +21,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href='/' class="navbar-brand">HOME</a>
-      <a class="navbar-brand">CHICAGO</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">CHICAGO</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,7 +33,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -79,7 +80,7 @@
           <h2 id='h2'>BASICS</h2>
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= ((new Date - new Date(theListing.listDate.trim())) / 86400000).toFixed(0) %> Days on Market</div>
-          <div><%= theListing.beds %> Bed, <%= theListing.fullBaths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
+          <div><%= theListing.beds %> Bed, <%= theListing.fullBaths %> Bath, <%= theListing.appxsqft %> Sq.Ft.</div>
           <div class='add'><%= theListing.streetNumber %> <%= theListing.streetName %> <% if (theListing.unitNum !== 'NA') { %>Unit <%= theListing.unitNum %><% } %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
       <div class='col-md-6'>
@@ -94,9 +95,9 @@
     <div class='row'>
       <div class='col-md-6'>
         <h2 id='h2'>SCHOOLS</h2>
-        <div>Elem: <%= theListing.elemSchool %> [rating]</div>
-        <div>Middle: <%= theListing.middleSchool %> [rating]</div>
-        <div>High School: <%= theListing.highSchool %> [rating]</div>
+        <div>Elem: <%= theListing.elemSchool %></div>
+        <div>Middle: <%= theListing.middleSchool %></div>
+        <div>High School: <%= theListing.highSchool %></div>
       </div>
       <div class='col-md-6'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
@@ -114,20 +115,33 @@
 
       <div class='col-md-6'>
         <h2 id='h2'>SHOWING INFO</h2>
-        <div>Darrin Bennett</div>
-        <div>AGENT PHOTO PLACEHOLDER</div>
-        <div><a href='tel:3094290826'>309-429-0826</a></div>
-        <div><a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a></div>
+        <div>Walker Robinson</div>
+         <!-- <div><img src='/images/walker-robinson-chicago.jpg' height='200px' width='200px' /></div> -->
+        <div><a href='tel:3094290826'>AGENT PHONE PLACEHOLDER</a></div>
+        <div><a href='mailto:Walker@MyHomesMatchmaker.com'>Walker@MyHomesMatchmaker.com</a></div>
+        <div>RE/MAX Edge</div>
       </div>
     </div>
     <div class='row'>
-      <div><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></div>
+      <div>
+        <% if (favs) { %> 
+         <% if (favs >= 0) { %>
+        <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
     </div>
     <div class='row'>
       <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
     </div>
      <div class='row'>
         <div id="map"></div>
+    </div>
+    <div class='row'>
+      <small>Each Office Independently Owned and Operated. RE/MAX, LLC is an Equal Opportunity Employer and supports the Fair Housing Act.
+                        © 2015 RE/MAX, LLC. All Rights Reserved.</small>
     </div>
 
   
@@ -136,7 +150,9 @@
 
   </div>
    </div>
-<script src='/javascripts/javascript.js'></script> 
+
+<script src='/javascripts/javascript.js'></script>
+<script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

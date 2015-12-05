@@ -2,15 +2,7 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover({html: true}); 
 
 
-//     var greatSchoolsAPI_key = 'ipzksrs4y2qyffctvkxczaxx'
 
-// $.ajax({
-//   url: 'http://api.greatschools.org/school/tests/TX/1?key=' + greatSchoolsAPI_key + '',
-//   dataType: "json",
-//   success: function(data) {
-//       console.log(data)
-//   } 
-// })
 
 // this shows each house price in dollar format
 for (var i = 0; i <= $('.price').length; i++) {
@@ -38,49 +30,16 @@ $.ajax({
   } 
 })
 
-// THIS IS THE SLICK SLIDER FUNCTIONALITY
-$('.rtl').slick({
-  infinite: true,
-  speed: 100,
-  fade: true,
-  cssEase: 'linear',
-  arrows: true
-});
+
         
 
-
-// THIS FINDS THE LAT/LNG FOR THE ADDRESS ON THE SHOW PAGE and RENDERS THE MAP ON THE SHOW PAGE
-$.ajax({
-  url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $('.add').text() + '&key=AIzaSyC6G3q-CSKbBqHoRbRJdsKsKHDa9hfICuU',
-  dataType: "json",
-  success: function(data){
-          var mapCanvas = document.getElementById('map');
-          console.log(data);
-          var mapOptions = {
-            center: new google.maps.LatLng(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng),
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          }
-          var marker = new google.maps.Marker({
-          position: {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng},
-          map: map
-          });
-
-          var map = new google.maps.Map(mapCanvas, mapOptions)
-          marker.setMap(map);
-  } 
-})
-
-
-
+// THIS ADDS A LISTING TO THE USER FAVS
 $(".FAV").submit(function(event) {
-
         // get the form data
         // there are many ways to get this data using jQuery (you can use the class or id also)
         var formData = {
             'favorite'       :  $(location).attr("href").split('/')[4]
         };
-
         // process the form
         $.ajax({
             type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -97,15 +56,43 @@ $(".FAV").submit(function(event) {
 
                 // here we will handle errors and validation messages
             });
-
+            $('.FAVBTN').text('Remove Favorite');
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     })
 
 
+// THIS REMOVES A LISTING FROM THE USER FAVS
+$(".REMOVEFAV").submit(function(event) {
+        // get the form data
+        // there are many ways to get this data using jQuery (you can use the class or id also)
+        var formData = {
+            'favorite'       :  $(location).attr("href").split('/')[4]
+        };
+        // process the form
+        $.ajax({
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : '/removeFav', // the url where we want to POST
+            data        : formData, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+                        encode          : true
+        })
+            // using the done promise callback
+            .done(function(data) {
 
+                // log data to the console so we can see
+                console.log(data); 
 
+                // here we will handle errors and validation messages
+            });
+            $('.FAVBTN').text('Add Favorite');
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    })
 
+$('.FAVDISABLED').on('click', function(){
+    alert('Login or create an account to save favorites!')
+})
 
 
 

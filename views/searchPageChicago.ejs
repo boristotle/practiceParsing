@@ -15,7 +15,7 @@
   </head>
   <body id="searchPageBody" class='orlando'>
     <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -25,8 +25,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href='/'>HOME</a>
-      <a class="navbar-brand">CHICAGO</a>
+     <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">CHICAGO</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,8 +36,18 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <!-- THIS IS TO SEARCH BY CITY -->
+         <form class="navbar-form navbar-left" role="search" action='/citySearchChicago' method='post'>
+    <div class="form-group">
+      <label for='form-control'>Search by City</label>
+        <input type="text" class="form-control" placeholder="Enter City" name='city'>
+    </div>
+    <button type="submit" class="btn btn-default" id='navbar'><span class="glyphicon glyphicon-search"></span></button>
+</form>
+         <li><% theUser.forEach(function(user){ if (user) { %><a href='/chicagoFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
         <li><a href="tel:3094290826">309-429-0826</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -54,297 +64,297 @@
         <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
           <label for"city">Select City</label><br>
           <select multiple id="city" name="city">
-                <option value="CHICAGO">Chicago</option>
-              <option value="ADDISON" selected>Addison</option>
-              <option value="ALBANY PARK">ALBANY PARK</option>
-              <option value="ALGONQUIN">ALGONQUIN</option>
-              <option value="ALSIP">ALSIP</option>
-              <option value="ANTIOCH">ANTIOCH</option>
-              <option value="ARLINGTON HEIGHTS">ARLINGTON HEIGHTS</option>
-              <option value="ASHBURN">ASHBURN</option>
-              <option value="AUBURN GRESHAM">AUBURN GRESHAM</option>
-              <option value="AURORA">AURORA</option>
-              <option value="AUSTIN">AUSTIN</option>
-              <option value="AVONDALE">AVONDALE</option>
-              <option value="BARRINGTON">BARRINGTON</option>
-              <option value="BARRINGTON HILLS">BARRINGTON HILLS</option>
-              <option value="BARTLETT">BARTLETT</option>
-              <option value="BATAVIA">BATAVIA</option>
+                <option value="CHICAGO" selected>Chicago</option>
+              <option value="ADDISON">Addison</option>
+              <option value="ALBANY PARK">Albany Park</option>
+              <option value="ALGONQUIN">Algonquin</option>
+              <option value="ALSIP">Alsip</option>
+              <option value="ANTIOCH">Antioch</option>
+              <option value="ARLINGTON HEIGHTS">Arlington Heights</option>
+              <option value="ASHBURN">Ashburn</option>
+              <option value="AUBURN GRESHAM">Auburn Gresham</option>
+              <option value="AURORA">Aurora</option>
+              <option value="AUSTIN">Austin</option>
+              <option value="AVONDALE">Avondale</option>
+              <option value="BARRINGTON">Barrington</option>
+              <option value="BARRINGTON HILLS">Barrington Hills</option>
+              <option value="BARTLETT">Bartlett</option>
+              <option value="BATAVIA">Batavia</option>
               <option value="BEECHER">Beecher</option>
               <option value="BELVIDERE">Belvidere</option>
               <option value="BENSENVILLE">Bensenville</option>
               <option value="BERWYN">Berwyn</option>
               <option value="BLOOMINGDALE">Bloomingdale</option>
-              <option value="BOLINGBROOK">BOLINGBROOK</option>
-              <option value="BRAIDWOOD">BRAIDWOOD</option>
-              <option value="BRIDGEPORT">BRIDGEPORT</option>
-              <option value="BRIDGEVIEW">BRIDGEVIEW</option>
-              <option value="BRIGHTON PARK">BRIGHTON PARK</option>
-              <option value="BROOKFIELD">BROOKFIELD</option>
-              <option value="BUFFALO GROVE">BUFFALO GROVE</option>
-              <option value="BURBANK">BURBANK</option>
-              <option value="BURR RIDGE">BURR RIDGE</option>
-              <option value="CALUMET CITY">CALUMET CITY</option>
-              <option value="CALUMET HEIGHTS">CALUMET HEIGHTS</option>
-              <option value="CALUMENT PARK">CALUMENT PARK</option>
-              <option value="CAROL STREAM">CAROL STREAM</option>
-              <option value="CARPENTERSVILLE">CARPENTERSVILLE</option>
-              <option value="CARY">CARY</option>
-              <option value="CHANNAHON">CHANNAHON</option>
-              <option value="CHATHAM">CHATHAM</option>
+              <option value="BOLINGBROOK">Bolingbrook</option>
+              <option value="BRAIDWOOD">Braidwood</option>
+              <option value="BRIDGEPORT">Bridgeport</option>
+              <option value="BRIDGEVIEW">Bridgeview</option>
+              <option value="BRIGHTON PARK">Brighton Park</option>
+              <option value="BROOKFIELD">Brookfield</option>
+              <option value="BUFFALO GROVE">Buffalo Grove</option>
+              <option value="BURBANK">Burbank</option>
+              <option value="BURR RIDGE">Burr Ridge</option>
+              <option value="CALUMET CITY">Calumet City</option>
+              <option value="CALUMET HEIGHTS">Calumet Heights</option>
+              <option value="CALUMET PARK">Calumet Park</option>
+              <option value="CAROL STREAM">Carol Stream</option>
+              <option value="CARPENTERSVILLE">Carpentersville</option>
+              <option value="CARY">Cary</option>
+              <option value="CHANNAHON">Channahon</option>
+              <option value="CHATHAM">Chatham</option>
               <option value="CHICAGO HEIGHTS">Chicago Heights</option>
-              <option value="CHICAGO LAWN">CHICAGO LAWN</option>
-              <option value="CHICAGO RIDGE">CHICAGO RIDGE</option>
-              <option value="CICERO">CICERO</option>
-              <option value="CLARENDON HILLS">CLARENDON HILLS</option>
-              <option value="CLEARING">CLEARING</option>
-              <option value="COAL CITY">COAL CITY</option>
-              <option value="COUNTRY CLUB HILLS">COUNTRY CLUB HILLS</option>
-              <option value="CREST HILL">CREST HILL</option>
-              <option value="CRESTWOOD">CRESTWOOD</option>
-              <option value="CRETE">CRETE</option>
-              <option value="CRYSTAL LAKE">CRYSTAL LAKE</option>
-              <option value="DARIEN">DARIEN</option>
-              <option value="DEERFIELD">DEERFIELD</option>
+              <option value="CHICAGO LAWN">Chicago Lawn</option>
+              <option value="CHICAGO RIDGE">Chicago Ridge</option>
+              <option value="CICERO">Cicero</option>
+              <option value="CLARENDON HILLS">Clarendon Hills</option>
+              <option value="CLEARING">Clearing</option>
+              <option value="COAL CITY">Coal City</option>
+              <option value="COUNTRY CLUB HILLS">Country Club Hills</option>
+              <option value="CREST HILL">Crest Hill</option>
+              <option value="CRESTWOOD">Crestwood</option>
+              <option value="CRETE">Crete</option>
+              <option value="CRYSTAL LAKE">Crystal Lake</option>
+              <option value="DARIEN">Darien</option>
+              <option value="DEERFIELD">Deerfield</option>
               <option value="DEKALB">Dekalb</option>
-              <option value="DES PLAINES">DES PLAINES</option>
-              <option value="DOLTON">DOLTON</option>
-              <option value="DOWNERS GROVE">DOWNERS GROVE</option>
-              <option value="DUNNING">DUNNING</option>
-              <option value="EAST GARFIELD PARK">EAST GARFIELD PARK</option>
-              <option value="EAST SIDE">EAST SIDE</option>
-              <option value="EDGEWATER">EDGEWATER</option>
-              <option value="EDISON PARK">EDISON PARK</option>
-              <option value="ELBURN">ELBURN</option>
-              <option value="ELGIN">ELGIN</option>
-              <option value="ELK GROVE VILLAGE">ELK GROVE VILLAGE</option>
+              <option value="DES PLAINES">Des Plaines</option>
+              <option value="DOLTON">Dolton</option>
+              <option value="DOWNERS GROVE">Downers Grove</option>
+              <option value="DUNNING">Dunning</option>
+              <option value="EAST GARFIELD PARK">East Garfield Park</option>
+              <option value="EAST SIDE">East Side</option>
+              <option value="EDGEWATER">Edgewater</option>
+              <option value="EDISON PARK">Edison Park</option>
+              <option value="ELBURN">Elburn</option>
+              <option value="ELGIN">Elgin</option>
+              <option value="ELK GROVE VILLAGE">Elk Grove Village</option>
               <option value="ELMHURST">Elmhurst</option>
-              <option value="ELMWOOD PARK">ELMWOOD PARK</option>
-              <option value="ELWOOD">ELWOOD</option>
-              <option value="ENGLEWOOD">ENGLEWOOD</option>
-              <option value="EVANSTON">EVANSTON</option>
-              <option value="EVERGREEN PARK">EVERGREEN PARK</option>
-              <option value="FLOSSMOOR">FLOSSMOOR</option>
-              <option value="FOREST GLEN">FOREST GLEN</option>
-              <option value="FOREST PARK">FOREST PARK</option>
-              <option value="FOX LAKE">FOX LAKE</option>
-              <option value="FRANKFORT">FRANKFORT</option>
-              <option value="FRANKLIN PARK">FRANKLIN PARK</option>
-              <option value="GAGE PARK">GAGE PARK</option>
-              <option value="GARFIELD RIDGE">GARFIELD RIDGE</option>
-              <option value="GENEVA">GENEVA</option>
-              <option value="GILBERTS">GILBERTS</option>
-              <option value="GLEN ELLYN">GLEN ELLYN</option>
+              <option value="ELMWOOD PARK">Elmwood Park</option>
+              <option value="ELWOOD">Elwood</option>
+              <option value="ENGLEWOOD">Englewood</option>
+              <option value="EVANSTON">Evanston</option>
+              <option value="EVERGREEN PARK">Evergreen Park</option>
+              <option value="FLOSSMOOR">Flossmoor</option>
+              <option value="FOREST GLEN">Forest Glen</option>
+              <option value="FOREST PARK">Forest Park</option>
+              <option value="FOX LAKE">Fox Lake</option>
+              <option value="FRANKFORT">Frankfort</option>
+              <option value="FRANKLIN PARK">Franklin Park</option>
+              <option value="GAGE PARK">Gage Park</option>
+              <option value="GARFIELD RIDGE">Garfield Ridge</option>
+              <option value="GENEVA">Geneva</option>
+              <option value="GILBERTS">Gilberts</option>
+              <option value="GLEN ELLYN">Glen Ellyn</option>
               <option value="GLENCOE">Glencoe</option>
-              <option value="GLENDALE HEIGHTS">GLENDALE HEIGHTS</option>
-              <option value="GLENVIEW">GLENVIEW</option>
-              <option value="GLENWOOD">GLENWOOD</option>
-              <option value="GRAND BOULEVARD">GRAND BOULEVARD</option>
-              <option value="GRAYSLAKE">GRAYSLAKE</option>
-              <option value="GREATER GRAND CROSSING">GREATER GRAND CROSSING</option>
-              <option value="GURNEE">GURNEE</option>
-              <option value="HAMPSHIRE">HAMPSHIRE</option>
-              <option value="HANOVER PARK">HANOVER PARK</option>
-              <option value="HARVARD">HARVARD</option>
-              <option value="HARVEY">HARVEY</option>
-              <option value="HAWTHORN WOODS">HAWTHORN WOODS</option>
+              <option value="GLENDALE HEIGHTS">Glendale Heights</option>
+              <option value="GLENVIEW">Glenview</option>
+              <option value="GLENWOOD">Glenwood</option>
+              <option value="GRAND BOULEVARD">Grand Boulevard</option>
+              <option value="GRAYSLAKE">Garyslake</option>
+              <option value="GREATER GRAND CROSSING">Greater Grand Crossing</option>
+              <option value="GURNEE">Gurnee</option>
+              <option value="HAMPSHIRE">Hampshire</option>
+              <option value="HANOVER PARK">Hanover Park</option>
+              <option value="HARVARD">Harvard</option>
+              <option value="HARVEY">Harvey</option>
+              <option value="HAWTHORN WOODS">Hawthorn Woods</option>
               <option value="HAZEL CREST">Hazel Crest</option>
-              <option value="HEGEWISCH">HEGEWISCH</option>
-              <option value="HERMOSA">HERMOSA</option>
-              <option value="HICKORY HILLS">HICKORY HILLS</option>
-              <option value="HIGHLAND PARK">HIGHLAND PARK</option>
-              <option value="HILLSIDE">HILLSIDE</option>
-              <option value="HINSDALE">HINSDALE</option>
-              <option value="HOFFMAN ESTATES">HOFFMAN ESTATES</option>
-              <option value="HOMER GLEN">HOMER GLEN</option>
-              <option value="HOMEWOOD">HOMEWOOD</option>
-              <option value="HUMBOLDT PARK">HUMBOLDT PARK</option>
-              <option value="HUNTLEY">HUNTLEY</option>
-              <option value="HYDE PARK">HYDE PARK</option>
-              <option value="INGLESIDE">INGLESIDE</option>
-              <option value="INVERNESS">INVERNESS</option>
-              <option value="IRVING PARK">IRVING PARK</option>
-              <option value="ISLAND LAKE">ISLAND LAKE</option>
-              <option value="ITASCA">ITASCA</option>
-              <option value="JEFFERSON PARK">JEFFERSON PARK</option>
-              <option value="JOHNSBURN">JOHNSBURN</option>
-              <option value="JOLIET">JOLIET</option>
-              <option value="JUSTICE">JUSTICE</option>
-              <option value="KENILWORTH">KENILWORTH</option>
-              <option value="KENWOOD">KENWOOD</option>
-              <option value="KILDEER">KILDEER</option>
-              <option value="LA GRANGE">LA GRANGE</option>
-              <option value="LA GRANGE PARK">LA GRANGE PARK</option>
+              <option value="HEGEWISCH">Hegewisch</option>
+              <option value="HERMOSA">Hermosa</option>
+              <option value="HICKORY HILLS">Hickory Hills</option>
+              <option value="HIGHLAND PARK">Highland Park</option>
+              <option value="HILLSIDE">Hillside</option>
+              <option value="HINSDALE">Hinsdale</option>
+              <option value="HOFFMAN ESTATES">Hoffman Estates</option>
+              <option value="HOMER GLEN">Homer Glen</option>
+              <option value="HOMEWOOD">Homewood</option>
+              <option value="HUMBOLDT PARK">Humboldt Park</option>
+              <option value="HUNTLEY">Huntley</option>
+              <option value="HYDE PARK">Hyde Park</option>
+              <option value="INGLESIDE">Ingleside</option>
+              <option value="INVERNESS">Inverness</option>
+              <option value="IRVING PARK">Irving Park</option>
+              <option value="ISLAND LAKE">Island Lake</option>
+              <option value="ITASCA">Itasca</option>
+              <option value="JEFFERSON PARK">Jefferson Park</option>
+              <option value="JOHNSBURN">Johnsburn</option>
+              <option value="JOLIET">Joliet</option>
+              <option value="JUSTICE">Justice</option>
+              <option value="KENILWORTH">Kenliworth</option>
+              <option value="KENWOOD">Kenwood</option>
+              <option value="KILDEER">Kildeer</option>
+              <option value="LA GRANGE">La Grange</option>
+              <option value="LA GRANGE PARK">La Grange Park</option>
               <option value="LAKE BARRINGTON">Lake Barrington</option>
-              <option value="LAKE BLUFF">LAKE BLUFF</option>
-              <option value="LAKE FOREST">LAKE FOREST</option>
-              <option value="LAKE VIEW">LAKE VIEW</option>
-              <option value="LAKE VILLA">LAKE VILLA</option>
-              <option value="LAKE ZURICH">LAKE ZURICH</option>
-              <option value="LAKE IN THE HILLS">LAKE IN THE HILLS</option>
-              <option value="LAKEMOOR">LAKEMOOR</option>
-              <option value="LAKEWOOD">LAKEWOOD</option>
-              <option value="LANSING">LANSING</option>
-              <option value="LEMONT">LEMONT</option>
-              <option value="LIBERTYVILLE">LIBERTYVILLE</option>
-              <option value="LINCOLN PARK">LINCOLN PARK</option>
-              <option value="LINCOLN SQUARE">LINCOLN SQUARE</option>
-              <option value="LINCOLNSHIRE">LINCOLNSHIRE</option>
-              <option value="LINCOLNWOOD">LINCOLNWOOD</option>
-              <option value="LINDENHURST">LINDENHURST</option>
-              <option value="LISLE">LISLE</option>
-              <option value="LOCKPORT">LOCKPORT</option>
-              <option value="LOGAN SQUARE">LOGAN SQUARE</option>
-              <option value="LOMBARD">LOMBARD</option>
-              <option value="LONG GROVE">LONG GROVE</option>
-              <option value="LOOP">LOOP</option>
+              <option value="LAKE BLUFF">Lake Bluff</option>
+              <option value="LAKE FOREST">Lake Forest</option>
+              <option value="LAKE VIEW">Lake View</option>
+              <option value="LAKE VILLA">Lake Villa</option>
+              <option value="LAKE ZURICH">Lake Zurich</option>
+              <option value="LAKE IN THE HILLS">Lake in the Hills</option>
+              <option value="LAKEMOOR">Lakemoor</option>
+              <option value="LAKEWOOD">Lakewood</option>
+              <option value="LANSING">Lansing</option>
+              <option value="LEMONT">Lemont</option>
+              <option value="LIBERTYVILLE">Libertyville</option>
+              <option value="LINCOLN PARK">Lincoln Park</option>
+              <option value="LINCOLN SQUARE">Lincoln Square</option>
+              <option value="LINCOLNSHIRE">Lincolnshire</option>
+              <option value="LINCOLNWOOD">Lincolnwood</option>
+              <option value="LINDENHURST">Lindenhurst</option>
+              <option value="LISLE">Lisle</option>
+              <option value="LOCKPORT">Lockport</option>
+              <option value="LOGAN SQUARE">Logan Square</option>
+              <option value="LOMBARD">Lombard</option>
+              <option value="LONG GROVE">Long Grove</option>
+              <option value="LOOP">Loop</option>
               <option value="LOVES PARK">Loves Park</option>
-              <option value="LOWER WEST SIDE">LOWER WEST SIDE</option>
-              <option value="LYNWOOD">LYNWOOD</option>
-              <option value="LYONS">LYONS</option>
-              <option value="MANHATTAN">MANHATTAN</option>
-              <option value="MARENGO">MARENGO</option>
-              <option value="MARKHAM">MARKHAM</option>
-              <option value="MATTESON">MATTESON</option>
-              <option value="MAYWOOD">MAYWOOD</option>
-              <option value="MAZON">MAZON</option>
-              <option value="MCKINLEY PARK">MCKINLEY PARK</option>
-              <option value="MCHENRY">MCHENRY</option>
-              <option value="MELROSE PARK">MELROSE PARK</option>
-              <option value="MIDLOTHIAN">MIDLOTHIAN</option>
-              <option value="MINOOKA">MINOOKA</option>
-              <option value="MOKENA">MOKENA</option>
-              <option value="MONEE">MONEE</option>
-              <option value="MONTCLARE">MONTCLARE</option>
-              <option value="MONTGOMERY">MONTGOMERY</option>
-              <option value="MORGAN PARK">MORGAN PARK</option>
-              <option value="MORRIS">MORRIS</option>
-              <option value="MORRISON">MORRISON</option>
-              <option value="MORTON GROVE">MORTON GROVE</option>
-              <option value="MOUNT GREENWOOD">MOUNT GREENWOOD</option>
-              <option value="MOUNT PROSPECT">MOUNT PROSPECT</option>
-              <option value="PROSPECT">PROSPECT</option>
-              <option value="MUNDELEIN">MUNDELEIN</option>
-              <option value="NORTH AURORA">NORTH AURORA</option>
-              <option value="NAPERVILLE">NAPERVILLE</option>
-              <option value="NEAR NORTH SIDE">NEAR NORTH SIDE</option>
-              <option value="NEAR SOUTH SIDE">NEAR SOUTH SIDE</option>
-              <option value="NEAR WEST SIDE">NEAR WEST SIDE</option>
-              <option value="NEW CITY">NEW CITY</option>
-              <option value="NEW LENNOX">NEW LENNOX</option>
-              <option value="NILES">NILES</option>
-              <option value="NORTH CENTER">NORTH CENTER</option>
-              <option value="NORTH CHICAGO">NORTH CHICAGO</option>
-              <option value="NORTH LAWNDALE">NORTH LAWNDALE</option>
-              <option value="NORTH PARK">NORTH PARK</option>
-              <option value="NORTHBROOK">NORTHBROOK</option>
-              <option value="NORTHFIELD">NORTHFIELD</option>
-              <option value="NORWOOD PARK">NORWOOD PARK</option>
-              <option value="O'HARE">O'HARE</option>
-              <option value="OAK BROOK">OAK BROOK</option>
-              <option value="OAK FOREST">OAK FOREST</option>
-              <option value="OAK LAWN">OAK LAWN</option>
-              <option value="OAK PARK">OAK PARK</option>
+              <option value="LOWER WEST SIDE">Lower West Side</option>
+              <option value="LYNWOOD">Lynwood</option>
+              <option value="LYONS">Lyons</option>
+              <option value="MANHATTAN">Manhattan</option>
+              <option value="MARENGO">Marengo</option>
+              <option value="MARKHAM">Markham</option>
+              <option value="MATTESON">Matteson</option>
+              <option value="MAYWOOD">Maywood</option>
+              <option value="MAZON">Mazon</option>
+              <option value="MCKINLEY PARK">Mckinley Park</option>
+              <option value="MCHENRY">Mchenry</option>
+              <option value="MELROSE PARK">Melrose Park</option>
+              <option value="MIDLOTHIAN">Midlothian</option>
+              <option value="MINOOKA">Minooka</option>
+              <option value="MOKENA">Mokena</option>
+              <option value="MONEE">Monee</option>
+              <option value="MONTCLARE">Montclare</option>
+              <option value="MONTGOMERY">Montgomery</option>
+              <option value="MORGAN PARK">Morgan Park</option>
+              <option value="MORRIS">Morris</option>
+              <option value="MORRISON">Morrison</option>
+              <option value="MORTON GROVE">Morton Grove</option>
+              <option value="MOUNT GREENWOOD">Mount Greenwood</option>
+              <option value="MOUNT PROSPECT">Mount Prospect</option>
+              <option value="PROSPECT">Prospect</option>
+              <option value="MUNDELEIN">Mundelein</option>
+              <option value="NORTH AURORA">North Aurora</option>
+              <option value="NAPERVILLE">Naperville</option>
+              <option value="NEAR NORTH SIDE">Near North Side</option>
+              <option value="NEAR SOUTH SIDE">Near South Side</option>
+              <option value="NEAR WEST SIDE">Near West Side</option>
+              <option value="NEW CITY">New City</option>
+              <option value="NEW LENNOX">New Lennox</option>
+              <option value="NILES">Niles</option>
+              <option value="NORTH CENTER">North Center</option>
+              <option value="NORTH CHICAGO">North Chicago</option>
+              <option value="NORTH LAWNDALE">North Lawndale</option>
+              <option value="NORTH PARK">North Park</option>
+              <option value="NORTHBROOK">Northbrook</option>
+              <option value="NORTHFIELD">Northfield</option>
+              <option value="NORWOOD PARK">Norwood Park</option>
+              <option value="O'HARE">O'Hare</option>
+              <option value="OAK BROOK">Oak Brook</option>
+              <option value="OAK FOREST">Oak Forest</option>
+              <option value="OAK LAWN">Oak Lawn</option>
+              <option value="OAK PARK">Oak Park</option>
               <option value="OAKBROOK TERRACE">Oakbrook Terrace</option>
-              <option value="OAKLAND">OAKLAND</option>
-              <option value="OAKWOOD HILLS">OAKWOOD HILLS</option>
-              <option value="OLYMPIA FIELDS">OLYMPIA FIELDS</option>
-              <option value="ORLAND HILLS">ORLAND HILLS</option>
-              <option value="ORLAND PARK">ORLAND PARK</option>
-              <option value="OSWEGO">OSWEGO</option>
-              <option value="PALATINE">PALATINE</option>
-              <option value="PALOS HEIGHTS">PALOS HEIGHTS</option>
-              <option value="PALOS HILLS">PALOS HILLS</option>
-              <option value="PALOS PARK">PALOS PARK</option>
-              <option value="PARK FOREST">PARK FOREST</option>
-              <option value="PARK RIDGE">PARK RIDGE</option>
-              <option value="PEOTONE">PEOTONE</option>
-              <option value="PINGREE GROVE">PINGREE GROVE</option>
-              <option value="PLAINFIELD">PLAINFIELD</option>
-              <option value="PLANO">PLANO</option>
+              <option value="OAKLAND">Oakland</option>
+              <option value="OAKWOOD HILLS">Oakwood Hills</option>
+              <option value="OLYMPIA FIELDS">Olympia Fields</option>
+              <option value="ORLAND HILLS">Orland Hills</option>
+              <option value="ORLAND PARK">Orland Park</option>
+              <option value="OSWEGO">Oswego</option>
+              <option value="PALATINE">Palatine</option>
+              <option value="PALOS HEIGHTS">Palos Heights</option>
+              <option value="PALOS HILLS">Palos Hills</option>
+              <option value="PALOS PARK">Palos Park</option>
+              <option value="PARK FOREST">Park Forest</option>
+              <option value="PARK RIDGE">Park Ridge</option>
+              <option value="PEOTONE">Peotone</option>
+              <option value="PINGREE GROVE">Pingree Grove</option>
+              <option value="PLAINFIELD">Plainfield</option>
+              <option value="PLANO">Plano</option>
               <option value="POPLAR GROVE">Poplar Grove</option>
-              <option value="PORTAGE PARK">PORTAGE PARK</option>
+              <option value="PORTAGE PARK">Portage Park</option>
               <option value="PRINCETON">Princeton</option>
-              <option value="PROSPECT PARK">PROSPECT PARK</option>
-              <option value="PROSPECT HEIGHTS">PROSPECT HEIGHTS</option>
-              <option value="RICHMOND">RICHMOND</option>
-              <option value="RICHTON PARK">RICHTON PARK</option>
-              <option value="RIVER FOREST">RIVER FOREST</option>
-              <option value="RIVERDALE">RIVERDALE</option>
-              <option value="RIVERSIDE">RIVERSIDE</option>
-              <option value="RIVERWOODS">RIVERWOODS</option>
+              <option value="PROSPECT PARK">Prospect Park</option>
+              <option value="PROSPECT HEIGHTS">Prospect Heights</option>
+              <option value="RICHMOND">Richmond</option>
+              <option value="RICHTON PARK">Richton Park</option>
+              <option value="RIVER FOREST">River Forest</option>
+              <option value="RIVERDALE">Riverdale</option>
+              <option value="RIVERSIDE">Riverside</option>
+              <option value="RIVERWOODS">Riverwoods</option>
               <option value="ROCKFORD">Rockford</option>
-              <option value="ROGERS PARK">ROGERS PARK</option>
-              <option value="ROLLING MEADOWS">ROLLING MEADOWS</option>
-              <option value="ROMEOVILLE">ROMEOVILLE</option>
+              <option value="ROGERS PARK">Rogers Park</option>
+              <option value="ROLLING MEADOWS">Rolling Meadows</option>
+              <option value="ROMEOVILLE">Romeoville</option>
               <option value="ROSCOE">Roscoe</option>
-              <option value="ROSELAND">ROSELAND</option>
-              <option value="ROSELLE">ROSELLE</option>
-              <option value="ROUND LAKE">ROUND LAKE</option>
-              <option value="ROUND LAKE BEACH">ROUND LAKE BEACH</option>
-              <option value="SAUK VILLAGE">SAUK VILLAGE</option>
-              <option value="SCHAUMBURG">SCHAUMBURG</option>
-              <option value="SCHILLER PARK">SCHILLER PARK</option>
-              <option value="SHOREWOOD">SHOREWOOD</option>
-              <option value="SKOKIE">SKOKIE</option>
-              <option value="SOUTH BARRINGTON">SOUTH BARRINGTON</option>
-              <option value="SOUTH CHICAGO">SOUTH CHICAGO</option>
-              <option value="SOUTH CHICAGO HEIGHTS">SOUTH CHICAGO HEIGHTS</option>
-              <option value="SOUTH DEERING">SOUTH DEERING</option>
-              <option value="SOUTH ELGIN">SOUTH ELGIN</option>
-              <option value="SOUTH HOLLAND">SOUTH HOLLAND</option>
-              <option value="SOUTH SHORE">SOUTH SHORE</option>
-              <option value="SPRING GROVE">SPRING GROVE</option>
-              <option value="ST. CHARLES">ST.CHARLES</option>
-              <option value="STEGER">STEGER</option>
-              <option value="STICKNEY">STICKNEY</option>
-              <option value="STREAMWOOD">STREAMWOOD</option>
-              <option value="SUGAR GROVE">SUGAR GROVE</option>
-              <option value="SUMMIT">SUMMIT</option>
+              <option value="ROSELAND">Roseland</option>
+              <option value="ROSELLE">Roselle</option>
+              <option value="ROUND LAKE">Round Lake</option>
+              <option value="ROUND LAKE BEACH">Round Lake Beach</option>
+              <option value="SAUK VILLAGE">Sauk Village</option>
+              <option value="SCHAUMBURG">Schaumburg</option>
+              <option value="SCHILLER PARK">Schiller Park</option>
+              <option value="SHOREWOOD">Shorewood</option>
+              <option value="SKOKIE">Skokie</option>
+              <option value="SOUTH BARRINGTON">South Barrington</option>
+              <option value="SOUTH CHICAGO">South Chicago</option>
+              <option value="SOUTH CHICAGO HEIGHTS">South Chicago Heights</option>
+              <option value="SOUTH DEERING">South Deering</option>
+              <option value="SOUTH ELGIN">South Elgin</option>
+              <option value="SOUTH HOLLAND">South Holland</option>
+              <option value="SOUTH SHORE">South Shore</option>
+              <option value="SPRING GROVE">Spring Grove</option>
+              <option value="ST. CHARLES">St. Charles</option>
+              <option value="STEGER">Steger</option>
+              <option value="STICKNEY">Stickney</option>
+              <option value="STREAMWOOD">Streamwood</option>
+              <option value="SUGAR GROVE">Sugar Grove</option>
+              <option value="SUMMIT">Summit</option>
               <option value="SYCAMORE">Sycamore</option>
-              <option value="TINLEY PARK">TINLEY PARK</option>
+              <option value="TINLEY PARK">Tinley Park</option>
               <option value="TWIN LAKES">Twin Lakes</option>
-              <option value="UNIVERSITY PARK">UNIVERSITY PARK</option>
-              <option value="UPTOWN">UPTOWN</option>
+              <option value="UNIVERSITY PARK">University Park</option>
+              <option value="UPTOWN">Uptown</option>
               <option value="UTICA">Utica</option>
-              <option value="VERNON HILLS">VERNON HILLS</option>
-              <option value="VILLA PARK">VILLA PARK</option>
-              <option value="VOLO">VOLO</option>
-              <option value="WADSWORTH">WADSWORTH</option>
-              <option value="WARRENVILLE">WARRENVILLE</option>
-              <option value="WOODRIDGE">WASHINGTON</option>
-              <option value="WASHINGTON PARK">WASHINGTON PARK</option>
-              <option value="WAUCONDA">WAUCONDA</option>
-              <option value="WAUKEGAN">WAUKEGAN</option>
-              <option value="WAYNE">WAYNE</option>
-              <option value="WEST CHICAGO">WEST CHICAGO</option>
-              <option value="WEST DUNDEE">WEST DUNDEE</option>
-              <option value="WEST ELSDON">WEST ELSDON</option>
-              <option value="WEST ENGLEWOOD">WEST ENGLEWOOD</option>
-              <option value="WEST GARFIELD PARK">WEST GARFIELD PARK</option>
-              <option value="WEST LAWN">WEST LAWN</option>
-              <option value="WEST PULLMAN">WEST PULLMAN</option>
-              <option value="WEST RIDGE">WEST RIDGE</option>
-              <option value="WEST TOWN">WEST TOWN</option>
-              <option value="WESTCHESTER">WESTCHESTER</option>
-              <option value="WESTERN SPRINGS">WESTERN SPRINGS</option>
-              <option value="WESTMONT">WESTMONT</option>
-              <option value="WHEATON">WHEATON</option>
-              <option value="WHEELING">WHEELING</option>
-              <option value="WILLOW SPRINGS">WILLOW SPRINGS</option>
-              <option value="WILLOWBROOK">WILLOWBROOK</option>
-              <option value="WILMETTE">WILMETTE</option>
-              <option value="WILMINGTON">WILMINGTON</option>
-              <option value="WINFIELD">WINFIELD</option>
-              <option value="WINTHROP HARBOR">WINTHROP HARBOR</option>
-              <option value="WONDER LAKE">WONDER LAKE</option>
-              <option value="WOOD DALE">WOOD DALE</option>
-              <option value="WOODLAWN">WOODLAWN</option>
-              <option value="WOODRIDGE">WASHINGTON</option>
-              <option value="WOODSTOCK">WOODSTOCK</option>
-              <option value="WORTH">WORTH</option>
-              <option value="YORKVILLE">YORKVILLE</option>
-              <option value="ZION">ZION</option>
+              <option value="VERNON HILLS">Vernon Hills</option>
+              <option value="VILLA PARK">Villa Park</option>
+              <option value="VOLO">Volo</option>
+              <option value="WADSWORTH">Wadsworth</option>
+              <option value="WARRENVILLE">Warrenville</option>
+              <option value="WOODRIDGE">Washington</option>
+              <option value="WASHINGTON PARK">Washington Park</option>
+              <option value="WAUCONDA">Wauconda</option>
+              <option value="WAUKEGAN">Waukegan</option>
+              <option value="WAYNE">Wayne</option>
+              <option value="WEST CHICAGO">West Chicago</option>
+              <option value="WEST DUNDEE">West Dundee</option>
+              <option value="WEST ELSDON">West Elsdon</option>
+              <option value="WEST ENGLEWOOD">West Englewood</option>
+              <option value="WEST GARFIELD PARK">West Garfield Park</option>
+              <option value="WEST LAWN">West Lawn</option>
+              <option value="WEST PULLMAN">West Pullman</option>
+              <option value="WEST RIDGE">West Ridge</option>
+              <option value="WEST TOWN">West Town</option>
+              <option value="WESTCHESTER">Westchester</option>
+              <option value="WESTERN SPRINGS">Western Springs</option>
+              <option value="WESTMONT">Westmont</option>
+              <option value="WHEATON">Wheaton</option>
+              <option value="WHEELING">Wheeling</option>
+              <option value="WILLOW SPRINGS">Willow Springs</option>
+              <option value="WILLOWBROOK">Willowbrook</option>
+              <option value="WILMETTE">Wilmette</option>
+              <option value="WILMINGTON">Wilmington</option>
+              <option value="WINFIELD">Winfield</option>
+              <option value="WINTHROP HARBOR">Winthrop Harbor</option>
+              <option value="WONDER LAKE">Wonder Lake</option>
+              <option value="WOOD DALE">Wood Dale</option>
+              <option value="WOODLAWN">Woodlawn</option>
+              <option value="WOODRIDGE">Woodridge</option>
+              <option value="WOODSTOCK">Woodstock</option>
+              <option value="WORTH">Worth</option>
+              <option value="YORKVILLE">Yorkville</option>
+              <option value="ZION">Zion</option>
           </select>
         </div>
     </div>
@@ -541,13 +551,13 @@
          <div id="phoneFloatHomePage">
   <div class="justListed text-center">Popular Listings</div>
           <% listings.forEach(function(listing) { %>
-      <% if (listing.city === 'CHICAGO') { %>
+      <% if (listing.city == 'CHICAGO') { %>
           <div class="col-lg-3  col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button><% if (((new Date - new Date(listing.listDate.trim())) / 86400000).toFixed(0) <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
       
     <div class="listingImage rtl">
           <% for (var i = 1; i <= listing.photoCount; i++) { %>
-        <a href="/chicago/<%= listing._id %>"><img class="image" src="/images/chicagoImages/LargePhoto<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <a href="/chicago/<%= listing.MLS %>"><img class="image" src="/images/chicagoImages/LargePhoto<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
         <% } %>
     </div>
       
@@ -558,29 +568,8 @@
       <div><span class='listingOffice'><%= listing.listOffice %></span></div><br>
      </div>
        <div class='amenities'>
-  
-
 <!-- STORIES-->
-
-           
-<!-- GARAGE WORKS-->
-        <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button>
-
-<!-- FIREPLACE WORKS-->
-      <% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %>
-
-<!-- BASEMENT WORKS-->
-        <% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %>
-
-<!-- COMM POOL WORKS-->
-        <% if (listing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %>
-
-<!-- WATERFRONT -->
-        <% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %>
-
-        <% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %>
-
-        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+        <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %><% if (listing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Walker Robinson" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Walker@MyHomesMatchmaker.com'>Email</a> <br> RE/Max Edge">Contact Agent</button></div></div>
 
 </div>
 <% } %>
@@ -589,14 +578,25 @@
 </div>
 
 
-<div id="footer">
-      <div class="container">
-        <p class="text-muted credit">Copyright and Disclaimer info.</p>
-      </div>
+   <div class='row footerMargin'>
     </div>
+
+      <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Each Office Independently Owned and Operated. RE/MAX, LLC is an Equal Opportunity Employer and supports the Fair Housing Act.
+                        © 2015 RE/MAX, LLC. All Rights Reserved.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
 
  <script src='/javascripts/javascript.js'></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <!-- SLICK SLIDER SCRIPT -->
+   <script src='/javascripts/slickSlider.js'></script>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>

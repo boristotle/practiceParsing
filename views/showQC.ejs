@@ -11,7 +11,7 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,8 +21,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href='/' class="navbar-brand">HOME</a>
-      <a class="navbar-brand">QUAD CITIES</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">QUAD CITIES</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,8 +32,10 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><%= theUser[0] %></li>
+        <li><a href="tel:3094290826">309-429-0826</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -94,9 +96,9 @@
       <div class='col-md-6'>
         <h2 id='h2'>SCHOOLS</h2>
         <div><%= theListing.schoolDistrict %></div>
-        <div>Elem: <%= theListing.elemSchool %> [rating]</div>
-        <div>Middle: <%= theListing.middleSchool %> [rating]</div>
-        <div>High School: <%= theListing.highSchool %> [rating]</div>
+        <div>Elem: <%= theListing.elemSchool %></div>
+        <div>Middle: <%= theListing.middleSchool %></div>
+        <div>High School: <%= theListing.highSchool %></div>
       </div>
       <div class='col-md-6'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
@@ -113,14 +115,23 @@
 
       <div class='col-md-6'>
         <h2 id='h2'>SHOWING INFO</h2>
-        <div>Darrin Bennett</div>
-        <div>AGENT PHOTO PLACEHOLDER</div>
-        <div><a href='tel:3094290826'>309-429-0826</a></div>
-        <div><a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a></div>
+        <div>Hillary Walker</div>
+        <!-- <div>AGENT PHOTO PLACEHOLDER</div> -->
+        <div><a href='tel:3094290826'>AGENT PHONE PLACEHOLDER</a></div>
+        <div><a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a></div>
+        <div>RE/MAX</div>
       </div>
     </div>
     <div class='row'>
-      <div><form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form></div>
+      <div>
+        <% if (favs) { %> 
+         <% if (favs >= 0) { %>
+        <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
     </div>
     <div class='row'>
       <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
@@ -131,11 +142,25 @@
 
   
 
-
-
   </div>
    </div>
+
+      <div class='row footerMargin'>
+    </div>
+
+ <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Each Office Independently Owned and Operated. RE/MAX Holdings, Inc. is an Equal Opportunity Employer and supports the Fair Housing Act. © 2015 RE/MAX Holdings, Inc. All Rights Reserved.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
 <script src='/javascripts/javascript.js'></script> 
+<script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

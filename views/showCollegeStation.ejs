@@ -11,7 +11,7 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,8 +21,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href='/' class="navbar-brand">HOME</a>
-      <a class="navbar-brand">COLLEGE STATION</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">COLLEGE STATION</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,7 +33,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="tel:5122709688">512-270-9688</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -80,7 +81,7 @@
           <h2 id='h2'>BASICS</h2>
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= ((new Date() - theListing.listContractDate) / 86400000).toFixed(0) %> Days on Market</div>
-          <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
+          <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft.toFixed(0) %> Sq.Ft.</div>
           <div class='add'><%= theListing.streetNumber %> <%= theListing.streetName %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
       <div class='col-md-6'>
@@ -108,14 +109,23 @@
 
       <div class='col-md-6'>
         <h2 id='h2'>SHOWING INFO</h2>
-        <div>Darrin Bennett</div>
-        <div>AGENT PHOTO PLACEHOLDER</div>
-        <div><a href='tel:3094290826'>309-429-0826</a></div>
-        <div><a href='mailto:darrin@QCHomesMatchmaker.com'>Email</a></div>
+        <div>Amber Dawn Cox</div>
+        <!-- <div>AGENT PHOTO PLACEHOLDER</div> -->
+        <div><a href='tel:3094290826'>AGENT PHONE PLACEHOLDER</a></div>
+        <div><a href='mailto:Amber@MyHomesMatchmaker.com'>Amber@MyHomesMatchmaker.com</a></div>
+        <div>Keller Williams Realty</div>
       </div>
     </div>
     <div class='row'>
-      <div><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></div>
+      <div>
+        <% if (favs) { %> 
+         <% if (favs >= 0) { %>
+        <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
+
+        <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
     </div>
     <div class='row'>
       <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
@@ -130,7 +140,22 @@
 
   </div>
    </div>
+
+      <div class='row footerMargin'>
+    </div>
+   <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Copyright © 2000-2015 Keller Williams ® Realty. - a real estate franchise company. All information provided is deemed reliable but is not guaranteed and should be independently verified. Properties subject to prior sale or rental. Each brokerage is independently owned and operated.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
 <script src='/javascripts/javascript.js'></script> 
+<script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

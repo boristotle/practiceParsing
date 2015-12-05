@@ -11,7 +11,7 @@
     <title>CHICAGO</title>
   </head>
   <body>
-       <nav class="navbar navbar-default navbar-fixed-top">
+       <nav class="navbar navbar-default navbar-fixed-top" id='navbar'>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,8 +21,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href='/'>HOME</a>
-      <a class="navbar-brand">CHICAGO</a>
+      <a class="navbar-brand" href='/'>MyHomesMatchmaker</a>
+      <!-- <a class="navbar-brand">CHICAGO</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,8 +32,10 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
+         <li><% theUser.forEach(function(user){ if (user) { %><a href='/chicagoFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
         <li><a href="tel:3094290826">309-429-0826</a></li>
-        <li><a href="login">Login/Register</a></li>
+        <li><% cookies.forEach(function(cookie) { %>
+        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -48,7 +50,7 @@
       
       <div class="listingImage rtl">
           <% for (var i = 1; i <= listing.photoCount; i++) { %>
-        <a href="/chicago/<%= listing._id %>"><img class="image" src="/images/chicagoImages/LargePhoto<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
+        <a href="/chicago/<%= listing.MLS %>"><img class="image" src="/images/chicagoImages/LargePhoto<%= listing.MLS %>-<%= i %>.jpeg" height="200px" width="250px"></a>
         <% } %>
     </div>
 
@@ -58,41 +60,35 @@
       <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
       <div><span class='listingOffice'>Listed by <%= listing.listOffice %></span></div><br>
      </div>
-       <div class='amenities'>
-
+    <div class='amenities'>
 <!-- STORIES-->
-  
-      
-
-<!-- GARAGE WORKS-->
-        <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button>
-
-<!-- FIREPLACE WORKS-->
-      <% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %>
-
-<!-- BASEMENT WORKS-->
-        <% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %>
-
-<!-- COMM POOL WORKS -->
-        <% if (listing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %>
-
-<!-- WATERFRONT -->
-        <% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %>
-
-        <!-- GOLF COMM -->
-        <% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %>
-
-        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Darrin Bennett" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'>512-270-9688</a> <br> <a href='mailto:darrin@austinHomesMatchmaker.com'>Email</a>">Contact Agent</button></div></div>
+        <button id='none' disabled='true'><img src="images/garage-icon.png" height="20px" width="20px"><%= listing.garage %> Garage</button><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.basement.indexOf('N') < 0) { %><button id="none" disabled="true"><img src="images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %><% if (listing.otherAmenities.indexOf('C') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><% if (listing.waterfront === 'Y') { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Walker Robinson" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Walker@MyHomesMatchmaker.com'>Email</a> <br> RE/Max Edge">Contact Agent</button></div></div>
 
 </div>
 <% }) %>
 </div>
 </div>
 
+   <div class='row footerMargin'>
+    </div>
+
+      <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin visible-lg visible-md"></div>
+                        <small>Each Office Independently Owned and Operated. RE/MAX, LLC is an Equal Opportunity Employer and supports the Fair Housing Act.
+                        © 2015 RE/MAX, LLC. All Rights Reserved.</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
 
  <script src='/javascripts/javascript.js'></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  <!-- SLICK SLIDER SCRIPT -->
+ <script src='/javascripts/slickSlider.js'></script>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
   </body>
 </html>
