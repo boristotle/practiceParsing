@@ -5,9 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
      <!--jquery> -->
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
-<!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
 
   </head>
   <body class='homepage'>
@@ -34,9 +32,9 @@
         <li><% cookies.forEach(function(cookie) { %>
       <p style='color:red'><%= cookie %></p>
       <% }) %></li>
-        <li><a href="tel:5122709688">512-270-9688</a></li>
+        <!-- <li><a href="tel:5122709688">512-270-9688</a></li> -->
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -60,27 +58,27 @@
 
   <div class='col-md-3 col-sm-4'>
     <h4>COMING SOON</h4>
-    <p><a href='/boulder'>Boulder</a></p>
-    <p><a href='/dallas'>Dallas/Ft. Worth</a></p>
-    <p><a href='/ftCollins'>Ft. Collins</a></p>
-    <p><a href='/lasVegas'>Las Vegas</a></p>
-    <p><a href='/memphis'>Memphis</a></p>
-    <p><a href='/sanAntonio'>San Antonio</a></p>
-    <p><a href='/sanDiego'>San Diego</a></p>
-    <p><a href='/stLouis'>St. Louis</a></p>
+    <p><a href='/'>Boulder</a></p>
+    <p><a href='/'>Dallas/Ft. Worth</a></p>
+    <p><a href='/'>Ft. Collins</a></p>
+    <p><a href='/'>Las Vegas</a></p>
+    <p><a href='/'>Memphis</a></p>
+    <p><a href='/'>San Antonio</a></p>
+    <p><a href='/'>San Diego</a></p>
+    <p><a href='/'>St. Louis</a></p>
 
   </div>
 
   <div class='col-md-3 col-md-offset-1 col-sm-4'>
     <h4>COMING NEXT YEAR</h4>
-    <p><a href='/annapolis'>Annapolis</a></p>
-    <p><a href='/alrlington'>Arlington</a></p>
-    <p><a href='/baltimore'>Baltimore</a></p>
-    <p><a href='/fresno'>Fresno</a></p>
-    <p><a href='/madison'>Madison</a></p>
-    <p><a href='/portland'>Portland</a></p>
-    <p><a href='/seattle'>Seattle</a></p>
-    <p><a href='/DC'>Washington DC</a></p>
+    <p><a href='/'>Annapolis</a></p>
+    <p><a href='/'>Arlington</a></p>
+    <p><a href='/'>Baltimore</a></p>
+    <p><a href='/'>Fresno</a></p>
+    <p><a href='/'>Madison</a></p>
+    <p><a href='/'>Portland</a></p>
+    <p><a href='/'>Seattle</a></p>
+    <p><a href='/'>Washington DC</a></p>
     
   </div>
 
@@ -93,7 +91,7 @@
      <nav class="navbar navbar-fixed-bottom" id='navbar'>
             <div class="container">
                 <div class="row">
-                        <small>MyHomesMatchmaker - Top agents from top firms across the country looking out for you!</small>
+                        <small>MyHomesMatchmaker Copyright 2015</small>
                 </div>
             </div>
         </nav>

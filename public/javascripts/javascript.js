@@ -12,8 +12,8 @@ $('.price').eq(i).html('$' + commaPrice);
 
 
 // this shows the number of results from a search
-var numResults = $('.HOME').length;
-$('.numResults').append(numResults + ' homes matching your search!');
+// var numResults = $('.HOME').length;
+// $('.numResults').append(numResults + ' homes matching your search!');
       
 
 // THIS IS THE ZILLOW INTEREST RATE API CALL, CHANGE THIS TO UNIREST
@@ -90,24 +90,198 @@ $(".REMOVEFAV").submit(function(event) {
         event.preventDefault();
     })
 
-$('.FAVDISABLED').on('click', function(){
-    alert('Login or create an account to save favorites!')
-})
-
-
-
-
-
-
 // SAVE FORM INPUTS TO LOCAL STORAGE
 
-  // JQUERY: (saves the name input to local storage on change);
-// $('#minprice option:selected').on('change', function (){ localStorage.setItem( 'minprice', $('#minprice option:selected').val()})
+// SET MIN PRICE
+$('#minprice').on('change', function (){ localStorage.setItem('minprice', this.value) })
+    // GET MIN PRICE
+    if (localStorage.getItem('minprice')) {
+        $('#minprice').val(localStorage.getItem('minprice')).trigger('change');
+     }
+
+// GET MAX PRICE
+$('#maxprice').on('change', function (){ localStorage.setItem('maxprice', this.value) })
+    // SET MAX PRICE
+    if (localStorage.getItem('maxprice')) {
+        $('#maxprice').val(localStorage.getItem('maxprice')).trigger('change');
+     }
+
+// GET BEDS MIN
+$('#bedsmin').on('change', function (){ localStorage.setItem('bedsmin', this.value) })
+    // SET BEDS MIN
+    if (localStorage.getItem('bedsmin')) {
+        $('#bedsmin').val(localStorage.getItem('bedsmin')).trigger('change');
+     }
+
+// GET BATHS MIN
+$('#bathsmin').on('change', function (){ localStorage.setItem('bathsmin', this.value) })
+    // SET BATHS MIN
+    if (localStorage.getItem('bathsmin')) {
+        $('#bathsmin').val(localStorage.getItem('bathsmin')).trigger('change');
+     }
+
+// GET MIN SQFT
+$('#minsqft').on('change', function (){ localStorage.setItem('minsqft', this.value) })
+    // SET MIN SQFT
+    if (localStorage.getItem('minsqft')) {
+        $('#minsqft').val(localStorage.getItem('minsqft')).trigger('change');
+     }
+
+// GET MAX SQFT
+$('#maxsqft').on('change', function (){ localStorage.setItem('maxsqft', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('maxsqft')) {
+        $('#maxsqft').val(localStorage.getItem('maxsqft')).trigger('change');
+     }
+
+// GET CITYAUSTIN
+$('#cityAustin').on('change', function (){ localStorage.setItem('cityAustin', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityAustin')) {
+        $('#cityAustin').val(localStorage.getItem('cityAustin')).trigger('change');
+     }
+
+
+// GET CITYCHICAGO
+$('#cityChicago').on('change', function (){ localStorage.setItem('cityChicago', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityChicago')) {
+        $('#cityChicago').val(localStorage.getItem('cityChicago')).trigger('change');
+     }
+
+// GET CITYCS
+$('#cityCS').on('change', function (){ localStorage.setItem('cityCS', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityCS')) {
+        $('#cityCS').val(localStorage.getItem('cityCS')).trigger('change');
+     }
+
+
+// GET CITYNASHVILLE
+$('#cityNashville').on('change', function (){ localStorage.setItem('cityNashville', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityNashville')) {
+        $('#cityNashville').val(localStorage.getItem('cityNashville')).trigger('change');
+     }
+
+
+// GET CITYORLANDO
+$('#cityOrlando').on('change', function (){ localStorage.setItem('cityOrlando', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityOrlando')) {
+        $('#cityOrlando').val(localStorage.getItem('cityOrlando')).trigger('change');
+     }
+
+
+// GET CITYQC
+$('#cityQC').on('change', function (){ localStorage.setItem('cityQC', this.value) })
+    // SET MAX SQFT
+    if (localStorage.getItem('cityQC')) {
+        $('#cityQC').val(localStorage.getItem('cityQC')).trigger('change');
+     }
 
 
 
-// // SETS the name back to where it was when the user left the page
-// $(document).ready(function() { $('#minprice option:selected').val() === (localStorage.minprice)})
+// LOCAL STORAGE SET CITIES
+
+
+//  // SET GARAGES AUSTIN
+// $('#garagesAustin').on('change', function (){ localStorage.setItem('garagesAustin', this.value) })
+//     // SET garagesAustin
+//     if (localStorage.getItem('garagesAustin')) {
+//         $('#garagesAustin').val(localStorage.getItem('garagesAustin')).trigger('change');
+//      }
+
+//  // SET GARAGES CHICAGO
+// $('#garagesChicago').on('change', function (){ localStorage.setItem('garagesChicago', this.value) })
+//     // SET garagesChicago
+//     if (localStorage.getItem('garagesChicago')) {
+//         $('#garagesChicago').val(localStorage.getItem('garagesChicago')).trigger('change');
+//      }
+
+//  // SET GARAGES CS
+// $('#garagesCS').on('change', function (){ localStorage.setItem('garagesCS', this.value) })
+//     // SET garagesCS
+//     if (localStorage.getItem('garagesCS')) {
+//         $('#garagesCS').val(localStorage.getItem('garagesCS')).trigger('change');
+//      }
+
+
+//  // SET GARAGES NASHVILLE
+// $('#garagesNashville').on('change', function (){ localStorage.setItem('garagesNashville', this.value) })
+//     // SET garagesNashville
+//     if (localStorage.getItem('garagesNashville')) {
+//         $('#garagesNashville').val(localStorage.getItem('garagesNashville')).trigger('change');
+//      }
+
+
+//  // SET GARAGES ORLANDO
+// $('#garagesOrlando').on('change', function (){ localStorage.setItem('garagesOrlando', this.value) })
+//     // SET garagesOrlando
+//     if (localStorage.getItem('garagesOrlando')) {
+//         $('#garagesOrlando').val(localStorage.getItem('garagesOrlando')).trigger('change');
+//      }
+
+
+//  // SET GARAGES QC
+// $('#garagesQC').on('change', function (){ localStorage.setItem('garagesQC', this.value) })
+//     // SET garagesQC
+//     if (localStorage.getItem('garagesQC')) {
+//         $('#garagesQC').val(localStorage.getItem('garagesQC')).trigger('change');
+//      }
+
+
+
+
+// LOCAL STORAGE SET STORIES
+
+//  // SET stories AUSTIN
+// $('#storiesAustin').on('change', function (){ localStorage.setItem('storiesAustin', this.value) })
+//     // SET storiesAustin
+//     if (localStorage.getItem('storiesAustin')) {
+//         $('#storiesAustin').val(localStorage.getItem('storiesAustin')).trigger('change');
+//      }
+
+//  // SET stories CHICAGO
+// $('#storiesChicago').on('change', function (){ localStorage.setItem('storiesChicago', this.value) })
+//     // SET storiesChicago
+//     if (localStorage.getItem('storiesChicago')) {
+//         $('#storiesChicago').val(localStorage.getItem('storiesChicago')).trigger('change');
+//      }
+
+//  // SET stories CS
+// $('#storiesCS').on('change', function (){ localStorage.setItem('storiesCS', this.value) })
+//     // SET storiesCS
+//     if (localStorage.getItem('storiesCS')) {
+//         $('#storiesCS').val(localStorage.getItem('storiesCS')).trigger('change');
+//      }
+
+
+//  // SET stories NASHVILLE
+// $('#storiesNashville').on('change', function (){ localStorage.setItem('storiesNashville', this.value) })
+//     // SET storiesNashville
+//     if (localStorage.getItem('storiesNashville')) {
+//         $('#storiesNashville').val(localStorage.getItem('storiesNashville')).trigger('change');
+//      }
+
+
+//  // SET stories ORLANDO
+// $('#storiesOrlando').on('change', function (){ localStorage.setItem('storiesOrlando', this.value) })
+//     // SET storiesOrlando
+//     if (localStorage.getItem('storiesOrlando')) {
+//         $('#storiesOrlando').val(localStorage.getItem('storiesOrlando')).trigger('change');
+//      }
+
+
+//  // SET stories QC
+// $('#storiesQC').on('change', function (){ localStorage.setItem('storiesQC', this.value) })
+//     // SET storiesQC
+//     if (localStorage.getItem('storiesQC')) {
+//         $('#storiesQC').val(localStorage.getItem('storiesQC')).trigger('change');
+//      }
+
+
+
 
 
 

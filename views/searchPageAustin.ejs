@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel='stylesheet' href='/stylesheets/style3.css' />
        <link rel='stylesheet' href='/stylesheets/style.css' />
-     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
    
 
@@ -48,7 +48,7 @@
         <li><% theUser.forEach(function(user){ if (user) { %><a href='/austinFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
         <li><a href="tel:5122709688">512-270-9688</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -61,8 +61,8 @@
     </div>
     <div class="row cityRow">
         <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
-          <label for"city">Select City</label><br>
-          <select multiple id="city" name="city">
+          <label for"cityAustin">Select City</label><br>
+          <select multiple id="cityAustin" name="city">
               <option value="Austin" selected>Austin</option>
               <option value="Bastrop">Bastrop</option>
               <option value="Bee Cave">Bee Cave</option>
@@ -310,27 +310,10 @@
 </div> <!-- closes phone float -->
 </div>
 
-    <div class='row footerMargin'>
-    </div>
+<div class='col-md-12 col-xs-12'>
+  <small>Based on information from the Austin Board of REALTORS® (alternatively, from ACTRIS) All information provided is deemed reliable but is not guaranteed and should be independently verified. The Austin Board of REALTORS®, ACTRIS and their affiliates provide the MLS and all content therein “AS IS” and without any warranty, express or implied.</small>
+</div>
 
-     <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Powered by VRG - <a href="#" id="disclaimer" target="_blank">Disclaimer</a></small>
-                    </div>
-                    <div class="col-md-6 text-right visible-lg visible-md">
-                        <div class="margin"></div>
-                        <small>&copy; 2015 - MyHomesMatchmaker</small>
-                    </div>
-                    <div class="col-md-6 visible-sm visible-xs">
-                        <div class="margin"></div>
-                        <small>&copy; 2015 - MyHomesMatchmaker</small>
-                    </div>
-                </div>
-            </div>
-        </nav>
 
 
  <script src='/javascripts/javascript.js'></script> 

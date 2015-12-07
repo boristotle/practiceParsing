@@ -6,7 +6,7 @@
 
     <link rel='stylesheet' href='/stylesheets/style2.css' />
     <link rel='stylesheet' href='/stylesheets/showPage.css' />
-      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+      <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
@@ -32,9 +32,9 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="tel:5122709688">512-270-9688</a></li>
+        <li><a href="tel:6154809013">615-480-9013</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -71,38 +71,38 @@
     </div>
      <div class='SHOW'>
     <div class='row'>
-        <div class='col-md-12'>
+        <div class='col-md-12 col-xs-12'>
         <h2 id='h2'>DESCRIPTION</h2>
         <div><%= theListing.remarks %></div>
         </div>
     </div>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>BASICS</h2>
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
           <div class='add'><%= theListing.address %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>MORE INFO</h2>
         <div><button id='none' disabled='true'><%= theListing.stories %> Stories</button><% if (theListing.garage > 0) { %><button id='none' disabled='true'><%= theListing.garage %> Garage</button><% } else { %><% } %><% if (theListing.acreage !== '') { %><button id="none" disabled="true"><%= theListing.acreage %> Acres</button><% } else { %><% } %><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } else { %><% } %><% if (theListing.pool.indexOf('ABGRN') >= 0 || theListing.pool.indexOf('IDOOR') >= 0 || theListing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true">Pool</button><% } else { %><% } %><% if (theListing.waterfront.indexOf('LAKEFR') >= 0 || theListing.waterfront.indexOf('RIVFR') >= 0 || theListing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true">Waterfront</button><% } else { %><% } %><% if (theListing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true">Golf Comm</button><% } else { %><% } %><% if (theListing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true">Comm Pool</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button></div>
     </div>
   </div>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>SCHOOLS</h2>
         <div><%= theListing.schoolDistrict %></div>
         <div>Elem: <%= theListing.elemSchool %></div>
         <div>Middle: <%= theListing.middleSchool %></div>
         <div>High School: <%= theListing.highSchool %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
           <div><%= theListing.subdivision %></div>
       </div>
     </div>
     <div class='row'>
-        <div class='col-md-6'>
+        <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>FINANCIALS</h2>
         <div>Taxes: $<%= theListing.taxes %></div>
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
@@ -110,11 +110,11 @@
         <div class='est'> </div>
         </div>
 
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>SHOWING INFO</h2>
         <div>Nathan Beach</div>
-        <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:3094290826'>AGENT PHONE</a></div>
+      <!--   <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
+        <div><a href='tel:6154809013'>615-480-9013</a></div>
         <div><a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a></div>
         <div>Keller Williams Realty</div>
       </div>
@@ -145,22 +145,26 @@
   </div>
    </div>
 
-      <div class='row footerMargin'>
-    </div>
 
-    <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Copyright © 2000-2015 Keller Williams ® Realty. - a real estate franchise company. All information provided is deemed reliable but is not guaranteed and should be independently verified. Properties subject to prior sale or rental. Each brokerage is independently owned and operated.</small>
-                    </div>
+      <div class="col-md-12">
+         <small>All information is believed to be accurate but not guaranteed and should be independently verified. All properties are subject to prior sale, change or withdrawal. Copyright 2015 RealTracs Solutions.</small>
+      </div>
                     
-                </div>
-            </div>
-        </nav>
+       
 <script src='/javascripts/javascript.js'></script> 
 <script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  <div class="dialog" title="Create an Account">Login or create an account to save favorites! <a href='/signup' style='outline: 0; text-decoration: none; font-weight: bold'>Signup here!</a></div>
+               
+  <script>
+    $( ".dialog" ).dialog({ autoOpen: false });
+    $( ".FAVDISABLED" ).on('click', function() {
+    $( ".dialog" ).dialog( "open" );
+    });
+  </script>
   </body>
 </html>

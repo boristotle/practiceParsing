@@ -6,7 +6,7 @@
 
     <link rel='stylesheet' href='/stylesheets/style2.css' />
     <link rel='stylesheet' href='/stylesheets/showPage.css' />
-      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+      <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
@@ -33,9 +33,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><%= theUser[0] %></li>
-        <li><a href="tel:3094290826">309-429-0826</a></li>
+        <li><a href="tel:3097140314">309-714-0314</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -116,8 +116,8 @@
       <div class='col-md-6'>
         <h2 id='h2'>SHOWING INFO</h2>
         <div>Hillary Walker</div>
-        <!-- <div>AGENT PHOTO PLACEHOLDER</div> -->
-        <div><a href='tel:3094290826'>AGENT PHONE PLACEHOLDER</a></div>
+          <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
+        <div><a href='tel:3097140314'>309-714-0314</a></div>
         <div><a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a></div>
         <div>RE/MAX</div>
       </div>
@@ -140,27 +140,30 @@
         <div id="map"></div>
     </div>
 
-  
-
   </div>
    </div>
+               
 
-      <div class='row footerMargin'>
-    </div>
 
- <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Each Office Independently Owned and Operated. RE/MAX Holdings, Inc. is an Equal Opportunity Employer and supports the Fair Housing Act. © 2015 RE/MAX Holdings, Inc. All Rights Reserved.</small>
-                    </div>
-                    
-                </div>
-            </div>
-        </nav>
+
+      <div class="col-md-12">
+        <small>The data relating to real estate for sale on this website comes in part from the IDX program of the Quad Cities Area REALTOR® Association. IDX information from this property search is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
+      </div>
+            
 <script src='/javascripts/javascript.js'></script> 
 <script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  <div class="dialog" title="Create an Account">Login or create an account to save favorites! <a href='/signup' style='outline: 0; text-decoration: none; font-weight: bold'>Signup here!</a></div>
+               
+  <script>
+    $( ".dialog" ).dialog({ autoOpen: false });
+    $( ".FAVDISABLED" ).on('click', function() {
+    $( ".dialog" ).dialog( "open" );
+    });
+  </script>
   </body>
 </html>

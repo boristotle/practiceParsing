@@ -6,7 +6,7 @@
     
     <link rel='stylesheet' href='/stylesheets/style2.css' />
     <link rel='stylesheet' href='/stylesheets/showPage.css' />
-      <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+      <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
@@ -34,7 +34,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="tel:5122709688">512-270-9688</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -71,39 +71,39 @@
     </div>
      <div class='SHOW'>
     <div class='row'>
-        <div class='col-md-12'>
+        <div class='col-md-12 col-xs-12'>
         <h2 id='h2'>DESCRIPTION</h2>
         <div><%= theListing.remarks %></div>
         </div>
     </div>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>BASICS</h2>
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= ((new Date() - theListing.ListingContractDate) / 86400000).toFixed(0) %> Days on Market</div>
           <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
           <div class='add'><%= theListing.address %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>MORE INFO</h2>
         <div><button id='none' disabled='true'><%= theListing.stories %> Stories</button><% if (theListing.garage > 0) { %><button id='none' disabled='true'><%= theListing.garage %> Garage</button><% } else { %><% } %><% if(theListing.lotSize !== '0.00') { %><button id='none' disabled='true'><%= theListing.lotSize %> Acres</button><% } else { %><% } %><% if (theListing.fireplace > 0) { %><button id="none" disabled="true">Fireplace</button><% } else { %><% } %><% if (theListing.pool > 0) { %><button id="none" disabled="true">Pool</button><% } else { %><% } %><% if (theListing.masterMain === '1') { %><button id="none" disabled="true">Master Main</button><% } else { %><% } %><% if (theListing.view.indexOf('GRENBELT') >= 0) { %><button id="none" disabled="true">Greenbelt</button><% } else { %><% } %><% if (theListing.amenities.indexOf('JOGBIKE') >= 0) { %><% } %><% if (theListing.amenities.indexOf('PARK') >= 0) { %><button id="none" disabled="true">Comm Park</button><% } else { %><% } %><% if (theListing.amenities.indexOf('DOGPRK') >= 0) { %><button id="none" disabled="true">Jog/Bike Path</button><% } else { %><% } %><% if (theListing.amenities.indexOf('DOGPRK') >= 0) { %><button id="none" disabled="true">Comm Dog Park</button><% } else { %><% } %><% if (theListing.amenities.indexOf('GOLFPRIV') >= 0 || theListing.amenities.indexOf('GOLFPUB') >= 0) { %><button id="none" disabled="true">Golf Comm</button><% } else { %><% } %><% if (theListing.amenities.indexOf('POOLCOMM') >= 0) { %><button id="none" disabled="true">Comm Pool</button><% } else { %><% } %><% if (theListing.waterfront > 0) { %><button id="none" disabled="true">Waterfront</button><% } else { %><% } %><% if (theListing.amenities.indexOf('LAKEPRIV') >= 0) { %><button id="none" disabled="true">Comm Lake</button><% } else { %><% } %><% if (theListing.rooms.indexOf('RMOFS') >= 0) { %><button id='none' disabled='true'>Study</button><% } else { %><% } %><% if (theListing.rooms.indexOf('RMHTH') >= 0 || theListing.rooms.indexOf('RMMED'))  { %><button id='none' disabled='true'>Media Room</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button></div>
     </div>
   </div>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>SCHOOLS</h2>
         <div><%= theListing.schoolDistrict %></div>
         <div>Elem: <%= theListing.elemSchool %></div>
         <div>Middle: <%= theListing.middleSchool %></div>
         <div>High School: <%= theListing.highSchool %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
           <div><%= theListing.subdivision %></div>
       </div>
     </div>
     <div class='row'>
-        <div class='col-md-6'>
+        <div class='col-md-6 col-xs-6'>
         <h2 id='h2'>FINANCIALS</h2>
         <div>Taxes: $<%= theListing.taxes %></div>
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
@@ -111,10 +111,10 @@
         <div class='est'> </div>
         </div>
 
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>SHOWING INFO</h2>
         <div>Darrin Bennett</div>
-        <!-- <div>AGENT PHOTO PLACEHOLDER</div> -->
+        <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
         <div><a href='tel:5122709688'>512-270-9688</a></div>
         <div><a href='mailto:Darrin@MyHomesMatchmaker.com'>Darrin@MyHomesMatchmaker.com</a></div>
          <div>Virtual Realty Group</div>
@@ -153,5 +153,17 @@
 <script src='/javascripts/javascript.js'></script> 
 <script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  <div class="dialog" title="Create an Account">Login or create an account to save favorites! <a href='/signup' style='outline: 0; text-decoration: none; font-weight: bold'>Signup here!</a></div>
+               
+  <script>
+    $( ".dialog" ).dialog({ autoOpen: false });
+    $( ".FAVDISABLED" ).on('click', function() {
+    $( ".dialog" ).dialog( "open" );
+    });
+  </script>
   </body>
 </html>

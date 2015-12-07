@@ -6,7 +6,7 @@
         <link rel='stylesheet' href='/stylesheets/slickSlider.css' />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
 
-    <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
 
@@ -34,9 +34,9 @@
         <!-- <li><a href="new">Sell My Home</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="tel:5122709688">309-429-0826</a></li>
+        <li><a href="tel:7734250881">773-425-0881</a></li>
          <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -83,28 +83,16 @@
 
         <% if (listing.remarks.indexOf('golf') >= 0 || listing.remarks.indexOf('Golf') >= 0 || listing.remarks.indexOf('GOLF') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %>
 
-        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Walker Robinson" data-content="[Agent Photo Here] <br> <a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Walker@MyHomesMatchmaker.com'>Walker@MyHomesMatchmaker.com</a> <br> RE/MAX Edge">Contact Agent</button></div></div>
+        <div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFee %>/mo">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Walker Robinson" data-content="[Agent Photo Here] <br> <a href='tel:7734250881'><strong>773-425-0881</strong></a> <br> <a href='mailto:Walker@MyHomesMatchmaker.com'>Walker@MyHomesMatchmaker.com</a> <br> RE/MAX Edge">Contact Agent</button></div></div>
 
 </div>
 <% }) %>
 </div>
 </div>
 
-   <div class='row footerMargin'>
+ <div class='col-md-12 col-xs-12'>
+      <small>"This representation is based in whole or in part on data supplied by Midwest Real Estate Data, LLC for the period of inception of this website through present day. Midwest Real Estate Data, LLC does not guarantee nor is it in any way responsible for its accuracy. Data maintained by Midwest Real Estate Data, LLC may not reflect all real estate activity in the market."</small>
     </div>
-
-      <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Each Office Independently Owned and Operated. RE/MAX, LLC is an Equal Opportunity Employer and supports the Fair Housing Act.
-                        © 2015 RE/MAX, LLC. All Rights Reserved.</small>
-                    </div>
-                    
-                </div>
-            </div>
-        </nav>
 
   <script src='/javascripts/javascript.js'></script> 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

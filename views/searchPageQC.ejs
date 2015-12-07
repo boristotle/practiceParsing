@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
     <link rel='stylesheet' href='/stylesheets/style3.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     
 
@@ -37,9 +37,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><% theUser.forEach(function(user){ if (user) { %><a href='/qcFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
-        <li><a href="tel:5122709688">309-429-0826</a></li>
+        <li><a href="tel:3097140314">309-714-0314</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -53,8 +53,8 @@
     </div>
     <div class="row cityRow">
         <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
-          <label for"city">Select City</label><br>
-          <select multiple id="city" name="city">
+          <label for"cityQC">Select City</label><br>
+          <select multiple id="cityQC" name="city">
               <option value="Bettendorf" selected>Bettendorf</option>
               <option value="Davenport">Davenport</option>
               <option value="East Molin">East Moline</option>
@@ -272,7 +272,7 @@
       <div>Subdiv: <strong><%= listing.subdivision %></strong></div>
        <div><span class='listingOffice'>Listed by <%= listing.listOffice %></span></div><br>
      </div>
- <div class='amenities'><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.amenities.indexOf([7]) >= 0 || listing.amenities.indexOf([8]) >= 0) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.basement.indexOf([5]) >= 0 || listing.basement.indexOf([6]) >= 0) { %><button id="none" disabled="true"><img src="/images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><% } else { %><% } %><% if (listing.acreage !== 'NA') { %><button id="none" disabled="true"><img src="/images/lot-size-icon.png" height="20px" width="20px"> <%= listing.acreage %> Acres</button><% } else { %><% } %><button id="none" disabled="true"><img src="/images/hammer-icon.png" height="20px" width="20px"> Built <%= listing.yearBuilt %></button><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSqft %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Hillary Walker" data-content="[Agent Photo Here] <br> <a href='tel:3094290826'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a> <br> RE/MAX">Contact Agent</button></div></div>
+ <div class='amenities'><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.amenities.indexOf([7]) >= 0 || listing.amenities.indexOf([8]) >= 0) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.basement.indexOf([5]) >= 0 || listing.basement.indexOf([6]) >= 0) { %><button id="none" disabled="true"><img src="/images/basement5.png" height="20px" width="20px"> Basement</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><% } else { %><% } %><% if (listing.acreage !== 'NA') { %><button id="none" disabled="true"><img src="/images/lot-size-icon.png" height="20px" width="20px"> <%= listing.acreage %> Acres</button><% } else { %><% } %><button id="none" disabled="true"><img src="/images/hammer-icon.png" height="20px" width="20px"> Built <%= listing.yearBuilt %></button><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSqft %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Hillary Walker" data-content="[Agent Photo Here] <br> <a href='tel:3097140314'><strong>309-714-0314</strong></a> <br> <a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a> <br> RE/MAX">Contact Agent</button></div></div>
 
 
 
@@ -283,20 +283,9 @@
 </div>
 
 
-   <div class='row footerMargin'>
-    </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Each Office Independently Owned and Operated. RE/MAX Holdings, Inc. is an Equal Opportunity Employer and supports the Fair Housing Act. © 2015 RE/MAX Holdings, Inc. All Rights Reserved.</small>
-                    </div>
-                    
-                </div>
-            </div>
-        </nav>
+     <div class='col-md-12 col-xs-12'>
+        <small>The data relating to real estate for sale on this website comes in part from the IDX program of the Quad Cities Area REALTOR® Association. IDX information from this property search is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
+      </div>
 
   <script src='/javascripts/javascript.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

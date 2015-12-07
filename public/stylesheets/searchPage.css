@@ -8,13 +8,14 @@ body {
   background-color: black;
 }
 
-/*.footerMargin {
-  margin-bottom: 5px;
-}*/
-
 .nashIDX {
   margin-top: 5px;
   margin-left: 42%;
+}
+
+.chiIDX {
+  margin-top: 5px;
+  margin-left: 30%;
 }
 
 .btn {
@@ -64,6 +65,8 @@ button {
   margin: 2px;
   margin-top: 5px;
   max-width: 305px;
+
+  min-width: 305px;
 }
 
 
@@ -113,6 +116,15 @@ button {
 
 
 /*MEDIA CSS*/
+/*
+ @media screen and (max-width: 800px) {
+    .well {
+    margin: 2px;
+    margin-top: 5px;
+    width: 320px;
+    }
+
+  }*/
 
   @media screen and (max-width: 400px) {
 
@@ -135,6 +147,8 @@ button {
   margin: 2px;
   margin-top: 5px;
   width: 290px;
+
+  min-width: 290px;
 }
 
 #phoneFloatHomePage {

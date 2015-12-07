@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel='stylesheet' href='/stylesheets/style3.css' />
        <link rel='stylesheet' href='/stylesheets/style.css' />
-     <link rel="stylesheet" href="http://bootswatch.com/superhero/bootstrap.min.css">
+     <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   
 
@@ -37,9 +37,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><% theUser.forEach(function(user){ if (user) { %><a href='/nashvilleFavs/<%= theUser[0]._id %>'>My Favorites</a><% } })%></li>
-        <li><a href="tel:5122709688">512-270-9688</a></li>
+        <li><a href="tel:6154809013">615-480-9013</a></li>
         <li><% cookies.forEach(function(cookie) { %>
-        <% if (!cookie) { %><a href="/signup">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
+        <% if (!cookie) { %><a href="/signin">Login/Register</a><% } else { %><a href="/signout">Signout <% } })%></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -54,23 +54,23 @@
     </div>
     <div class="row cityRow">
         <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 city">
-          <label for"city">Select City</label><br>
-          <select multiple id="city" name="city">
-              <option value="Nashville" selected>Nashville</option>
-              <option value="Antioch">Antioch</option>
-              <option value="Brentwood">Brentwood</option>
-              <option value="Bruceton">Bruceton</option>
-              <option value="Clarksville">Clarksville</option>
-              <option value="Columbia">Columbia</option>
-              <option value="Franklin">Franklin</option>
-              <option value="Gallatin">Gallatin</option>
-              <option value="HendersonVille">Herendersonville</option>
-              <!-- <option value="Hopkinsville">Hopkinville</option> -->
-              <option value="Lebanon">Lebanon</option>
-              <option value="Mount Juliet">Mount Juliet</option>
-              <option value="Murfreesboro">Murfreesboro</option>
-              <option value="Shelbyville">Shelbyville</option>
-              <option value="Spring Hill">Spring Hill</option>
+          <label for"cityNashville">Select City</label><br>
+          <select multiple id="cityNashville" name="city">
+              <option value="NASHVILLE" selected>Nashville</option>
+              <option value="ANTIOCH">Antioch</option>
+              <option value="BRENTWOOD">Brentwood</option>
+              <option value="BRUCETON">Bruceton</option>
+              <option value="CLARKSVILLE">Clarksville</option>
+              <option value="COLUMBIA">Columbia</option>
+              <option value="FRANKLIN">Franklin</option>
+              <option value="GALLATIN">Gallatin</option>
+              <option value="HENDERSONVILLE">Herendersonville</option>
+              <option value="HOPKINSVILLE">Hopkinsville</option>
+              <option value="LEBANON">Lebanon</option>
+              <option value="MOUNT JULIET">Mount Juliet</option>
+              <option value="MURFREESBORO">Murfreesboro</option>
+              <option value="SHELBYVILLE">Shelbyville</option>
+              <option value="SPRING HILL">Spring Hill</option>
           </select>
         </div>
     </div>
@@ -268,7 +268,6 @@
          <div id="phoneFloatHomePage">
   <div class="justListed text-center">Popular Listings</div>
           <% listings.forEach(function(listing) { %>
-          <% if (listing.city === 'NASHVILLE') { %>
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true">Active</button></div>
       
@@ -284,29 +283,17 @@
       <div><span class='neighborhood'>Subdiv: <strong><%= listing.subdivision %></strong></span></div>
       <div><span class='listingOffice'>Listing provided courtesy of <%= listing.listOffice %></span></div><br>
      </div>
-            <div class='amenities'><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> <%= listing.stories %> Stories</button><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.acreage !== "0.00") { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="/images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool.indexOf('ABGRN') >= 0 || listing.pool.indexOf('IDOOR') >= 0 || listing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.waterfront.indexOf('LAKEFR') >= 0 || listing.waterfront.indexOf('RIVFR') >= 0 || listing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('GATED') >= 0) { %><button id="none" disabled="true"><img src="images/gate-icon.png" height="20px" width="20px"> Gated Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFees %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Nathan Beach" data-content="<a href='tel:5122709688'><strong>AGENT PHONE</strong></a> <br> <a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a> <br> Keller Williams Realty">Contact Agent</button><div class='nashIDX'><img src='/images/nashville-idximage-small.gif'></div></div></div>
+            <div class='amenities'><button id='none' disabled='true'><img src="/images/stories-icon.png" height="20px" width="20px"> <%= listing.stories %> Stories</button><% if (listing.garage > 0) { %><button id='none' disabled='true'><img src="/images/garage-icon.png" height="20px" width="20px"> <%= listing.garage %> Garage</button><% } else { %><% } %><% if (listing.acreage !== "0.00") { %><button id="none" disabled="true"><img src="images/lot-size-icon.png" height="20px" width="20px"><%= listing.acreage %> Acres</button><% } else { %><% } %><% if (listing.fireplace > 0) { %><button id="none" disabled="true"><img src="/images/fireplace-icon.png" height="20px" width="20px"> Fireplace</button><% } else { %><% } %><% if (listing.pool.indexOf('ABGRN') >= 0 || listing.pool.indexOf('IDOOR') >= 0 || listing.pool.indexOf('INGRN') >=0 ) { %><button id="none" disabled="true"><img src="/images/icon-swimming.png" height="20px" width="20px"> Pool</button><% } else { %><% } %><% if (listing.waterfront.indexOf('LAKEFR') >= 0 || listing.waterfront.indexOf('RIVFR') >= 0 || listing.waterfront.indexOf('POND') >= 0) { %><button id="none" disabled="true"><img src="/images/waterfront-icon.png" height="20px" width="20px"> Waterfront</button><% } else { %><% } %><% if (listing.amenities.indexOf('GOLFC') >= 0) { %><button id="none" disabled="true"><img src="images/golf-icon2.png" height="20px" width="20px"> Golf Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('GATED') >= 0) { %><button id="none" disabled="true"><img src="images/gate-icon.png" height="20px" width="20px"> Gated Comm</button><% } else { %><% } %><% if (listing.amenities.indexOf('POOL') >= 0) { %><button id="none" disabled="true"><img src="images/swimming.png" height="20px" width="20px"> Comm Pool</button><% } else { %><% } %><div class='DescSchoolsFin'><button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Description" data-content="<%= listing.remarks %>">Desc</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Schools" data-content="<%= listing.schoolDistrict %> <br> Elem: <%= listing.elemSchool %> <br> Middle: <%= listing.middleSchool %> <br>High School: <%= listing.highSchool %>">Schools</button>&nbsp;<button type="button" class="btn btn-primary DESC" data-toggle="popover" data-trigger="focus" data-placement="top" title="Financials" data-content="Taxes: $<%= listing.taxes %> <br> $/SqFt: $<%= listing.priceSQFT %> <br> HOA: $<%= listing.hoaFees %>">Financials</button></div><div><button type="button" class="btn DESC form-control" data-toggle="popover" data-trigger="focus" data-placement="top" title="Nathan Beach" data-content="<a href='tel:6154809013'><strong>615-480-9013</strong></a> <br> <a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a> <br> Keller Williams Realty">Contact Agent</button><div class='nashIDX'><img src='/images/nashville-idximage-small.gif'></div></div></div>
 
 </div>
-<% } %>
 <% }) %>
 </div> <!-- closes phone float -->
 </div>
 
-   <div class='row footerMargin'>
-    </div>
-
-     <nav class="navbar navbar-default navbar-fixed-bottom" id='navbar'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="margin visible-lg visible-md"></div>
-                        <small>Copyright © 2000-2015 Keller Williams ® Realty. - a real estate franchise company. All information provided is deemed reliable but is not guaranteed and should be independently verified. Properties subject to prior sale or rental. Each brokerage is independently owned and operated.</small>
-                    </div>
-                    
-                </div>
-            </div>
-        </nav>
-
+    <div class='col-md-12 col-xs-12'>
+         <small>All information is believed to be accurate but not guaranteed and should be independently verified. All properties are subject to prior sale, change or withdrawal. Copyright 2015 RealTracs Solutions.</small>
+      </div>
+             
    
 
  <script src='/javascripts/javascript.js'></script> 

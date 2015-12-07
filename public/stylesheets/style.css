@@ -5,6 +5,11 @@
   background-color: #2b3e50;
 }
 
+
+#minprice, #maxprice, #bedsmin, #bathsmin, #garages, #minsqft, #maxsqft, #stories {
+  min-width: 80px;
+}
+
 #navbar {
   background-color: black;
 }
@@ -14,6 +19,14 @@
   background: url('/images/austin-skyline.jpg') no-repeat;
   background-size: 100% 450px;
   background-color: #2b3e50;
+}
+
+.chicago {
+  background: url('/images/chicago-skyline.jpg') no-repeat;
+  background-size: 100% 450px;
+  background-color: #2b3e50;
+  opacity: .85;
+
 }
 
 .quadCities {

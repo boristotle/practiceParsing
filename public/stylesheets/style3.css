@@ -77,6 +77,10 @@ select {
 
 }
 
+.topSpacer {
+  margin-top: 40px;
+}
+
 .justListed {
     font-size: 20px;
 }

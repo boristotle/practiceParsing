@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var mongo = require('mongodb').ObjectId;
 var dotenv = require('dotenv');
 var unirest = require('unirest');
 var bcrypt = require('bcrypt');
 var cookieSession = require('cookie-session')
-// var subdomain = require('express-subdomain');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -16,7 +14,6 @@ var transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
-
 
 
 var userFavs = require('monk')('localhost/userFavs')
@@ -43,7 +40,7 @@ router.post('/signup', function(req, res, next) {
   var hash = bcrypt.hashSync(req.body.password, 8);
   var errors = [];
   if (req.body.email.length == 0 || req.body.email.indexOf('@') === -1) {
-    errors.push("Email can't be blank and must contain an @ character.")
+    errors.push("Invalid Email.")
   } 
   if (req.body.password.length < 8) {
     errors.push("Password must be a minimum of 8 characters.")
@@ -87,7 +84,6 @@ transporter.sendMail(mailOptions, function(error, info){
         return console.log(error);
     }
     console.log('Message sent: ' + info.response);
- 
 });
         // console.log(req.session.user);
           res.redirect('/');
@@ -145,9 +141,6 @@ router.post('/removeFav', function(req, res, next){
 // QC DATABASE
 var db = require('monk')('localhost/listings');
 var listings = db.get('listings');
-
-
-
   
 // get QC favorites with promises to render the listings on the page
 router.get('/qcFavs/:id', function(req, res, next){
@@ -229,6 +222,83 @@ router.get('/quadCities', function(req, res, next){
 })
 
 
+
+// THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
+// router.get('/searchResultsQC/:page', function(req, res, next) {
+//       Favs.find({email: req.session.user}, function(err, user){
+//       var page = parseInt(req.params.page);
+//       var size = 50;
+//       var skip = page > 0 ? ((page - 1) * size) : 0;
+//       listings.find({}, function(err, data){
+//         // console.log(data.length);
+//         var totalRecords = data.length;
+//       }).then(function(totalData){
+//       listings.find({}, {
+//          skip: skip,
+//          limit: size
+//       }, function (err, data) {
+//             res.render('searchResultsQC', {listings: data, totalRecords: totalData, size: size, theUser: user, cookies: [req.session.user]});
+//       });
+//     })
+//   })
+// });
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS ******TESTING*******
+
+// router.post('/searchResultsQC/:page', function(req, res, next) {
+//       Favs.find({email: req.session.user}, function(err, user){
+//       var page = parseInt(req.params.page);
+//       var size = 25;
+//       var skip = page > 0 ? ((page - 1) * size) : 0;
+//       listings.find({}, function(err, data){
+//         // console.log(data.length);
+//         var totalRecords = data.length;
+//       }).then(function(totalData){
+//       listings.find({}, {
+//          skip: skip,
+//          limit: size
+//       }, function (err, data) {
+//             res.render('searchResultsQC', {listings: data, totalRecords: totalData, size: size, theUser: user, cookies: [req.session.user]});
+//       });
+//     })
+//   })
+// });
+
+
+// THIS IS THE POST ROUTE TO FOR THE QC HOME SEARCH     ***********TEST*************
+// router.post('/searchQC/:page', function(req, res, next){
+//   // var page = parseInt(req.params.page);
+//   var page = 1;
+//       var size = 25;
+//       var skip = page > 0 ? ((page - 1) * size) : 0;
+//     Favs.find({email: req.session.user}, function(err, user){
+//   listings.find({ $query: {$and: [ 
+//   {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
+//   { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
+//   { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
+//   { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
+//   { city: req.body.city[13] } ]}, 
+//   {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
+//   {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
+//   {beds: {$gte: req.body.bedsmin}},
+//   {garage: {$gte: req.body.garages}},
+//   {baths: {$gte: req.body.bathsmin}
+// }]}, $orderby: { price : Number(-1) }
+   
+// }, { limit : size, skip : skip}, function(err, listing){
+//   var totalRecords = listing;
+//   if (listing.length == 0) {
+//     res.render('searchResultsQC', {listings: listing, theUser: user, cookies: [req.session.user]});
+//   }
+
+//     res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, size: 10, cookies: [req.session.user]});
+//   })
+// })
+// })
+
+
+
 // THIS IS THE POST ROUTE TO FOR THE QC HOME SEARCH
 router.post('/searchQC', function(req, res, next){
     Favs.find({email: req.session.user}, function(err, user){
@@ -245,15 +315,25 @@ router.post('/searchQC', function(req, res, next){
   {baths: {$gte: req.body.bathsmin}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : req.params.page}, function(err, listing){
+}, { limit : 10, skip : 0}, function(err, listing){
   if (listing.length == 0) {
-    res.render('searchResultsQC', {listings: listing, theUser: user, cookies: [req.session.user]});
+    res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, cookies: [req.session.user]});
   }
-
-    res.render('searchResultsQC', {listings: listing, theUser: user, cookies: [req.session.user]});
+    res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, size: 10, cookies: [req.session.user]});
   })
 })
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 // THIS IS THE SHOW ROUTE FOR QC HOMES
@@ -310,6 +390,11 @@ fs.readFile('/Users/DarrinBennett/documents/nashvilleListings Doc', 'utf8', func
 for (var i = 0; i < listingsArray.length; i++) {
   var listing = listingsArray[i].split('|');
 
+
+    if (typeof listing[28] === 'string') {
+    var upperCity = listing[28].toUpperCase();
+  }
+
 listingsNashville.insert({
      acreage: Number(listing[0]).toFixed(2) || 'NA',
      hoaFees: listing[1] || 0,
@@ -339,7 +424,7 @@ listingsNashville.insert({
      waterfront: listing[25],
      yearBuilt: listing[26],
      zip: listing[27],
-     city: listing[28],
+     city: upperCity,
      remarks: listing[29],
      amenities: listing[30],
      MLS: Number(listing[31]).toString(),
@@ -356,7 +441,7 @@ listingsNashville.insert({
 
 router.get('/nashville', function(req, res, next){
   Favs.find({email: req.session.user}, function(err, user){
-  listingsNashville.find({}, function(err, listing){
+  listingsNashville.find({city: 'NASHVILLE'}, {limit: 25, skip: 0} , function(err, listing){
     res.render('searchPageNashville', { title: 'Nashville Listings', theUser: user,  listings: listing, cookies: [req.session.user]});
   })
  })
@@ -565,15 +650,6 @@ router.get('/austinFavs/:id', function(req, res, next){
 // router.get('/newAustin', function(req, res, next){
 //   res.render('newAustin');
 // })
-
-// THIS IS A POST REQUEST TO SEARCH BY SUBDIVISION
-
-// router.post('/subdSearch', function(req, res, next){
-//  listingsAustin.find({subdivision: {$regex: req.body.subdivision.charAt(0).toUpperCase() + req.body.subdivision.substring(1)}}, function(err, listing){
-//     res.render('searchResultsAustin', {listings: listing})
-//   })
-// })
-
 
 
 
@@ -831,7 +907,7 @@ listingsOrlando.insert({
 
 router.get('/orlando', function(req, res, next){
     Favs.find({email: req.session.user}, function(err, user){
-  listingsOrlando.find({}, { limit : 10, skip : 0} , function(err, listing){
+  listingsOrlando.find({city: 'ORLANDO', price: { $gte: 250000} }, {limit: 25, skip: 0}, function(err, listing){
     res.render('searchPageOrlando', { title: 'Orlando Listings', listings: listing, theUser: user, cookies: [req.session.user]});
   })
 })
@@ -880,9 +956,6 @@ router.post('/searchOrlando', function(req, res, next){
 }]}, $orderby: { price : Number(-1) }
    
 }, { limit : 10, skip : 0} , function(err, listing){
-  // if (listing.length == 0) {
-  //   res.render('searchResultsOrlando', {listings: listing, theUser: user, cookies: [req.session.user]});
-  // }
 
     res.render('searchResultsOrlando', {listings: listing, theUser: user, cookies: [req.session.user]});
   })
@@ -1018,7 +1091,7 @@ listingsChicago.insert({
 
 router.get('/chicago', function(req, res, next){
     Favs.find({email: req.session.user}, function(err, user){
-  listingsChicago.find({}, { limit : 10, skip : 0} , function(err, listing){
+  listingsChicago.find({city: 'CHICAGO', price: { $gte: 250000}, appxsqft: { $gte: 1000} }, {limit: 25, skip: 0}, function(err, listing){
     res.render('searchPageChicago', { title: 'Chicago Listings', listings: listing, theUser: user, cookies: [req.session.user]});
   })
 })
