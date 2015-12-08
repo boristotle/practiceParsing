@@ -1,8 +1,4 @@
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover({html: true}); 
-
-
-
 
 // this shows each house price in dollar format
 for (var i = 0; i <= $('.price').length; i++) {
@@ -10,11 +6,6 @@ var commaPrice = Number($('.price').eq(i).html()).toLocaleString()
 $('.price').eq(i).html('$' + commaPrice);
  }
 
-
-// this shows the number of results from a search
-// var numResults = $('.HOME').length;
-// $('.numResults').append(numResults + ' homes matching your search!');
-      
 
 // THIS IS THE ZILLOW INTEREST RATE API CALL, CHANGE THIS TO UNIREST
 var ZillowApiKey = "X1-ZWz1a2ozq55nuz_7oq0o"
@@ -32,7 +23,6 @@ $.ajax({
 
 
         
-
 // THIS ADDS A LISTING TO THE USER FAVS
 $(".FAV").submit(function(event) {
         // get the form data
@@ -185,111 +175,101 @@ $('#cityQC').on('change', function (){ localStorage.setItem('cityQC', this.value
 // LOCAL STORAGE SET CITIES
 
 
-//  // SET GARAGES AUSTIN
-// $('#garagesAustin').on('change', function (){ localStorage.setItem('garagesAustin', this.value) })
-//     // SET garagesAustin
-//     if (localStorage.getItem('garagesAustin')) {
-//         $('#garagesAustin').val(localStorage.getItem('garagesAustin')).trigger('change');
-//      }
+ // SET GARAGES AUSTIN
+$('#garagesAustin').on('change', function (){ localStorage.setItem('garagesAustin', this.value) })
+    // SET garagesAustin
+    if (localStorage.getItem('garagesAustin')) {
+        $('#garagesAustin').val(localStorage.getItem('garagesAustin')).trigger('change');
+     }
 
-//  // SET GARAGES CHICAGO
-// $('#garagesChicago').on('change', function (){ localStorage.setItem('garagesChicago', this.value) })
-//     // SET garagesChicago
-//     if (localStorage.getItem('garagesChicago')) {
-//         $('#garagesChicago').val(localStorage.getItem('garagesChicago')).trigger('change');
-//      }
+ // SET GARAGES CHICAGO
+$('#garagesChicago').on('change', function (){ localStorage.setItem('garagesChicago', this.value) })
+    // SET garagesChicago
+    if (localStorage.getItem('garagesChicago')) {
+        $('#garagesChicago').val(localStorage.getItem('garagesChicago')).trigger('change');
+     }
 
-//  // SET GARAGES CS
-// $('#garagesCS').on('change', function (){ localStorage.setItem('garagesCS', this.value) })
-//     // SET garagesCS
-//     if (localStorage.getItem('garagesCS')) {
-//         $('#garagesCS').val(localStorage.getItem('garagesCS')).trigger('change');
-//      }
-
-
-//  // SET GARAGES NASHVILLE
-// $('#garagesNashville').on('change', function (){ localStorage.setItem('garagesNashville', this.value) })
-//     // SET garagesNashville
-//     if (localStorage.getItem('garagesNashville')) {
-//         $('#garagesNashville').val(localStorage.getItem('garagesNashville')).trigger('change');
-//      }
+ // SET GARAGES CS
+$('#garagesCS').on('change', function (){ localStorage.setItem('garagesCS', this.value) })
+    // SET garagesCS
+    if (localStorage.getItem('garagesCS')) {
+        $('#garagesCS').val(localStorage.getItem('garagesCS')).trigger('change');
+     }
 
 
-//  // SET GARAGES ORLANDO
-// $('#garagesOrlando').on('change', function (){ localStorage.setItem('garagesOrlando', this.value) })
-//     // SET garagesOrlando
-//     if (localStorage.getItem('garagesOrlando')) {
-//         $('#garagesOrlando').val(localStorage.getItem('garagesOrlando')).trigger('change');
-//      }
+ // SET GARAGES NASHVILLE
+$('#garagesNashville').on('change', function (){ localStorage.setItem('garagesNashville', this.value) })
+    // SET garagesNashville
+    if (localStorage.getItem('garagesNashville')) {
+        $('#garagesNashville').val(localStorage.getItem('garagesNashville')).trigger('change');
+     }
 
 
-//  // SET GARAGES QC
-// $('#garagesQC').on('change', function (){ localStorage.setItem('garagesQC', this.value) })
-//     // SET garagesQC
-//     if (localStorage.getItem('garagesQC')) {
-//         $('#garagesQC').val(localStorage.getItem('garagesQC')).trigger('change');
-//      }
+ // SET GARAGES ORLANDO
+$('#garagesOrlando').on('change', function (){ localStorage.setItem('garagesOrlando', this.value) })
+    // SET garagesOrlando
+    if (localStorage.getItem('garagesOrlando')) {
+        $('#garagesOrlando').val(localStorage.getItem('garagesOrlando')).trigger('change');
+     }
+
+
+ // SET GARAGES QC
+$('#garagesQC').on('change', function (){ localStorage.setItem('garagesQC', this.value) })
+    // SET garagesQC
+    if (localStorage.getItem('garagesQC')) {
+        $('#garagesQC').val(localStorage.getItem('garagesQC')).trigger('change');
+     }
 
 
 
 
 // LOCAL STORAGE SET STORIES
 
-//  // SET stories AUSTIN
-// $('#storiesAustin').on('change', function (){ localStorage.setItem('storiesAustin', this.value) })
-//     // SET storiesAustin
-//     if (localStorage.getItem('storiesAustin')) {
-//         $('#storiesAustin').val(localStorage.getItem('storiesAustin')).trigger('change');
-//      }
+ // SET stories AUSTIN
+$('#storiesAustin').on('change', function (){ localStorage.setItem('storiesAustin', this.value) })
+    // SET storiesAustin
+    if (localStorage.getItem('storiesAustin')) {
+        $('#storiesAustin').val(localStorage.getItem('storiesAustin')).trigger('change');
+     }
 
-//  // SET stories CHICAGO
-// $('#storiesChicago').on('change', function (){ localStorage.setItem('storiesChicago', this.value) })
-//     // SET storiesChicago
-//     if (localStorage.getItem('storiesChicago')) {
-//         $('#storiesChicago').val(localStorage.getItem('storiesChicago')).trigger('change');
-//      }
+ // SET stories CHICAGO
+$('#storiesChicago').on('change', function (){ localStorage.setItem('storiesChicago', this.value) })
+    // SET storiesChicago
+    if (localStorage.getItem('storiesChicago')) {
+        $('#storiesChicago').val(localStorage.getItem('storiesChicago')).trigger('change');
+     }
 
-//  // SET stories CS
-// $('#storiesCS').on('change', function (){ localStorage.setItem('storiesCS', this.value) })
-//     // SET storiesCS
-//     if (localStorage.getItem('storiesCS')) {
-//         $('#storiesCS').val(localStorage.getItem('storiesCS')).trigger('change');
-//      }
-
-
-//  // SET stories NASHVILLE
-// $('#storiesNashville').on('change', function (){ localStorage.setItem('storiesNashville', this.value) })
-//     // SET storiesNashville
-//     if (localStorage.getItem('storiesNashville')) {
-//         $('#storiesNashville').val(localStorage.getItem('storiesNashville')).trigger('change');
-//      }
+ // SET stories CS
+$('#storiesCS').on('change', function (){ localStorage.setItem('storiesCS', this.value) })
+    // SET storiesCS
+    if (localStorage.getItem('storiesCS')) {
+        $('#storiesCS').val(localStorage.getItem('storiesCS')).trigger('change');
+     }
 
 
-//  // SET stories ORLANDO
-// $('#storiesOrlando').on('change', function (){ localStorage.setItem('storiesOrlando', this.value) })
-//     // SET storiesOrlando
-//     if (localStorage.getItem('storiesOrlando')) {
-//         $('#storiesOrlando').val(localStorage.getItem('storiesOrlando')).trigger('change');
-//      }
+ // SET stories NASHVILLE
+$('#storiesNashville').on('change', function (){ localStorage.setItem('storiesNashville', this.value) })
+    // SET storiesNashville
+    if (localStorage.getItem('storiesNashville')) {
+        $('#storiesNashville').val(localStorage.getItem('storiesNashville')).trigger('change');
+     }
 
 
-//  // SET stories QC
-// $('#storiesQC').on('change', function (){ localStorage.setItem('storiesQC', this.value) })
-//     // SET storiesQC
-//     if (localStorage.getItem('storiesQC')) {
-//         $('#storiesQC').val(localStorage.getItem('storiesQC')).trigger('change');
-//      }
+ // SET stories ORLANDO
+$('#storiesOrlando').on('change', function (){ localStorage.setItem('storiesOrlando', this.value) })
+    // SET storiesOrlando
+    if (localStorage.getItem('storiesOrlando')) {
+        $('#storiesOrlando').val(localStorage.getItem('storiesOrlando')).trigger('change');
+     }
 
 
+ // SET stories QC
+$('#storiesQC').on('change', function (){ localStorage.setItem('storiesQC', this.value) })
+    // SET storiesQC
+    if (localStorage.getItem('storiesQC')) {
+        $('#storiesQC').val(localStorage.getItem('storiesQC')).trigger('change');
+     }
 
-
-
-
-// THIS CONSOLE LOGS THE ID OF THE LISTING THAT IS FAVORITED
-// $('.FAVBTN').on('click', function(){
-//   console.log($(location).attr("href").split('/')[4]);
-
-// })
 
 
 

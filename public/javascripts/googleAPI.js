@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
 // THIS FINDS THE LAT/LNG FOR THE ADDRESS ON THE SHOW PAGE and RENDERS THE MAP ON THE SHOW PAGE
 $.ajax({
   url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $('.add').text() + '&key=AIzaSyC6G3q-CSKbBqHoRbRJdsKsKHDa9hfICuU',
@@ -19,6 +20,7 @@ $.ajax({
 
           var map = new google.maps.Map(mapCanvas, mapOptions)
           marker.setMap(map);
+
   } 
 })
 

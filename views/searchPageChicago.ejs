@@ -452,7 +452,7 @@
           <label for"bedsmin">Beds</label><br>
           <select id="bedsmin" name="bedsmin">
               <option value="0">Any</option>
-              <option value="1">1</option>
+              <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
               <option value="4">4+</option>
@@ -464,7 +464,7 @@
           <label for"bathsmin">Baths</label><br>
           <select id="bathsmin" name="bathsmin">
               <option value="0">Any</option>
-              <option value="1">1</option>
+              <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
               <option value="4">4+</option>
@@ -526,15 +526,15 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-0 stories">
-        <label for"stories">Stories</label><br>
+      <!--   <label for"stories">Stories</label><br>
           <select id="stories" name="stories">
               <option value="200">Any</option>
               <option value="1">1</option> 
-          </select>
+          </select> -->
         </div>
         <div class="col-md-2 col-sm-2 col-sm-2 col-xs-6 garages">
-          <label for"garages">Garages</label><br>
-          <select id="garages" name="garages">
+          <label for"garagesChicago">Garages</label><br>
+          <select id="garagesChicago" name="garages">
               <option value="0">Any</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
@@ -586,6 +586,7 @@
 
  <script src='/javascripts/javascript.js'></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script>$('[data-toggle="popover"]').popover({html: true});</script> 
    <!-- SLICK SLIDER SCRIPT -->
    <script src='/javascripts/slickSlider.js'></script>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>

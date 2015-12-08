@@ -21,7 +21,7 @@ var Favs = userFavs.get('favs');
 
 // GET THE HOME PAGE
 router.get('/', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
+    Favs.find({email: req.session.user}, function(err, user){
       res.render('home', {cookies: [req.session.user], theUser: user})
   })
 })
@@ -197,7 +197,7 @@ listings.insert({
      DOM: Number(listing[22]),
      garage: listing[23],
      remarks: listing[24] || 'NA',
-     amenities: listing[25],
+     amenities: listing[25] || 'NA',
      MLS: listing[26],
      photoCount: listing[27],
      listOffice: listing[28]
@@ -222,118 +222,79 @@ router.get('/quadCities', function(req, res, next){
 })
 
 
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
+router.get('/searchResultsQC/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
 
-// THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
-// router.get('/searchResultsQC/:page', function(req, res, next) {
-//       Favs.find({email: req.session.user}, function(err, user){
-//       var page = parseInt(req.params.page);
-//       var size = 50;
-//       var skip = page > 0 ? ((page - 1) * size) : 0;
-//       listings.find({}, function(err, data){
-//         // console.log(data.length);
-//         var totalRecords = data.length;
-//       }).then(function(totalData){
-//       listings.find({}, {
-//          skip: skip,
-//          limit: size
-//       }, function (err, data) {
-//             res.render('searchResultsQC', {listings: data, totalRecords: totalData, size: size, theUser: user, cookies: [req.session.user]});
-//       });
-//     })
-//   })
-// });
-
-
-// / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS ******TESTING*******
-
-// router.post('/searchResultsQC/:page', function(req, res, next) {
-//       Favs.find({email: req.session.user}, function(err, user){
-//       var page = parseInt(req.params.page);
-//       var size = 25;
-//       var skip = page > 0 ? ((page - 1) * size) : 0;
-//       listings.find({}, function(err, data){
-//         // console.log(data.length);
-//         var totalRecords = data.length;
-//       }).then(function(totalData){
-//       listings.find({}, {
-//          skip: skip,
-//          limit: size
-//       }, function (err, data) {
-//             res.render('searchResultsQC', {listings: data, totalRecords: totalData, size: size, theUser: user, cookies: [req.session.user]});
-//       });
-//     })
-//   })
-// });
-
-
-// THIS IS THE POST ROUTE TO FOR THE QC HOME SEARCH     ***********TEST*************
-// router.post('/searchQC/:page', function(req, res, next){
-//   // var page = parseInt(req.params.page);
-//   var page = 1;
-//       var size = 25;
-//       var skip = page > 0 ? ((page - 1) * size) : 0;
-//     Favs.find({email: req.session.user}, function(err, user){
-//   listings.find({ $query: {$and: [ 
-//   {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-//   { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-//   { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-//   { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-//   { city: req.body.city[13] } ]}, 
-//   {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-//   {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-//   {beds: {$gte: req.body.bedsmin}},
-//   {garage: {$gte: req.body.garages}},
-//   {baths: {$gte: req.body.bathsmin}
-// }]}, $orderby: { price : Number(-1) }
-   
-// }, { limit : size, skip : skip}, function(err, listing){
-//   var totalRecords = listing;
-//   if (listing.length == 0) {
-//     res.render('searchResultsQC', {listings: listing, theUser: user, cookies: [req.session.user]});
-//   }
-
-//     res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, size: 10, cookies: [req.session.user]});
-//   })
-// })
-// })
-
-
-
-// THIS IS THE POST ROUTE TO FOR THE QC HOME SEARCH
-router.post('/searchQC', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-  listings.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] } ]}, 
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: {$gte: req.body.garages}},
-  {baths: {$gte: req.body.bathsmin}
+      Favs.find({email: req.session.user}, function(err, user){
+        listings.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {garage: {$gte: req.session.userSearch.garage}},
+  {baths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : 0}, function(err, listing){
-  if (listing.length == 0) {
-    res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, cookies: [req.session.user]});
-  }
-    res.render('searchResultsQC', {listings: listing, theUser: user, totalRecords: listing, size: 10, cookies: [req.session.user]});
+}, function(err, listing){
+          console.log(listing[0]);
+          var totalRecords = listing.length;
+        })  
+
+      .then(function(totalRecords) {
+    listings.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {garage: {$gte: req.session.userSearch.garage}},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsQC', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
   })
+ })
+});
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE QC HOME SEARCH
+router.post('/searchQC', function(req, res, next){
+  // console.log(req.body.city);
+  // console.log(typeof req.body.city)
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages,
+        stories: req.body.stories
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages,
+          stories: req.body.stories
+          }
+      }
+    // console.log(req.session.userSearch.city);
+    res.redirect('/searchResultsQC/1');
 })
-})
-
-
-
-
-
-
-
-
-
-
-
 
 
 // THIS IS THE SHOW ROUTE FOR QC HOMES
@@ -447,31 +408,86 @@ router.get('/nashville', function(req, res, next){
  })
 })
 
-router.post('/searchNashville', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-  listingsNashville.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] }, { city: req.body.city[14] }, { city: req.body.city[15] } ]}, 
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: {$gte: req.body.garages}},
-  {stories: {$in: req.body.stories.split(',') } },
-  {baths: {$gte: req.body.bathsmin}
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL NASHVILLE LISTINGS
+router.get('/searchResultsNashville/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsNashville.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$gte: req.session.userSearch.garage}},
+  {baths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : 0}, function(err, listing){
-  if (listing.length == 0) {
-    res.render('searchResultsNashville', {listings: listing, theUser: user, cookies: [req.session.user]});
-  }
+}, function(err, listing){
+          console.log(listing[0]);
+          var totalRecords = listing.length;
+        })  
 
-    res.render('searchResultsNashville', {listings: listing, theUser: user, cookies: [req.session.user]});
+      .then(function(totalRecords) {
+    listingsNashville.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$gte: req.session.userSearch.garage}},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsNashville', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
   })
+ })
+});
+
+
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE NASHVILLE HOME SEARCH
+router.post('/searchNashville', function(req, res, next){
+  // console.log(req.body.city);
+  // console.log(typeof req.body.city)
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages,
+        stories: req.body.stories.split(',')
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages,
+          stories: req.body.stories.split(',')
+          }
+      }
+    // console.log(req.session.userSearch.city);
+    res.redirect('/searchResultsNashville/1');
 })
-})
+
 
 
 
@@ -578,37 +594,88 @@ router.get('/collegeStation', function(req, res, next){
   })
 })
 })
-  
-router.post('/searchCS', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-  listingsCollegeStation.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] }, { city: req.body.city[14] }, { city: req.body.city[15] },
-  { city: req.body.city[16] }, { city: req.body.city[17] }, { city: req.body.city[18] },
-  { city: req.body.city[19] }, { city: req.body.city[20] }, { city: req.body.city[21] },
-  { city: req.body.city[22] }, { city: req.body.city[23] }, { city: req.body.city[24] },
-  { city: req.body.city[25] }, { city: req.body.city[26] }, { city: req.body.city[27] },
-  { city: req.body.city[28] }, { city: req.body.city[29] }]}, 
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: { $in: req.body.garages.split(',') } },
-  {stories: { $in: req.body.stories.split(',') } },
-  {baths: {$gte: req.body.bathsmin}
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL NASHVILLE LISTINGS
+router.get('/searchResultsCS/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsCollegeStation.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$in: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : 0} , function(err, listing){
-  // if (listing.length === 0) {
-  //   res.render('searchResultsCS', {listings: listing, theUser: user, cookies: [req.session.user]});
-  // }
+}, function(err, listing){
+          console.log(listing[0]);
+          var totalRecords = listing.length;
+        })  
 
-    res.render('searchResultsCS', {listings: listing, theUser: user, cookies: [req.session.user]});
+      .then(function(totalRecords) {
+    listingsCollegeStation.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$in: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsCS', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
   })
+ })
+});
+
+
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE NASHVILLE HOME SEARCH
+router.post('/searchCS', function(req, res, next){
+  // console.log(req.body.city);
+  // console.log(typeof req.body.city)
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages.split(','),
+        stories: req.body.stories.split(',')
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages.split(','),
+          stories: req.body.stories.split(',')
+          }
+      }
+    // console.log(req.session.userSearch.city);
+    res.redirect('/searchResultsCS/1');
 })
-})
+
+
+
 
 // THIS IS THE SHOW ROUTE FOR COLLEGE STATION HOMES
 router.get('/collegeStation/:MLS', function(req, res, next){
@@ -653,27 +720,133 @@ router.get('/austinFavs/:id', function(req, res, next){
 
 
 
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL AUSTIN LISTINGS
+router.get('/searchResultsAustin/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsAustin.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$gte: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, function(err, listing){
+          // console.log(listing[0]);
+          var totalRecords = listing.length;
+        })  
+
+      .then(function(totalRecords) {
+    listingsAustin.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$in: req.session.userSearch.stories } },
+  {garage: {$gte: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsAustin', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
+  })
+ })
+});
+
+
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE AUSTIN HOME SEARCH
+router.post('/searchAustin', function(req, res, next){
+  // console.log(req.body.city);
+  // console.log(typeof req.body.city)
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages,
+        stories: req.body.stories.split(',')
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages,
+          stories: req.body.stories.split(',')
+          }
+      }
+    // console.log(req.session.userSearch.city);
+    res.redirect('/searchResultsAustin/1');
+})
+
+
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL AUSTIN LISTINGS
+router.get('/searchResultsCityAustin/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsAustin.find({ $query: {city:{$regex: req.session.userSearch.city} },
+        $orderby: { price : Number(-1) } }, function(err, listing){
+          // console.log(listing.length);
+          var totalRecords = listing.length;
+        })  
+
+      .then(function(totalRecords) {
+    listingsAustin.find({ $query: {city: {$regex: req.session.userSearch.city} },
+     $orderby: { price : Number(-1) }}
+     , {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsCityAustin', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
+  })
+ })
+});
+
+
+
 // CREATE A POST REQUEST TO SEARCH BY CITY AUSTIN
 router.post('/citySearchAustin', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-    if (req.body.city.length == 0) {
-      listingsAustin.find({}, function(err, listing){
-        res.render('searchPageAustin', {listings: listing, theUser: user, cookies: [req.session.user]})
-      })
-    }
-    else {
       var cityArr = req.body.city.split(' ');
       var output = []
       for (var i = 0; i < cityArr.length; i++) {
-        output.push(cityArr[i][0].toUpperCase() + cityArr[i].substring(1));
+        output.push(cityArr[i][0].toUpperCase() + cityArr[i].substring(1).toLowerCase());
       }
-  // console.log(output.join(' '))
-     listingsAustin.find({city: {$regex: output.join(' ') } }, function(err, listing){
-        res.render('searchResultsAustin', {listings: listing, theUser: user, cookies: [req.session.user]})
-      })
-    }
- })
+
+          req.session.userSearch.city = output.join(' '); 
+
+    res.redirect('/searchResultsCityAustin/1');
 })
+
+
+
+
 
 
 router.get('/listingsAustin', function(req, res, next) {
@@ -748,37 +921,7 @@ router.get('/austin', function(req, res, next){
   })
 })
 })
-  
 
-router.post('/searchAustin', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-  listingsAustin.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] }, { city: req.body.city[14] }, { city: req.body.city[15] },
-  { city: req.body.city[16] }, { city: req.body.city[17] }, { city: req.body.city[18] },
-  { city: req.body.city[19] }, { city: req.body.city[20] }, { city: req.body.city[21] },
-  { city: req.body.city[22] }, { city: req.body.city[23] }, { city: req.body.city[24] },
-  { city: req.body.city[25] } ]}, 
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: {$gte: req.body.garages}},
-  {stories: {$in: req.body.stories.split(',') } },
-  {baths: {$gte: req.body.bathsmin}
-}]}, $orderby: { price : Number(-1) }
-   
-}, { limit : 10, skip : 0} , function(err, listing){
-  if (listing.length == 0) {
-    res.render('searchResultsAustin', {listings: listing, theUser: user, cookies: [req.session.user]});
-  }
-
-    res.render('searchResultsAustin', {listings: listing, theUser: user, cookies: [req.session.user]});
-  })
-})
-})
 
 
 // THIS IS THE SHOW ROUTE FOR AUSTIN HOMES
@@ -817,26 +960,6 @@ router.get('/orlandoFavs/:id', function(req, res, next){
     }) 
   })
 })
-
-
-// CREATE A POST REQUEST TO SEARCH BY CITY ORLANDO
-router.post('/citySearchOrlando', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-      if (req.body.city.length == 0) {
-      listingsOrlando.find({}, function(err, listing){
-        res.render('searchPageOrlando', {listings: listing, theUser: user, cookies: [req.session.user]})
-      })
-    }
-    else {
-  var cityToUpperCase = req.body.city.toUpperCase()
-  // console.log(cityToUpperCase)
- listingsOrlando.find({city: {$regex: cityToUpperCase } }, function(err, listing){
-    res.render('searchResultsOrlando', {listings: listing, theUser: user, cookies: [req.session.user]})
-    })
-   }
- })
-})
-
 
 
 
@@ -914,53 +1037,140 @@ router.get('/orlando', function(req, res, next){
 })
   
 
-router.post('/searchOrlando', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-  listingsOrlando.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] }, { city: req.body.city[14] }, { city: req.body.city[15] },
-  { city: req.body.city[16] }, { city: req.body.city[17] }, { city: req.body.city[18] },
-  { city: req.body.city[19] }, { city: req.body.city[20] }, { city: req.body.city[21] },
-  { city: req.body.city[22] }, { city: req.body.city[23] }, { city: req.body.city[24] },
-   { city: req.body.city[25] }, { city: req.body.city[26] }, { city: req.body.city[27] },
-  { city: req.body.city[28] }, { city: req.body.city[29] }, { city: req.body.city[30] },
-  { city: req.body.city[31] }, { city: req.body.city[32] }, { city: req.body.city[33] },
-  { city: req.body.city[34] }, { city: req.body.city[35] }, { city: req.body.city[36] },
-  { city: req.body.city[37] }, { city: req.body.city[38] }, { city: req.body.city[39] },
-  { city: req.body.city[40] }, { city: req.body.city[41] }, { city: req.body.city[42] },
-  { city: req.body.city[43] }, { city: req.body.city[44] }, { city: req.body.city[45] },
-   { city: req.body.city[46] }, { city: req.body.city[47] }, { city: req.body.city[48] },
-  { city: req.body.city[49] }, { city: req.body.city[50] }, { city: req.body.city[51] },
-  { city: req.body.city[52] }, { city: req.body.city[53] }, { city: req.body.city[54] },
-  { city: req.body.city[55] }, { city: req.body.city[56] }, { city: req.body.city[57] },
-  { city: req.body.city[58] }, { city: req.body.city[59] }, { city: req.body.city[60] },
-  { city: req.body.city[61] }, { city: req.body.city[62] }, { city: req.body.city[63] },
-  { city: req.body.city[64] }, { city: req.body.city[65] }, { city: req.body.city[66] },
-   { city: req.body.city[67] }, { city: req.body.city[68] }, { city: req.body.city[69] },
-  { city: req.body.city[70] }, { city: req.body.city[71] }, { city: req.body.city[72] },
-  { city: req.body.city[73] }, { city: req.body.city[74] }, { city: req.body.city[75] },
-  { city: req.body.city[76] }, { city: req.body.city[77] }, { city: req.body.city[78] },
-  { city: req.body.city[79] }, { city: req.body.city[80] }, { city: req.body.city[81] },
-  { city: req.body.city[82] }, { city: req.body.city[83] }, { city: req.body.city[84] },
-  { city: req.body.city[85] }, { city: req.body.city[86] }, { city: req.body.city[87] },
-  { city: req.body.city[88] } ]}, 
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {sqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}},   
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: {$in: req.body.garages.split(',') } },
-  {stories: {$lte: req.body.stories}}, 
-  {baths: {$gte: req.body.bathsmin}
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL ORLANDO LISTINGS
+router.get('/searchResultsOrlando/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsOrlando.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$lte: req.session.userSearch.stories } },
+  {garage: {$in: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : 0} , function(err, listing){
+}, function(err, listing){
+          // console.log(listing[0]);
+          var totalRecords = listing.length;
+        })  
 
-    res.render('searchResultsOrlando', {listings: listing, theUser: user, cookies: [req.session.user]});
+      .then(function(totalRecords) {
+    listingsOrlando.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {stories: {$lte: req.session.userSearch.stories } },
+  {garage: {$in: req.session.userSearch.garage }},
+  {baths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsOrlando', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
   })
+ })
+});
+
+
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE ORLANDO HOME SEARCH
+router.post('/searchOrlando', function(req, res, next){
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages.split(','),
+        stories: req.body.stories
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages.split(','),
+          stories: req.body.stories
+          }
+      }
+    res.redirect('/searchResultsOrlando/1');
 })
+
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL ORLANDO LISTINGS
+router.get('/searchResultsCityOrlando/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsOrlando.find({ $query: {city:{$regex: req.session.userSearch.city} },
+        $orderby: { price : Number(-1) } }, function(err, listing){
+          // console.log(listing.length);
+          var totalRecords = listing.length;
+        })  
+
+      .then(function(totalRecords) {
+    listingsOrlando.find({ $query: {city: {$regex: req.session.userSearch.city} },
+     $orderby: { price : Number(-1) }}
+     , {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsCityOrlando', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
+  })
+ })
+});
+
+
+
+// CREATE A POST REQUEST TO SEARCH BY CITY ORLANDO
+router.post('/citySearchOrlando', function(req, res, next){
+          req.session.userSearch.city = req.body.city.toUpperCase(); 
+
+    res.redirect('/searchResultsCityOrlando/1');
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // THIS IS THE SHOW ROUTE FOR ORLANDO HOMES
 router.get('/orlando/:MLS', function(req, res, next){
@@ -997,25 +1207,6 @@ router.get('/chicagoFavs/:id', function(req, res, next){
       res.render('chicagoFavs', {listings: listing, theUser: favs._id, cookies: [req.session.user]} );
     }) 
   })
-})
-
-
-// CREATE A POST REQUEST TO SEARCH BY CITY CHICAGO
-router.post('/citySearchChicago', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-     if (req.body.city.length == 0) {
-      listingsChicago.find({}, function(err, listing){
-        res.render('searchPageChicago', {listings: listing, theUser: user, cookies: [req.session.user]})
-      })
-    } 
-    else {
-      var cityToUpperCase = req.body.city.toUpperCase()
-      // console.log(cityToUpperCase)
-     listingsChicago.find({city: {$regex: cityToUpperCase } }, function(err, listing){
-        res.render('searchResultsChicago', {listings: listing, theUser: user, cookies: [req.session.user]})
-      })
-    }
- })
 })
 
 
@@ -1098,35 +1289,124 @@ router.get('/chicago', function(req, res, next){
 })
   
 
-router.post('/searchChicago', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-  listingsChicago.find({ $query: {$and: [ 
-  {$or: [ { city: req.body.city }, { city: req.body.city[0] }, { city: req.body.city[1] }, { city: req.body.city[2] }, { city: req.body.city[3] },
-  { city: req.body.city[4] }, { city: req.body.city[5] }, { city: req.body.city[6] },
-  { city: req.body.city[7] }, { city: req.body.city[8] }, { city: req.body.city[9] },
-  { city: req.body.city[10] }, { city: req.body.city[11] }, { city: req.body.city[12] },
-  { city: req.body.city[13] }, { city: req.body.city[14] }, { city: req.body.city[15] },
-  { city: req.body.city[16] }, { city: req.body.city[17] }, { city: req.body.city[18] },
-  { city: req.body.city[19] }, { city: req.body.city[20] }, { city: req.body.city[21] },
-  { city: req.body.city[22] }, { city: req.body.city[23] }, { city: req.body.city[24] },
-  { city: req.body.city[25] } ]},
-  {price: {$gte: Number(req.body.minprice), $lte: Number(req.body.maxprice)}},
-  {appxsqft: {$gte: Number(req.body.minsqft), $lte: Number(req.body.maxsqft)}}, 
-  {beds: {$gte: req.body.bedsmin}},
-  {garage: {$gte: req.body.garages}},
-  {stories: {$lte: req.body.stories}},
-  {fullBaths: {$gte: req.body.bathsmin}
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
+router.get('/searchResultsChicago/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsChicago.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } }, 
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {appxsqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {garage: {$gte: req.session.userSearch.garage }},
+  {fullBaths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
    
-}, { limit : 10, skip : 0} , function(err, listing){
-  if (listing.length == 0) {
-    res.render('searchResultsChicago', {listings: listing, theUser: user, cookies: [req.session.user]});
-  }
+}, function(err, listing){
+          console.log(listing.length);
+          var totalRecords = listing.length;
+        })  
 
-    res.render('searchResultsChicago', {listings: listing, theUser: user, cookies: [req.session.user]});
+      .then(function(totalRecords) {
+    listingsChicago.find({ $query: {$and: [ 
+  {city: {$in: req.session.userSearch.city } },
+  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+  {appxsqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+  {beds: {$gte: req.session.userSearch.beds}},
+  {garage: {$gte: req.session.userSearch.garage }},
+  {fullBaths: {$gte: req.session.userSearch.baths}
+}]}, $orderby: { price : Number(-1) }
+   
+}, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsChicago', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
   })
+ })
+});
+
+
+
+// THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE CHICAGO HOME SEARCH
+router.post('/searchChicago', function(req, res, next){
+        if (typeof req.body.city == 'string') {
+        req.session.userSearch = {
+        city: [req.body.city], 
+        minprice: Number(req.body.minprice),
+        maxprice: Number(req.body.maxprice),
+        minsqft: Number(req.body.minsqft),
+        maxsqft: Number(req.body.maxsqft),
+        beds: req.body.bedsmin,
+        baths: req.body.bathsmin,
+        garage: req.body.garages,
+        stories: req.body.stories
+        }
+      } else {
+          req.session.userSearch = {
+          city: req.body.city, 
+          minprice: Number(req.body.minprice),
+          maxprice: Number(req.body.maxprice),
+          minsqft: Number(req.body.minsqft),
+          maxsqft: Number(req.body.maxsqft),
+          beds: req.body.bedsmin,
+          baths: req.body.bathsmin,
+          garage: req.body.garages,
+          stories: req.body.stories
+          }
+      }
+    res.redirect('/searchResultsChicago/1');
 })
+
+
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
+router.get('/searchResultsCityChicago/:page', function(req, res, next) {
+  console.log(req.session.userSearch);
+      var page = parseInt(req.params.page);
+      var size = 25;
+      var skip = page > 0 ? ((page - 1) * size) : 0;
+
+      Favs.find({email: req.session.user}, function(err, user){
+        listingsChicago.find({ $query: {city:{$regex: req.session.userSearch.city} },
+        $orderby: { price : Number(-1) } }, function(err, listing){
+          // console.log(listing.length);
+          var totalRecords = listing.length;
+        })  
+
+      .then(function(totalRecords) {
+    listingsChicago.find({ $query: {city: {$regex: req.session.userSearch.city} },
+     $orderby: { price : Number(-1) }}
+     , {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsCityChicago', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
+  })
+ })
+});
+
+
+
+// CREATE A POST REQUEST TO SEARCH BY CITY CHICAGO
+router.post('/citySearchChicago', function(req, res, next){
+          req.session.userSearch.city = req.body.city.toUpperCase(); 
+
+    res.redirect('/searchResultsCityChicago/1');
 })
+
+
+
+
+
+
+
+
 
 
 

@@ -69,11 +69,11 @@
 
   <div id="pager" class="text-center"></div>
         <ul class="pagination col-md-12">
-          <li><a href='/searchResultsAustin/<%= 1 %>'>First Page</a></li>
+          <li><a href='/searchResultsCityAustin/<%= 1 %>'>First Page</a></li>
           <% for (var i = 1; i < totalRecords.length / size; i++) { %> 
-          <li class='pageNumber'><a href="/searchResultsAustin/<%= i %>"><%= i %></a></li>
+          <li class='pageNumber'><a href="/searchResultsCityAustin/<%= i %>"><%= i %></a></li>
         <% } %>
-          <li><a href='/searchResultsAustin/<%= Math.floor(totalRecords.length / size) + 1 %>'>Last Page</a></li>
+          <li><a href='/searchResultsCityAustin/<%= Math.floor(totalRecords.length / size) + 1 %>'>Last Page</a></li>
         </ul>
       </div>
 </div> 

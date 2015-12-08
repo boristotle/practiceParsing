@@ -74,9 +74,9 @@
         <ul class="pagination col-md-12">
           <li><a href='/searchResultsQC/<%= 1 %>'>First Page</a></li>
           <% for (var i = 1; i < totalRecords.length / size; i++) { %> 
-          <li class='pageNumber'><a href="/searchResults/<%= i %>"><%= i %></a></li>
+          <li class='pageNumber'><a href="/searchResultsQC/<%= i %>"><%= i %></a></li>
         <% } %>
-          <li><a href='/searchResultsQC/<%= Math.floor(totalRecords.length / size) %>'>Last Page</a></li>
+          <li><a href='/searchResultsQC/<%= Math.floor(totalRecords.length / size) + 1 %>'>Last Page</a></li>
         </ul>
       </div>
 </div> 
@@ -89,6 +89,7 @@
 
  <script src='/javascripts/javascript.js'></script> 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script>$('[data-toggle="popover"]').popover({html: true});</script> 
 <!-- SLICK SLIDER SCRIPT -->
 <script src='/javascripts/slickSlider.js'></script>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
