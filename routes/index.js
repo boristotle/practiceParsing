@@ -139,7 +139,7 @@ router.post('/removeFav', function(req, res, next){
 
 
 // QC DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listings');
 var listings = db.get('listings');
   
 // get QC favorites with promises to render the listings on the page
@@ -323,8 +323,8 @@ router.get('/quadCities/:MLS', function(req, res, next){
 
 
 // NASHVILLE DATABASE
-var db = require('monk')('localhost/listingsNashville');
-var listingsNashville = db.get('listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listingsNashville');
+var listingsNashville = db.get('listingsNashville');
 
 
 // get NASHVILLE favorites with promises to render the listings on the page
@@ -513,8 +513,8 @@ router.get('/nashville/:MLS', function(req, res, next){
 
 
 // COLLEGE STATION
-var db = require('monk')('localhost/listingsCollegeStation');
-var listingsCollegeStation = db.get('listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listingsCollegeStation');
+var listingsCollegeStation = db.get('listingsCollegeStation');
 
 
 
@@ -699,8 +699,8 @@ router.get('/collegeStation/:MLS', function(req, res, next){
 
 
 // AUSTIN
-var db = require('monk')('localhost/listingsAustin'); 
-var listingsAustin = db.get('listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listingsAustin'); 
+var listingsAustin = db.get('listingsAustin');
 
 
 // get AUSTIN favorites with promises to render the listings on the page
@@ -905,8 +905,8 @@ router.get('/austin/:MLS', function(req, res, next){
 
 
 // ORLANDO
-var db = require('monk')('localhost/listingsOrlando');
-var listingsOrlando = db.get('listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listingsOrlando');
+var listingsOrlando = db.get('listingsOrlando');
 
 // get ORLANDO favorites with promises to render the listings on the page
 router.get('/orlandoFavs/:id', function(req, res, next){
@@ -1099,8 +1099,8 @@ router.get('/orlando/:MLS', function(req, res, next){
 
 
 // CHICAGO
-var db = require('monk')('localhost/listingsChicago');
-var listingsChicago = db.get('listings');
+var db = require('monk')(process.env.MONGLAB_URI || 'localhost/listingsChicago');
+var listingsChicago = db.get('listingsChicago');
 
 
 // get CHICAGO favorites with promises to render the listings on the page
