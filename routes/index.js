@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var userFavs = require('monk')(process.env.MONGOLAB_URI || 'localhost/userFavs')
+var userFavs = require('monk')('localhost/userFavs')
 var Favs = userFavs.get('favs');  
 
 // GET THE HOME PAGE
@@ -139,7 +139,7 @@ router.post('/removeFav', function(req, res, next){
 
 
 // QC DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listings');
+var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listings');
 var listings = db.get('listings');
   
 // get QC favorites with promises to render the listings on the page
@@ -323,7 +323,7 @@ router.get('/quadCities/:MLS', function(req, res, next){
 
 
 // NASHVILLE DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsNashville');
+var db = require('monk')('localhost/listingsNashville');
 var listingsNashville = db.get('listings');
 
 
@@ -513,7 +513,7 @@ router.get('/nashville/:MLS', function(req, res, next){
 
 
 // COLLEGE STATION
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsCollegeStation');
+var db = require('monk')('localhost/listingsCollegeStation');
 var listingsCollegeStation = db.get('listings');
 
 
@@ -699,7 +699,7 @@ router.get('/collegeStation/:MLS', function(req, res, next){
 
 
 // AUSTIN
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsAustin'); 
+var db = require('monk')('localhost/listingsAustin'); 
 var listingsAustin = db.get('listings');
 
 
@@ -719,13 +719,8 @@ router.get('/austinFavs/:id', function(req, res, next){
 // })
 
 
-
-
-
-
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL AUSTIN LISTINGS
 router.get('/searchResultsAustin/:page', function(req, res, next) {
-  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -876,7 +871,6 @@ listingsAustin.insert({
  res.send('hello'); 
 });
 })
-
 });
 
 
@@ -911,7 +905,7 @@ router.get('/austin/:MLS', function(req, res, next){
 
 
 // ORLANDO
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsOrlando');
+var db = require('monk')('localhost/listingsOrlando');
 var listingsOrlando = db.get('listings');
 
 // get ORLANDO favorites with promises to render the listings on the page
@@ -1105,7 +1099,7 @@ router.get('/orlando/:MLS', function(req, res, next){
 
 
 // CHICAGO
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsChicago');
+var db = require('monk')('localhost/listingsChicago');
 var listingsChicago = db.get('listings');
 
 
