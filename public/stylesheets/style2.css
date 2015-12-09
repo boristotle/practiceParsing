@@ -13,11 +13,19 @@ a, a:visited, a:hover, a:active {
   background-color: black;
 }
 
+.agentImage {
+  border-radius: 12px;
+
+}
+
+#map {
+  border-radius: 12px;
+}
+
 
 #images {
   float: left;
   width: 100%;
-
 }
 
 #images2 {

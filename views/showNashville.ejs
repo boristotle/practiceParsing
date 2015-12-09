@@ -108,19 +108,7 @@
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
         <div>HOA: $<%= theListing.hoaFees %></div>
         <div class='est'> </div>
-        </div>
-
-      <div class='col-md-6 col-xs-12'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Nathan Beach</div>
-      <!--   <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:6154809013'>615-480-9013</a></div>
-        <div><a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a></div>
-        <div>Keller Williams Realty</div>
-      </div>
-    </div>
-    <div class='row'>
-      <div>
+        <div class='favvbutton'>
         <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -129,26 +117,37 @@
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
       </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Nathan Beach</div>
+        <div><img class='agentImage' src='/images/nathan-nashville-kw.jpg' height='100px' width='100px' /></div>
+        <div><a href='tel:6154809013'>615-480-9013</a></div>
+        <div><a href='mailto:Nathan@MyHomesMatchmaker.com'>Nathan@MyHomesMatchmaker.com</a></div>
+        <div>Keller Williams Realty</div>
+      </div>
     </div>
-    <div class='row'>
+    <div class='col-md-12 col-xs-12'>
       <div class='LO'>Listing provided courtesy of <%= theListing.listOffice %></div>
     </div>
-     <div class='row'>
+     <div class='col-md-12 col-xs-12'>
         <div id="map"></div>
     </div>
-    <div class='nashIDX'><img src='/images/nashvilleidximage-large.gif'></div>
+   
 
   
 
-
+    <div class="col-md-12 col-xs-12">
+         <small>All information is believed to be accurate but not guaranteed and should be independently verified. All properties are subject to prior sale, change or withdrawal. Copyright 2015 RealTracs Solutions.</small>
+      </div>
+       <div class='nashIDX'><img src='/images/nashvilleidximage-large.gif'></div>
 
   </div>
    </div>
 
 
-      <div class="col-md-12">
-         <small>All information is believed to be accurate but not guaranteed and should be independently verified. All properties are subject to prior sale, change or withdrawal. Copyright 2015 RealTracs Solutions.</small>
-      </div>
+      
                     
        
 <script src='/javascripts/javascript.js'></script> 

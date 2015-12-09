@@ -108,18 +108,7 @@
         <div>Price/SQFT: <% if (theListing.priceSQFT === 'Infinity') { %>NA<% } else { %>$<%= theListing.priceSQFT %><% } %></div>
         <div>HOA: $<%= theListing.hoaFee %> <%= theListing.hoaDuration %></div>
         <div class='est'> </div>
-        </div>
-
-      <div class='col-md-6 col-xs-12'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Wael Georgey</div>
-<!--          <div><img src='/images/wael-georgey-orlando.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:3212319843'>321-231-9843</a></div>
-        <div><a href='mailto:Wael@MyHomesMatchmaker.com'>Wael@MyHomesMatchmaker.com</a></div>
-        <div>Properties In Town</div>
-      </div>
-    </div>
-    <div class='row'>
+        <div class='favvbutton'>
        <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -127,6 +116,17 @@
         <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Wael Georgey</div>
+         <div><img class='agentImage' src='/images/wael-georgey-orlando.jpg' height='100px' width='100px' /></div>
+        <div><a href='tel:3212319843'>321-231-9843</a></div>
+        <div><a href='mailto:Wael@MyHomesMatchmaker.com'>Wael@MyHomesMatchmaker.com</a></div>
+        <div>Properties In Town</div>
+        <!-- <a href='/searchResultsOrlando/1'><button>Back to Search Results</button></a> -->
       </div>
     </div>
     <div class='row'>
@@ -138,14 +138,14 @@
 
   
 
-
+   <div class='col-md-12 col-xs-12'>
+  <small>This data is updated daily. Some properties appearing for sale on this web site may subsequently have sold and may no longer be available. The data relating to real estate for sale on this web site comes in part from the IDX program of My Florida Regional Multiple Listing Service, Inc., Copyright 2015. Real estate listings held by brokerage firms other than Properties in Town are marked with the Broker Reciprocity logo, IDX. All information contained herein is deemed reliable but not guaranteed. The information provided is for consumer, non-commercial use only and my not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
+</div>
 
   </div>
    </div>
 
-   <div class='col-md-12'>
-  <small>This data is updated daily. Some properties appearing for sale on this web site may subsequently have sold and may no longer be available. The data relating to real estate for sale on this web site comes in part from the IDX program of My Florida Regional Multiple Listing Service, Inc., Copyright 2015. Real estate listings held by brokerage firms other than Properties in Town are marked with the Broker Reciprocity logo, IDX. All information contained herein is deemed reliable but not guaranteed. The information provided is for consumer, non-commercial use only and my not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
-</div>
+
 
 
 <script src='/javascripts/javascript.js'></script>

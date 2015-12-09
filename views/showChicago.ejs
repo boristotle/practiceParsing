@@ -111,19 +111,7 @@
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
         <div>HOA: $<%= theListing.hoaFee %> Monthly</div>
         <div class='est'> </div>
-        </div>
-
-      <div class='col-md-6 col-xs-12'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Walker Robinson</div>
-         <!-- <div><img src='/images/walker-robinson-chicago.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:7734250881'>773-425-0881</a></div>
-        <div><a href='mailto:Walker@MyHomesMatchmaker.com'>Walker@MyHomesMatchmaker.com</a></div>
-        <div>RE/MAX Edge</div>
-      </div>
-    </div>
-    <div class='row'>
-      <div>
+        <div class='favvbutton'>
         <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -132,6 +120,17 @@
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
       </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Walker Robinson</div>
+         <div><img class='agentImage' src='/images/walker-robinson-chicago.jpg' height='100px' width='100px' /></div>
+        <div><a href='tel:7734250881'>773-425-0881</a></div>
+        <div><a href='mailto:Walker@MyHomesMatchmaker.com'>Walker@MyHomesMatchmaker.com</a></div>
+        <div>RE/MAX Edge</div><br>
+        <!-- <a href='/searchResultsChicago/1'><button>Back to Search Results</button></a> -->
+      </div>
     </div>
     <div class='row'>
       <div class='LO'>Listing courtesy of <%= theListing.listOffice %></div>
@@ -139,7 +138,7 @@
      <div class='row'>
         <div id="map"></div>
     </div>
-    <div class='row'>
+    <div class='col-md-12 col-xs-12'>
       <small>“The accuracy of all information, regardless of source, including but not limited to square footages and lot sizes, is deemed reliable but not guaranteed and should be personally verified through personal inspection by and/or with the appropriate professionals.”</small>
     </div>
     <div class='chiIDX'><img src='/images/mred_logo.png'></div>

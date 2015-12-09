@@ -6,6 +6,10 @@ a, :focus {
   outline: 0;
 }
 
+.favvbutton {
+  margin-top: 5px;
+}
+
 #h2 {
   color: #a6a6a6;
 }

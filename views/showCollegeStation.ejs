@@ -105,19 +105,7 @@
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
         <div>HOA: $<%= theListing.hoaFee %> <%= theListing.hoaTerm %></div>
         <div class='est'> </div>
-        </div>
-
-      <div class='col-md-6 col-xs-12'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Amber Dawn Cox</div>
-          <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:9792197479'>979-219-7479</a></div>
-        <div><a href='mailto:Amber@MyHomesMatchmaker.com'>Amber@MyHomesMatchmaker.com</a></div>
-        <div>Keller Williams Realty</div>
-      </div>
-    </div>
-    <div class='row'>
-      <div>
+         <div class='favvbutton'>
         <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -125,6 +113,17 @@
         <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Amber Dawn Cox</div>
+          <!-- <div><img class='agentImage' src='/images/nathan-nashville-kw.jpg' height='100px' width='100px' /></div> -->
+        <div><a href='tel:9792197479'>979-219-7479</a></div>
+        <div><a href='mailto:Amber@MyHomesMatchmaker.com'>Amber@MyHomesMatchmaker.com</a></div>
+        <div>Keller Williams Realty</div><br>
+        <!-- <a href='/searchResultsCS/1'><button>Back to Search Results</button></a> -->
       </div>
     </div>
     <div class='row'>
@@ -135,16 +134,16 @@
     </div>
 
   
+    <div class='col-md-12 col-xs-12'>
+      <small>Listing information © 2015 Bryan-College Station Regional Multiple Listing Service. IDX information is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Data is deemed reliable but is not guaranteed accurate</small>
+    </div>
 
 
 
   </div>
    </div>
 
-    <div class='col-md-12'>
-      <small>Listing information © 2015 Bryan-College Station Regional Multiple Listing Service. IDX information is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Data is deemed reliable but is not guaranteed accurate</small>
-    </div>
-
+    
     
 <script src='/javascripts/javascript.js'></script> 
 <script src='/javascripts/googleAPI.js'></script>

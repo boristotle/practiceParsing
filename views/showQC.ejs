@@ -79,51 +79,39 @@
     </div>
      <div class='SHOW'>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>BASICS</h2>
           <div><strong><span class="price"><%= theListing.price %></span></strong></div>
           <div><%= theListing.DOM %> Days on Market</div>
           <div><%= theListing.beds %> Bed, <%= theListing.baths %> Bath, <%= theListing.sqft %> Sq.Ft.</div>
           <div class='add'><%= theListing.address %> in <%= theListing.city %>, <%= theListing.state %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>MORE INFO</h2>
         <div><% if (theListing.garage > 0) { %><button id='none' disabled='true'><%= theListing.garage %> Garage</button><% } else { %><% } %><% if (theListing.amenities.indexOf([7]) >= 0 || theListing.amenities.indexOf([8]) >= 0) { %>Pool</button><% } else { %><% } %><% if (theListing.basement.indexOf([5]) >= 0 || theListing.basement.indexOf([6]) >= 0) { %><button id="none" disabled="true">Basement</button><% } else { %><% } %><% if (theListing.fireplace > 0) { %><% } else { %><% } %><% if (theListing.acreage != 'NA') { %><button id="none" disabled="true"><%= theListing.acreage %> Acres</button><% } else { %><% } %><button id="none" disabled="true">Built <%= theListing.yearBuilt %></button>
         </div>
       </div>
     </div>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>SCHOOLS</h2>
         <div><%= theListing.schoolDistrict %></div>
         <div>Elem: <%= theListing.elemSchool %></div>
         <div>Middle: <%= theListing.middleSchool %></div>
         <div>High School: <%= theListing.highSchool %></div>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-xs-12'>
           <h2 id='h2'>NEIGHBORHOOD</h2>
           <div><%= theListing.subdivision %></div>
       </div>
     </div>
     <div class='row'>
-        <div class='col-md-6'>
+        <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>FINANCIALS</h2>
         <div>Taxes: $<%= theListing.taxes %></div>
         <div>Price/SQFT: $<%= theListing.priceSqft %></div>
         <div class='est'></div>
-        </div>
-
-      <div class='col-md-6'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Hillary Walker</div>
-          <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:3097140314'>309-714-0314</a></div>
-        <div><a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a></div>
-        <div>RE/MAX</div>
-      </div>
-    </div>
-    <div class='row'>
-      <div>
+        <div class='favvbutton'>
         <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -131,6 +119,16 @@
         <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+          <!-- <div><img class='agentImage' src='/images/nathan-nashville-kw.jpg' height='100px' width='100px' /></div> -->
+        <div>Hillary Walker</div>
+        <div><a href='tel:3097140314'>309-714-0314</a></div>
+        <div><a href='mailto:Hillary@MyHomesMatchmaker.com'>Hillary@MyHomesMatchmaker.com</a></div>
+        <div>RE/MAX</div><br>
       </div>
     </div>
     <div class='row'>
@@ -142,11 +140,9 @@
 
   </div>
    </div>
-               
 
 
-
-      <div class="col-md-12">
+      <div class="col-md-12 col-xs-12">
         <small>The data relating to real estate for sale on this website comes in part from the IDX program of the Quad Cities Area REALTOR® Association. IDX information from this property search is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</small>
       </div>
             

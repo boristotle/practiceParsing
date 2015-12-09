@@ -103,25 +103,13 @@
       </div>
     </div>
     <div class='row'>
-        <div class='col-md-6 col-xs-6'>
+        <div class='col-md-6 col-xs-12'>
         <h2 id='h2'>FINANCIALS</h2>
         <div>Taxes: $<%= theListing.taxes %></div>
         <div>Price/SQFT: $<%= theListing.priceSQFT %></div>
         <div>HOA: $<%= theListing.hoaFee %> <% if (theListing.hoaDuration === 'M') { %> Monthly <% } %><% if (theListing.hoaDuration === 'A') { %> Annually <% } %><% if (theListing.hoaDuration === 'Q') { %> Quarterly <% } %><% if (theListing.hoaDuration ==='S') { %> Semi-Annually <% } %></div>
         <div class='est'> </div>
-        </div>
-
-      <div class='col-md-6 col-xs-12'>
-        <h2 id='h2'>SHOWING INFO</h2>
-        <div>Darrin Bennett</div>
-        <!-- <div><img src='/images/nathan-nashville-kw.jpg' height='200px' width='200px' /></div> -->
-        <div><a href='tel:5122709688'>512-270-9688</a></div>
-        <div><a href='mailto:Darrin@MyHomesMatchmaker.com'>Darrin@MyHomesMatchmaker.com</a></div>
-         <div>Virtual Realty Group</div>
-      </div>
-    </div>
-    <div class='row'>
-      <div>
+          <div class='favvbutton'>
         <% if (favs) { %> 
          <% if (favs >= 0) { %>
         <form action='removeFav' method='post' class='REMOVEFAV'><button id='none' class='FAVBTN'>Remove Favorite</button></form><% } else { %>
@@ -129,6 +117,17 @@
         <form action='/' method='post' class='FAV'><button id='none' class='FAVBTN'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } } else { %> 
 
         <form action='/' method='post' class='FAV'><button id='none' class='FAVDISABLED'><img src="/images/favorite-icon.png" height="20px" width="20px">Add Favorite</button></form><% } %>
+      </div>
+        </div>
+
+      <div class='col-md-6 col-xs-12'>
+        <h2 id='h2'>SHOWING INFO</h2>
+        <div>Darrin Bennett</div>
+        <div><img class='agentImage' src='/images/darrin.jpg' height='100px' width='100px' /></div>
+        <div><a href='tel:5122709688'>512-270-9688</a></div>
+        <div><a href='mailto:Darrin@MyHomesMatchmaker.com'>Darrin@MyHomesMatchmaker.com</a></div>
+         <div>Virtual Realty Group</div><br>
+         <!-- <a href='/searchResultsAustin/1'><button>Back to Search Results</button></a> -->
       </div>
     </div>
     <div class='row'>
@@ -138,7 +137,10 @@
         <div id="map"></div>
     </div>
 
-    <div class='row'>
+
+
+
+    <div class='col-md-12 col-xs-12'>
       <small>Based on information from the Austin Board of REALTORS® (alternatively, from ACTRIS) All information provided is deemed reliable but is not guaranteed and should be independently verified. The Austin Board of REALTORS®, ACTRIS and their affiliates provide the MLS and all content therein “AS IS” and without any warranty, express or implied.</small>
     </div>
 

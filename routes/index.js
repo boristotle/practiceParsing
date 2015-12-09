@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var userFavs = require('monk')('localhost/userFavs')
+var userFavs = require('monk')('localhost/userFavs' || process.env.MONGOLAB_URI)
 var Favs = userFavs.get('favs');  
 
 // GET THE HOME PAGE
@@ -139,7 +139,7 @@ router.post('/removeFav', function(req, res, next){
 
 
 // QC DATABASE
-var db = require('monk')('localhost/listings');
+var db = require('monk')('localhost/listings' || process.env.MONGOLAB_URI);
 var listings = db.get('listings');
   
 // get QC favorites with promises to render the listings on the page
@@ -224,7 +224,7 @@ router.get('/quadCities', function(req, res, next){
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
 router.get('/searchResultsQC/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
+  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -240,7 +240,7 @@ router.get('/searchResultsQC/:page', function(req, res, next) {
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-          console.log(listing[0]);
+          // console.log(listing[0]);
           var totalRecords = listing.length;
         })  
 
@@ -323,7 +323,7 @@ router.get('/quadCities/:MLS', function(req, res, next){
 
 
 // NASHVILLE DATABASE
-var db = require('monk')('localhost/listingsNashville');
+var db = require('monk')('localhost/listingsNashville' || process.env.MONGOLAB_URI);
 var listingsNashville = db.get('listings');
 
 
@@ -412,7 +412,7 @@ router.get('/nashville', function(req, res, next){
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL NASHVILLE LISTINGS
 router.get('/searchResultsNashville/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
+  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -429,7 +429,7 @@ router.get('/searchResultsNashville/:page', function(req, res, next) {
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-          console.log(listing[0]);
+          // console.log(listing[0]);
           var totalRecords = listing.length;
         })  
 
@@ -513,7 +513,7 @@ router.get('/nashville/:MLS', function(req, res, next){
 
 
 // COLLEGE STATION
-var db = require('monk')('localhost/listingsCollegeStation');
+var db = require('monk')('localhost/listingsCollegeStation' || process.env.MONGOLAB_URI);
 var listingsCollegeStation = db.get('listings');
 
 
@@ -522,7 +522,7 @@ var listingsCollegeStation = db.get('listings');
 router.get('/collegeStationFavs/:id', function(req, res, next){
   return Favs.find({_id: req.params.id})
     .then(function(favs){
-      console.log(favs);
+      // console.log(favs);
     return listingsCollegeStation.find( { MLS: { $in: favs[0].favorites } }, function(err, listing) {
       res.render('collegeStationFavs', {listings: listing, theUser: favs._id, cookies: [req.session.user]} );
     }) 
@@ -598,7 +598,7 @@ router.get('/collegeStation', function(req, res, next){
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL NASHVILLE LISTINGS
 router.get('/searchResultsCS/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
+  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -615,7 +615,7 @@ router.get('/searchResultsCS/:page', function(req, res, next) {
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-          console.log(listing[0]);
+          // console.log(listing[0]);
           var totalRecords = listing.length;
         })  
 
@@ -699,7 +699,7 @@ router.get('/collegeStation/:MLS', function(req, res, next){
 
 
 // AUSTIN
-var db = require('monk')('localhost/listingsAustin'); 
+var db = require('monk')('localhost/listingsAustin' || process.env.MONGOLAB_URI); 
 var listingsAustin = db.get('listings');
 
 
@@ -707,7 +707,7 @@ var listingsAustin = db.get('listings');
 router.get('/austinFavs/:id', function(req, res, next){
   return Favs.find({_id: req.params.id})
     .then(function(favs){
-      console.log(favs);
+      // console.log(favs);
     return listingsAustin.find( { MLS: { $in: favs[0].favorites } }, function(err, listing) {
       res.render('austinFavs', {listings: listing, theUser: favs._id, cookies: [req.session.user]} );
     }) 
@@ -725,7 +725,7 @@ router.get('/austinFavs/:id', function(req, res, next){
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL AUSTIN LISTINGS
 router.get('/searchResultsAustin/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
+  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -770,8 +770,6 @@ router.get('/searchResultsAustin/:page', function(req, res, next) {
 
 // THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE AUSTIN HOME SEARCH
 router.post('/searchAustin', function(req, res, next){
-  // console.log(req.body.city);
-  // console.log(typeof req.body.city)
         if (typeof req.body.city == 'string') {
         req.session.userSearch = {
         city: [req.body.city], 
@@ -797,37 +795,8 @@ router.post('/searchAustin', function(req, res, next){
           stories: req.body.stories.split(',')
           }
       }
-    // console.log(req.session.userSearch.city);
     res.redirect('/searchResultsAustin/1');
 })
-
-
-
-
-
-// / THIS IS A ROUTE WITH PAGINATION FOR ALL AUSTIN LISTINGS
-router.get('/searchResultsCityAustin/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
-      var page = parseInt(req.params.page);
-      var size = 25;
-      var skip = page > 0 ? ((page - 1) * size) : 0;
-
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsAustin.find({ $query: {city:{$regex: req.session.userSearch.city} },
-        $orderby: { price : Number(-1) } }, function(err, listing){
-          // console.log(listing.length);
-          var totalRecords = listing.length;
-        })  
-
-      .then(function(totalRecords) {
-    listingsAustin.find({ $query: {city: {$regex: req.session.userSearch.city} },
-     $orderby: { price : Number(-1) }}
-     , {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsCityAustin', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
-  })
- })
-});
 
 
 
@@ -839,11 +808,10 @@ router.post('/citySearchAustin', function(req, res, next){
         output.push(cityArr[i][0].toUpperCase() + cityArr[i].substring(1).toLowerCase());
       }
 
-          req.session.userSearch.city = output.join(' '); 
+          req.session.userSearch.city = [output.join(' ')]; 
 
-    res.redirect('/searchResultsCityAustin/1');
+    res.redirect('/searchResultsAustin/1');
 })
-
 
 
 
@@ -870,7 +838,6 @@ listingsAustin.insert({
      city: listing[6],
      garage: listing[7],
      elemSchool: listing[8] ,
-     // highSchool1: listing[9],
      middleSchool: listing[10],
      price: Number(listing[11]),
      masterMain: listing[12],
@@ -907,7 +874,6 @@ listingsAustin.insert({
    });
 }
  res.send('hello'); 
-  // res.redirect('/');
 });
 })
 
@@ -928,7 +894,6 @@ router.get('/austin', function(req, res, next){
 router.get('/austin/:MLS', function(req, res, next){
   if (!req.session.user) {
     listingsAustin.findOne({MLS: req.params.MLS}, function(err, listing){
-      // console.log(listing);
     res.render('showAustin', {theListing: listing, favs: null, theUser: [], cookies: [req.session.user]})
     })
   }
@@ -946,9 +911,8 @@ router.get('/austin/:MLS', function(req, res, next){
 
 
 // ORLANDO
-var db = require('monk')('localhost/listingsOrlando');
+var db = require('monk')('localhost/listingsOrlando' || process.env.MONGOLAB_URI);
 var listingsOrlando = db.get('listings');
-
 
 // get ORLANDO favorites with promises to render the listings on the page
 router.get('/orlandoFavs/:id', function(req, res, next){
@@ -1039,16 +1003,14 @@ router.get('/orlando', function(req, res, next){
 
 
 
-
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL ORLANDO LISTINGS
 router.get('/searchResultsOrlando/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
 
       Favs.find({email: req.session.user}, function(err, user){
-        listingsOrlando.find({ $query: {$and: [ 
+      listingsOrlando.find({ $query: {$and: [ 
   {city: {$in: req.session.userSearch.city } }, 
   {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
   {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
@@ -1059,7 +1021,6 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-          // console.log(listing[0]);
           var totalRecords = listing.length;
         })  
 
@@ -1080,8 +1041,6 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
   })
  })
 });
-
-
 
 
 
@@ -1116,59 +1075,12 @@ router.post('/searchOrlando', function(req, res, next){
 })
 
 
-
-
-// / THIS IS A ROUTE WITH PAGINATION FOR ALL ORLANDO LISTINGS
-router.get('/searchResultsCityOrlando/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
-      var page = parseInt(req.params.page);
-      var size = 25;
-      var skip = page > 0 ? ((page - 1) * size) : 0;
-
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsOrlando.find({ $query: {city:{$regex: req.session.userSearch.city} },
-        $orderby: { price : Number(-1) } }, function(err, listing){
-          // console.log(listing.length);
-          var totalRecords = listing.length;
-        })  
-
-      .then(function(totalRecords) {
-    listingsOrlando.find({ $query: {city: {$regex: req.session.userSearch.city} },
-     $orderby: { price : Number(-1) }}
-     , {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsCityOrlando', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
-  })
- })
-});
-
-
-
 // CREATE A POST REQUEST TO SEARCH BY CITY ORLANDO
 router.post('/citySearchOrlando', function(req, res, next){
-          req.session.userSearch.city = req.body.city.toUpperCase(); 
+          req.session.userSearch.city = [req.body.city.toUpperCase()]; 
 
-    res.redirect('/searchResultsCityOrlando/1');
+    res.redirect('/searchResultsOrlando/1');
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1193,7 +1105,7 @@ router.get('/orlando/:MLS', function(req, res, next){
 
 
 // CHICAGO
-var db = require('monk')('localhost/listingsChicago');
+var db = require('monk')('localhost/listingsChicago' || process.env.MONGOLAB_URI);
 var listingsChicago = db.get('listings');
 
 
@@ -1290,11 +1202,9 @@ router.get('/chicago', function(req, res, next){
   
 
 
-
-
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
 router.get('/searchResultsChicago/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
+  // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -1310,7 +1220,7 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
 }]}, $orderby: { price : Number(-1) }
    
 }, function(err, listing){
-          console.log(listing.length);
+          // console.log(listing.length);
           var totalRecords = listing.length;
         })  
 
@@ -1365,49 +1275,12 @@ router.post('/searchChicago', function(req, res, next){
 
 
 
-
-
-// / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
-router.get('/searchResultsCityChicago/:page', function(req, res, next) {
-  console.log(req.session.userSearch);
-      var page = parseInt(req.params.page);
-      var size = 25;
-      var skip = page > 0 ? ((page - 1) * size) : 0;
-
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsChicago.find({ $query: {city:{$regex: req.session.userSearch.city} },
-        $orderby: { price : Number(-1) } }, function(err, listing){
-          // console.log(listing.length);
-          var totalRecords = listing.length;
-        })  
-
-      .then(function(totalRecords) {
-    listingsChicago.find({ $query: {city: {$regex: req.session.userSearch.city} },
-     $orderby: { price : Number(-1) }}
-     , {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsCityChicago', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
-  })
- })
-});
-
-
-
 // CREATE A POST REQUEST TO SEARCH BY CITY CHICAGO
 router.post('/citySearchChicago', function(req, res, next){
-          req.session.userSearch.city = req.body.city.toUpperCase(); 
+          req.session.userSearch.city = [req.body.city.toUpperCase()]; 
 
-    res.redirect('/searchResultsCityChicago/1');
+    res.redirect('/searchResultsChicago/1');
 })
-
-
-
-
-
-
-
-
-
 
 
 // THIS IS THE SHOW ROUTE FOR CHICAGO HOMES
@@ -1427,10 +1300,6 @@ router.get('/chicago/:MLS', function(req, res, next){
   })
 }
 })
-
-
-
-
 
 
 
