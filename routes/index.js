@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var userFavs = require('monk')('localhost/userFavs')
+var userFavs = require('monk')(process.env.MONGOLAB_URI || 'localhost/listings')
 var Favs = userFavs.get('favs');  
 
 // GET THE HOME PAGE
