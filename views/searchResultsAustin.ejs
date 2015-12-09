@@ -49,11 +49,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6 well HOME">
       <div class="statusButtons"><button id="new" disabled="true">MLS Listed</button><button id="new2" disabled="true"><% if (listing.status == 'A') { %> Active <% } %><% if (listing.status == 'AC') { %> Active <% } %><% if (listing.status == 'PB') { %> Taking Backups <% } %></button><% if ((new Date() - listing.ListingContractDate) / 86400000 <= 2) { %><button id="new" disabled="true">New!</button> <% } %></div>
 
-        <div class="listingImage rtl">
-          <% for (var i = 1; i <= listing.photoCount; i++) { %>
-        <a href="/austin/<%= listing.MLS %>"><img class="image" src="/images/austinImages/LargePhoto<%= listing.matrixID %>-<%= i %>.jpeg" height="200px" width="250px"></a>
-        <% } %>
-    </div> 
+ 
 
       <div class="listingBasics" class="text-center"><div><strong><span class="price"><%= listing.price %></span></strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= ((new Date() - listing.ListingContractDate) / 86400000).toFixed(0) %> Days on Market</div>
       <div><%= listing.beds %> Bed, <%= listing.baths %> Bath, <%= listing.sqft %> Sq.Ft.</div>
