@@ -223,7 +223,7 @@ router.get('/quadCities', function(req, res, next){
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
 router.get('/searchResultsQC/:page', function(req, res, next) {
   var page = parseInt(req.params.page);
-  var size = 25;
+  var size = 10;
   var skip = page > 0 ? ((page - 1) * size) : 0;
   var totalRecords = [];
   Favs.find({email: req.session.user}, function(err, user){ 
@@ -240,14 +240,11 @@ router.get('/searchResultsQC/:page', function(req, res, next) {
     {garage: {$gte: req.session.userSearch.garage}},
     {baths: {$gte: req.session.userSearch.baths}}
     ]}, $orderby: { price : Number(-1) }
-    //     var totalRecords = [listing.length, user];
-    // console.log(totalRecords);
     }, 
 
        function(err, listings) {
         totalRecords.push(listings.length);
         totalRecords.push(user[0]);
-        // console.log(totalRecords)
       return totalRecords
     }) 
   })
