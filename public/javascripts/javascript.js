@@ -13,6 +13,7 @@ var ZillowApiKey = "X1-ZWz1a2ozq55nuz_7oq0o"
 $.ajax({
   url: 'https://www.zillow.com/webservice/GetRateSummary.htm?zws-id=' + ZillowApiKey + '&output=json',
   dataType: "json",
+   headers: {"Access-Control-Allow-Origin": "*"}
   success: function(data) {
               var total = (data.response.today.thirtyYearFixed / 100 / 12) * (Math.pow((1 + (data.response.today.thirtyYearFixed / 100) / 12), 360));
               var total2 = Math.pow((1 + (data.response.today.thirtyYearFixed / 100) / 12), 360) - 1;
