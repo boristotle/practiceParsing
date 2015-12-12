@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var userFavs = require('monk')(process.env.MONGOLAB_URI || 'localhost/userFavs')
+var userFavs = require('monk')('localhost/userFavs')
 var Favs = userFavs.get('favs');  
 
 // GET THE HOME PAGE
@@ -64,29 +64,28 @@ router.post('/signup', function(req, res, next) {
 // THIS SENDS AN AUTO EMAIL TO NEW USERS UPON SIGNUP
 
     var mailOptions = {
-    from: 'Darrin Bennett <admin@MyHomesMatchmaker.com>', // sender address 
-    to: req.body.email, // list of receivers 
-    subject: 'MyHomesMatchmaker New Account Created', // Subject line 
-    text: 'Hello world', // plaintext body 
-    html:  '<p>Thank you for registering with <a href="https://www.myhomesmatchmaker.com">MyHomesMatchmaker.com</a>!</p>' +
-'<p>With hundreds of neighborhood real estate experts you can be sure you\'re in great hands no matter where you are looking to buy or sell! As a registered user you have access to hundreds of thousands of homes listed for sale nationwide and can get expert advice on buying and selling a home from top agents.</p>' + 
-'<p>If you have questions about homes, the home buying process, or want to tour homes our agents and I are ready and happy to help!</p>'  + '<p>Thank you!</p>' + 
-'<img src="cid:unique@kreata.ee" height="200px" width="150px"/>' + '<p>Darrin Bennett<br>Virtual Realty Group<br>President at MyHomesMatchmaker</p>',
-   attachments: [{
-        filename: 'darrin.jpg',
-        path: './public/images/darrin.jpg',
-        cid: 'unique@kreata.ee' //same cid value as in the html img src 
-    }]
-};
+      from: 'Darrin Bennett <admin@MyHomesMatchmaker.com>', // sender address 
+      to: req.body.email, // list of receivers 
+      subject: 'MyHomesMatchmaker New Account Created', // Subject line 
+      text: 'Hello world', // plaintext body 
+      html:  '<p>Thank you for registering with <a href="https://www.myhomesmatchmaker.com">MyHomesMatchmaker.com</a>!</p>' +
+      '<p>With hundreds of neighborhood real estate experts you can be sure you\'re in great hands no matter where you are looking to buy or sell! As a registered user you have access to hundreds of thousands of homes listed for sale nationwide and can get expert advice on buying and selling a home from top agents.</p>' + 
+      '<p>If you have questions about homes, the home buying process, or want to tour homes our agents and I are ready and happy to help!</p>'  + '<p>Thank you!</p>' + 
+      '<img src="cid:unique@kreata.ee" height="200px" width="150px"/>' + '<p>Darrin Bennett<br>Virtual Realty Group<br>President at MyHomesMatchmaker</p>',
+      attachments: [{
+          filename: 'darrin.jpg',
+          path: './public/images/darrin.jpg',
+          cid: 'unique@kreata.ee' //same cid value as in the html img src 
+      }]
+    };
  
-// send mail with defined transport object 
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
-        // console.log(req.session.user);
+    // send mail with defined transport object 
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        // console.log('Message sent: ' + info.response);
+    });
           res.redirect('/');
     })
   }
@@ -139,7 +138,7 @@ router.post('/removeFav', function(req, res, next){
 
 
 // QC DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listings');
+var db = require('monk')('localhost/listings');
 var listings = db.get('listings');
   
 // get QC favorites with promises to render the listings on the page
@@ -153,7 +152,9 @@ router.get('/qcFavs/:id', function(req, res, next){
 })
 
 
-router.get('/listingsQC', function(req, res, next) {
+// INSERT QC LISTINGS INTO DATABASE
+setTimeout(function(){
+
   listings.remove({}).then(function(){
     fs.readFile('/Users/DarrinBennett/documents/QCListings Doc', 'utf8', function (err,data) {
       if (err) {
@@ -196,10 +197,11 @@ router.get('/listingsQC', function(req, res, next) {
            listOffice: listing[28]
            });
       }
-      res.send('hello');
     });
   })
-});
+}, 60000)
+
+
 
 
 
@@ -223,7 +225,7 @@ router.get('/quadCities', function(req, res, next){
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
 router.get('/searchResultsQC/:page', function(req, res, next) {
   var page = parseInt(req.params.page);
-  var size = 10;
+  var size = 25;
   var skip = page > 0 ? ((page - 1) * size) : 0;
   var totalRecords = [];
   Favs.find({email: req.session.user}, function(err, user){ 
@@ -267,42 +269,42 @@ router.get('/searchResultsQC/:page', function(req, res, next) {
 
 
 // // / THIS IS A ROUTE WITH PAGINATION FOR ALL QC LISTINGS
-// router.get('/searchResultsQC/:page', function(req, res, next) {
-//   var page = parseInt(req.params.page);
-//   var size = 25;
-//   var skip = page > 0 ? ((page - 1) * size) : 0;
+router.get('/searchResultsQC/:page', function(req, res, next) {
+  var page = parseInt(req.params.page);
+  var size = 25;
+  var skip = page > 0 ? ((page - 1) * size) : 0;
 
-//   Favs.find({email: req.session.user}, function(err, user){
-//     listings.find({ $query: {$and: [ 
-//     {city: {$in: req.session.userSearch.city } }, 
-//     {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-//     {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-//     {beds: {$gte: req.session.userSearch.beds}},
-//     {garage: {$gte: req.session.userSearch.garage}},
-//     {baths: {$gte: req.session.userSearch.baths}
-//     }]}, $orderby: { price : Number(-1) }
+  Favs.find({email: req.session.user}, function(err, user){
+    listings.find({ $query: {$and: [ 
+    {city: {$in: req.session.userSearch.city } }, 
+    {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+    {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+    {beds: {$gte: req.session.userSearch.beds}},
+    {garage: {$gte: req.session.userSearch.garage}},
+    {baths: {$gte: req.session.userSearch.baths}
+    }]}, $orderby: { price : Number(-1) }
    
-//   }, function(err, listing){
-//           // console.log(listing[0]);
-//           var totalRecords = listing.length;
-//     })  
+  }, function(err, listing){
+          // console.log(listing[0]);
+          var totalRecords = listing.length;
+    })  
 
-//     .then(function(totalRecords) {
-//      listings.find({ $query: {$and: [ 
-//     {city: {$in: req.session.userSearch.city } },
-//     {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-//     {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-//     {beds: {$gte: req.session.userSearch.beds}},
-//     {garage: {$gte: req.session.userSearch.garage}},
-//     {baths: {$gte: req.session.userSearch.baths}
-//     }]}, $orderby: { price : Number(-1) }
+    .then(function(totalRecords) {
+     listings.find({ $query: {$and: [ 
+    {city: {$in: req.session.userSearch.city } },
+    {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+    {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+    {beds: {$gte: req.session.userSearch.beds}},
+    {garage: {$gte: req.session.userSearch.garage}},
+    {baths: {$gte: req.session.userSearch.baths}
+    }]}, $orderby: { price : Number(-1) }
      
-//     }, {skip: skip, limit: size}, function(err, listing){
-//    res.render('searchResultsQC', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-//    })
-//   })
-//  })
-// });
+    }, {skip: skip, limit: size}, function(err, listing){
+   res.render('searchResultsQC', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
+   })
+  })
+ })
+});
 
 
 
@@ -363,7 +365,7 @@ router.get('/quadCities/:MLS', function(req, res, next){
 
 
 // NASHVILLE DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listingsNashville');
+var db = require('monk')('localhost/listingsNashville');
 var listingsNashville = db.get('listings');
 
 
@@ -380,7 +382,9 @@ router.get('/nashvilleFavs/:id', function(req, res, next){
 
 
 
-router.get('/listingsNashville', function(req, res, next) {
+// INSERT NASHVILLE LISTINGS INTO DATABASE
+  setTimeout(function(){
+
   listingsNashville.remove({}).then(function(){
     fs.readFile('/Users/DarrinBennett/documents/nashvilleListings Doc', 'utf8', function (err,data) {
       if (err) {
@@ -432,10 +436,10 @@ router.get('/listingsNashville', function(req, res, next) {
            priceSQFT: (Number(listing[8]) / Number(listing[17])).toFixed(2)
          });
       }
-     res.send('hello');
     });
   })
-});
+}, 60000)
+
 
 
 router.get('/nashville', function(req, res, next){
@@ -459,9 +463,15 @@ router.get('/searchResultsNashville/:page', function(req, res, next) {
   var page = parseInt(req.params.page);
   var size = 25;
   var skip = page > 0 ? ((page - 1) * size) : 0;
+  var totalRecords = [];
 
-  Favs.find({email: req.session.user}, function(err, user){
-    listingsNashville.find({ $query: {$and: [ 
+   Favs.find({email: req.session.user}, function(err, user){ 
+    // console.log(user);
+    return user;
+  })
+
+  .then(function(user){
+   return listingsNashville.find({ $query: {$and: [ 
       {city: {$in: req.session.userSearch.city } }, 
       {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
       {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
@@ -470,13 +480,17 @@ router.get('/searchResultsNashville/:page', function(req, res, next) {
       {garage: {$gte: req.session.userSearch.garage}},
       {baths: {$gte: req.session.userSearch.baths}
       }]}, $orderby: { price : Number(-1) }
-    }, function(err, listing){
-          // console.log(listing[0]);
-          var totalRecords = listing.length;
-        })  
-    
-        .then(function(totalRecords) {
-        listingsNashville.find({ $query: {$and: [ 
+    }, 
+
+    function(err, listings){
+         totalRecords.push(listings.length);
+        totalRecords.push(user[0]);
+      return totalRecords
+    })   
+  })
+
+    .then(function(totalRecords) {
+      listingsNashville.find({ $query: {$and: [ 
           {city: {$in: req.session.userSearch.city } },
           {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
           {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
@@ -487,12 +501,10 @@ router.get('/searchResultsNashville/:page', function(req, res, next) {
           }]}, $orderby: { price : Number(-1) }
        
           }, {skip: skip, limit: size}, function(err, listing){
-        res.render('searchResultsNashville', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-        })
-    })
+        res.render('searchResultsNashville', {listings: listing, totalRecords: totalRecords, size: size, theUser: [totalRecords[1]], cookies: [req.session.user]});
+      })
   })
 });
-
 
 
 
@@ -555,7 +567,7 @@ router.get('/nashville/:MLS', function(req, res, next){
 
 
 // COLLEGE STATION
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listingsCollegeStation');
+var db = require('monk')('localhost/listingsCollegeStation');
 var listingsCollegeStation = db.get('listings');
 
 
@@ -573,7 +585,9 @@ router.get('/collegeStationFavs/:id', function(req, res, next){
 
 
 
-router.get('/listingsCollegeStation', function(req, res, next) {
+// INSERT COLLEGE STATION LISTINGS INTO DATABASE
+  setTimeout(function(){
+
    listingsCollegeStation.remove({}).then(function(){
 fs.readFile('/Users/DarrinBennett/documents/collegeStation Doc', 'utf8', function (err,data) {
   if (err) {
@@ -620,12 +634,10 @@ listingsCollegeStation.insert({
      masterMain: listing[32]
    });
 }
- res.send('hello');
-  // res.redirect('/');
 });
 })
+}, 60000)
 
-});
 
 
 
@@ -644,15 +656,23 @@ router.get('/collegeStation', function(req, res, next){
 })
 
 
-// / THIS IS A ROUTE WITH PAGINATION FOR ALL NASHVILLE LISTINGS
+
+
+
+// / THIS IS A ROUTE WITH PAGINATION FOR ALL CS LISTINGS
 router.get('/searchResultsCS/:page', function(req, res, next) {
   // console.log(req.session.userSearch);
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
+      var totalRecords = [];
 
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsCollegeStation.find({ $query: {$and: [ 
+      Favs.find({email: req.session.user}, function(err, user){ 
+        return user;
+      })
+
+  .then(function(user){
+   return listingsCollegeStation.find({ $query: {$and: [ 
   {city: {$in: req.session.userSearch.city } }, 
   {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
   {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
@@ -661,30 +681,31 @@ router.get('/searchResultsCS/:page', function(req, res, next) {
   {garage: {$in: req.session.userSearch.garage }},
   {baths: {$gte: req.session.userSearch.baths}
 }]}, $orderby: { price : Number(-1) }
-   
-}, function(err, listing){
-          // console.log(listing[0]);
-          var totalRecords = listing.length;
-        })  
+    }, 
 
-      .then(function(totalRecords) {
-    listingsCollegeStation.find({ $query: {$and: [ 
-  {city: {$in: req.session.userSearch.city } },
-  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-  {beds: {$gte: req.session.userSearch.beds}},
-  {stories: {$in: req.session.userSearch.stories } },
-  {garage: {$in: req.session.userSearch.garage }},
-  {baths: {$gte: req.session.userSearch.baths}
-}]}, $orderby: { price : Number(-1) }
-   
-}, {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsCS', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
+    function(err, listings){
+         totalRecords.push(listings.length);
+        totalRecords.push(user[0]);
+      return totalRecords
+    })   
   })
- })
-});
 
+    .then(function(totalRecords) {
+      listingsCollegeStation.find({ $query: {$and: [ 
+      {city: {$in: req.session.userSearch.city } },
+      {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+      {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+      {beds: {$gte: req.session.userSearch.beds}},
+      {stories: {$in: req.session.userSearch.stories } },
+      {garage: {$in: req.session.userSearch.garage }},
+      {baths: {$gte: req.session.userSearch.baths}
+      }]}, $orderby: { price : Number(-1) }
+       
+          }, {skip: skip, limit: size}, function(err, listing){
+        res.render('searchResultsCS', {listings: listing, totalRecords: totalRecords, size: size, theUser: [totalRecords[1]], cookies: [req.session.user]});
+      })
+  })
+});
 
 
 
@@ -747,7 +768,7 @@ router.get('/collegeStation/:MLS', function(req, res, next){
 
 
 // AUSTIN
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listingsAustin'); 
+var db = require('monk')('localhost/listingsAustin'); 
 var listingsAustin = db.get('listings');
 
 
@@ -772,42 +793,47 @@ router.get('/searchResultsAustin/:page', function(req, res, next) {
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
+      var totalRecords = [];
 
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsAustin.find({ $query: {$and: [ 
-  {city: {$in: req.session.userSearch.city } }, 
-  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-  {beds: {$gte: req.session.userSearch.beds}},
-  {stories: {$in: req.session.userSearch.stories } },
-  {garage: {$gte: req.session.userSearch.garage }},
-  {baths: {$gte: req.session.userSearch.baths}
-}]}, $orderby: { price : Number(-1) }
-   
-}, function(err, listing){
-          // console.log(listing[0]);
-          var totalRecords = listing.length;
-        })  
+      Favs.find({email: req.session.user}, function(err, user){ 
+        return user;
+      })
 
-      .then(function(totalRecords) {
-    listingsAustin.find({ $query: {$and: [ 
-  {city: {$in: req.session.userSearch.city } },
-  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-  {beds: {$gte: req.session.userSearch.beds}},
-  {stories: {$in: req.session.userSearch.stories } },
-  {garage: {$gte: req.session.userSearch.garage }},
-  {baths: {$gte: req.session.userSearch.baths}
-}]}, $orderby: { price : Number(-1) }
-   
-}, {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsAustin', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
+     .then(function(user){
+      return listingsAustin.find({ $query: {$and: [ 
+        {city: {$in: req.session.userSearch.city } }, 
+        {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+        {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+        {beds: {$gte: req.session.userSearch.beds}},
+        {stories: {$in: req.session.userSearch.stories } },
+        {garage: {$gte: req.session.userSearch.garage }},
+        {baths: {$gte: req.session.userSearch.baths}
+        }]}, $orderby: { price : Number(-1) }
+          }, 
+
+        function(err, listings){
+             totalRecords.push(listings.length);
+            totalRecords.push(user[0]);
+          return totalRecords
+        })   
+      })
+
+         .then(function(totalRecords) {
+            listingsAustin.find({ $query: {$and: [ 
+            {city: {$in: req.session.userSearch.city } },
+            {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+            {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+            {beds: {$gte: req.session.userSearch.beds}},
+            {stories: {$in: req.session.userSearch.stories } },
+            {garage: {$gte: req.session.userSearch.garage }},
+            {baths: {$gte: req.session.userSearch.baths}
+            }]}, $orderby: { price : Number(-1) }
+       
+          }, {skip: skip, limit: size}, function(err, listing){
+        res.render('searchResultsAustin', {listings: listing, totalRecords: totalRecords, size: size, theUser: [totalRecords[1]], cookies: [req.session.user]});
+      })
   })
- })
 });
-
-
 
 
 
@@ -860,7 +886,9 @@ router.post('/citySearchAustin', function(req, res, next){
 
 
 
-router.get('/listingsAustin', function(req, res, next) {
+// INSERT AUSTIN LISTINGS INTO DATABASE
+  setTimeout(function(){
+
    listingsAustin.remove({}).then(function(){
 fs.readFile('/Users/DarrinBennett/documents/AustinListings Doc', 'utf8', function (err,data) {
   if (err) {
@@ -916,10 +944,10 @@ listingsAustin.insert({
      MLS: Number(listing[41]).toString()
    });
 }
- res.send('hello'); 
 });
 })
-});
+}, 60000)
+
 
 
 router.get('/austin', function(req, res, next){
@@ -953,7 +981,7 @@ router.get('/austin/:MLS', function(req, res, next){
 
 
 // ORLANDO
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listingsOrlando');
+var db = require('monk')('localhost/listingsOrlando');
 var listingsOrlando = db.get('listings');
 
 // get ORLANDO favorites with promises to render the listings on the page
@@ -970,7 +998,9 @@ router.get('/orlandoFavs/:id', function(req, res, next){
 
 
 
-router.get('/listingsOrlando', function(req, res, next) {
+// INSERT ORLANDO LISTINGS INTO DATABASE
+    setTimeout(function(){
+
   listingsOrlando.remove({}).then(function(){
 fs.readFile('/Users/DarrinBennett/documents/OrlandoListings Doc', 'utf8', function (err,data) {
   if (err) {
@@ -1026,12 +1056,9 @@ listingsOrlando.insert({
      propType: listing[33]
    });
 }
- res.send('hello');
-  // res.redirect('/');
 });
 })
-
-});
+}, 60000)
 
 
 router.get('/orlando', function(req, res, next){
@@ -1047,7 +1074,8 @@ router.get('/orlando', function(req, res, next){
   })
 })
 })
-  
+
+
 
 
 
@@ -1056,38 +1084,46 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
+      var totalRecords = [];
 
-      Favs.find({email: req.session.user}, function(err, user){
-      listingsOrlando.find({ $query: {$and: [ 
-  {city: {$in: req.session.userSearch.city } }, 
-  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-  {beds: {$gte: req.session.userSearch.beds}},
-  {stories: {$lte: req.session.userSearch.stories } },
-  {garage: {$in: req.session.userSearch.garage }},
-  {baths: {$gte: req.session.userSearch.baths}
-}]}, $orderby: { price : Number(-1) }
-   
-}, function(err, listing){
-          var totalRecords = listing.length;
-        })  
+      Favs.find({email: req.session.user}, function(err, user){ 
+        return user;
+      })
 
-      .then(function(totalRecords) {
-    listingsOrlando.find({ $query: {$and: [ 
-  {city: {$in: req.session.userSearch.city } },
-  {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-  {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-  {beds: {$gte: req.session.userSearch.beds}},
-  {stories: {$lte: req.session.userSearch.stories } },
-  {garage: {$in: req.session.userSearch.garage }},
-  {baths: {$gte: req.session.userSearch.baths}
-}]}, $orderby: { price : Number(-1) }
-   
-}, {skip: skip, limit: size}, function(err, listing){
-   res.render('searchResultsOrlando', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
+       .then(function(user){
+          return listingsOrlando.find({ $query: {$and: [ 
+          {city: {$in: req.session.userSearch.city } }, 
+          {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+          {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+          {beds: {$gte: req.session.userSearch.beds}},
+          {stories: {$lte: req.session.userSearch.stories } },
+          {garage: {$in: req.session.userSearch.garage }},
+          {baths: {$gte: req.session.userSearch.baths}
+          }]}, $orderby: { price : Number(-1) }
+          }, 
+
+        function(err, listings){
+             totalRecords.push(listings.length);
+            totalRecords.push(user[0]);
+          return totalRecords
+        })   
+      })
+
+        .then(function(totalRecords) {
+          listingsOrlando.find({ $query: {$and: [ 
+            {city: {$in: req.session.userSearch.city } },
+            {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
+            {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
+            {beds: {$gte: req.session.userSearch.beds}},
+            {stories: {$lte: req.session.userSearch.stories } },
+            {garage: {$in: req.session.userSearch.garage }},
+            {baths: {$gte: req.session.userSearch.baths}
+            }]}, $orderby: { price : Number(-1) }
+       
+          }, {skip: skip, limit: size}, function(err, listing){
+        res.render('searchResultsOrlando', {listings: listing, totalRecords: totalRecords, size: size, theUser: [totalRecords[1]], cookies: [req.session.user]});
+      })
   })
- })
 });
 
 
@@ -1153,7 +1189,7 @@ router.get('/orlando/:MLS', function(req, res, next){
 
 
 // CHICAGO
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/listingsChicago');
+var db = require('monk')('localhost/listingsChicago');
 var listingsChicago = db.get('listings');
 
 
@@ -1171,7 +1207,9 @@ router.get('/chicagoFavs/:id', function(req, res, next){
 
 
 
-router.get('/listingsChicago', function(req, res, next) {
+// INSERT CHICAGO LISTINGS INTO DATABASE
+    setTimeout(function(){
+
   listingsChicago.remove({}).then(function(){
 fs.readFile('/Users/DarrinBennett/documents/ChicagoListings Doc', 'utf8', function (err,data) {
   if (err) {
@@ -1232,12 +1270,10 @@ listingsChicago.insert({
      propType: listing[39] || 'NA'
    });
 }
- res.send('hello');
-  // res.redirect('/');
 });
 })
+},60000)
 
-});
 
 
 router.get('/chicago', function(req, res, next){
@@ -1252,7 +1288,7 @@ router.get('/chicago', function(req, res, next){
   })
 })
 })
-  
+
 
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
@@ -1261,9 +1297,15 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
+      var totalRecords = [];
 
-      Favs.find({email: req.session.user}, function(err, user){
-        listingsChicago.find({ $query: {$and: [ 
+      Favs.find({email: req.session.user}, function(err, user){ 
+        return user;
+      })
+
+
+    .then(function(user){
+          return listingsChicago.find({ $query: {$and: [ 
           {city: {$in: req.session.userSearch.city } }, 
           {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
           {appxsqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
@@ -1271,11 +1313,14 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
           {garage: {$gte: req.session.userSearch.garage }},
           {fullBaths: {$gte: req.session.userSearch.baths}
         }]}, $orderby: { price : Number(-1) }
+          }, 
 
-      }, function(err, listing){
-          console.log('error', err);
-          var totalRecords = listing.length;
-        })  
+        function(err, listings){
+             totalRecords.push(listings.length);
+            totalRecords.push(user[0]);
+          return totalRecords
+        })   
+      })
 
         .then(function(totalRecords) {
           listingsChicago.find({ $query: {$and: [ 
@@ -1286,12 +1331,11 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
             {garage: {$gte: req.session.userSearch.garage }},
             {fullBaths: {$gte: req.session.userSearch.baths}
           }]}, $orderby: { price : Number(-1) }
-
-        }, {skip: skip, limit: size}, function(err, listing){
-         res.render('searchResultsChicago', {listings: listing, totalRecords: totalRecords, size: size, theUser: user, cookies: [req.session.user]});
-   })
+       
+          }, {skip: skip, limit: size}, function(err, listing){
+        res.render('searchResultsChicago', {listings: listing, totalRecords: totalRecords, size: size, theUser: [totalRecords[1]], cookies: [req.session.user]});
+      })
   })
- })
 });
 
 

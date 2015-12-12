@@ -1,4 +1,4 @@
-.container {
+.cont {
   font-size: 18px;
 }
 
@@ -8,6 +8,14 @@ a, :focus {
 
 .favvbutton {
   margin-top: 5px;
+}
+
+.imageSlideshow2 {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  min-height: 400px;
+  max-height: 400px;
+  width: 800px;
 }
 
 #h2 {
@@ -20,6 +28,7 @@ a, :focus {
 
 .LO {
   margin-top: 10px;
+  margin-left: 12px;
 }
 
 button {
@@ -40,13 +49,34 @@ button {
 
 @media screen and (max-width: 400px) {
 
-.container {
+/*.imageSlideshow2 {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  min-height: 350px;
+  max-height: 350px;
+  min-width: 350px;
+  max-width: 350px;
+}*/
+
+#map {
+  margin-left: 15px;
+  height: 250px;
+}
+
+.imageSlideshow {
+  height: 250px;
+  width: 250px;
+}
+
+
+.cont {
   font-size: 16px;
-  float: left;
+  width: 250px;
+  margin-left: -20px;
 }
 
 .carousel {
-  margin-left: -15%;
+  margin-left: -20%;
 }
 
 .SHOW {

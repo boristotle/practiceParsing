@@ -6,6 +6,9 @@
 
     <link rel='stylesheet' href='/stylesheets/style2.css' />
     <link rel='stylesheet' href='/stylesheets/showPage.css' />
+    <!-- SLICK SLIDER CSS -->
+    <link rel='stylesheet' href='/stylesheets/slickSlider2.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css"/>
       <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -39,37 +42,17 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-   <div class='container'>
-    <div class='row'>
-      <div class='container-fluid'>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-     <div class='item active'>
-        <img class="image" src="/images/nashvilleImages/<%= theListing.MLS %>-1.jpeg" height="400" width="800">
-      </div>
-      <% for (var i = 2; i <= theListing.photoCount; i++) { %>
-      <div class='item'>
-        <img class="image" src="/images/nashvilleImages/<%= theListing.MLS %>-<%= i %>.jpeg" height="400" width="800">
-      </div>
+   
+<div class='cont'>
+
+  <div class='row'>
+  <div class="rtl">
+          <% for (var i = 1; i <= theListing.photoCount; i++) { %>
+        <img class="imageSlideshow2" src="/images/nashvilleImages/<%= theListing.MLS %>-<%= i %>.jpeg"></a>
         <% } %>
-  </div>
-
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-  </div>
     </div>
-     <div class='SHOW'>
+  </div>
+
     <div class='row'>
         <div class='col-md-12 col-xs-12'>
         <h2 id='h2'>DESCRIPTION</h2>
@@ -144,18 +127,19 @@
        <div class='nashIDX'><img src='/images/nashvilleidximage-large.gif'></div>
 
   </div>
-   </div>
 
 
       
-                    
-       
+                         
 <script src='/javascripts/javascript.js'></script> 
 <script src='/javascripts/googleAPI.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <!-- SLICK SLIDER SCRIPT -->
+   <script src='/javascripts/slickSlider.js'></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 
   <div class="dialog" title="Create an Account">Login or create an account to save favorites! <a href='/signup' style='outline: 0; text-decoration: none; font-weight: bold'>Signup here!</a></div>
                
