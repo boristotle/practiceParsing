@@ -156,7 +156,7 @@ router.get('/qcFavs/:id', function(req, res, next){
 setTimeout(function(){
 
   listings.remove({}).then(function(){
-    fs.readFile('/Users/DarrinBennett/documents/QCListings Doc', 'utf8', function (err,data) {
+    fs.readFile('/RetsDownloads/QuadCities/QuadCities.xml', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
@@ -380,7 +380,7 @@ router.get('/nashvilleFavs/:id', function(req, res, next){
   setTimeout(function(){
 
   listingsNashville.remove({}).then(function(){
-    fs.readFile('/Users/DarrinBennett/documents/nashvilleListings Doc', 'utf8', function (err,data) {
+    fs.readFile('/RetsDownloads/Nashville/Nashville.xml', 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
@@ -577,7 +577,7 @@ router.get('/collegeStationFavs/:id', function(req, res, next){
   setTimeout(function(){
 
    listingsCollegeStation.remove({}).then(function(){
-fs.readFile('/Users/DarrinBennett/documents/collegeStation Doc', 'utf8', function (err,data) {
+fs.readFile('/RetsDownloads/CollegeStation/CollegeStation.xml', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
@@ -880,7 +880,7 @@ router.post('/citySearchAustin', function(req, res, next){
   setTimeout(function(){
 
    listingsAustin.remove({}).then(function(){
-fs.readFile('/Users/DarrinBennett/documents/AustinListings Doc', 'utf8', function (err,data) {
+fs.readFile('/RetsDownloads/Austin/Austin.xml', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
@@ -992,7 +992,7 @@ router.get('/orlandoFavs/:id', function(req, res, next){
     setTimeout(function(){
 
   listingsOrlando.remove({}).then(function(){
-fs.readFile('/Users/DarrinBennett/documents/OrlandoListings Doc', 'utf8', function (err,data) {
+fs.readFile('/RetsDownloads/Orlando/Orlando.xml', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
@@ -1217,7 +1217,7 @@ router.get('/chicagoFavs/:id', function(req, res, next){
     setTimeout(function(){
 
   listingsChicago.remove({}).then(function(){
-fs.readFile('/Users/DarrinBennett/documents/ChicagoListings Doc', 'utf8', function (err,data) {
+fs.readFile('/RetsDownloads/Chicago/Chicago.xml', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
