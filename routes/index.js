@@ -208,7 +208,7 @@ setTimeout(function(){
 // THIS GETS THE QC SEARCH PAGE
 router.get('/quadCities', function(req, res, next){
   return Favs.find({email: req.session.user}, function(err, user){
-    return listings.find({}, function(err, listing){
+    listings.find({}, function(err, listing){
       res.render('searchPageQC', { title: 'QC Listings', listings: listing, theUser: user, cookies: [req.session.user]});
     })
   })
