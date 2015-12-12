@@ -443,8 +443,8 @@ router.get('/nashvilleFavs/:id', function(req, res, next){
 
 
 router.get('/nashville', function(req, res, next){
-  Favs.find({email: req.session.user}, function(err, user){
-    listingsNashville.find({city: 'NASHVILLE'}, {limit: 25, skip: 0} , function(err, listing){
+  return Favs.find({email: req.session.user}, function(err, user){
+    return listingsNashville.find({city: 'NASHVILLE'}, {limit: 25, skip: 0} , function(err, listing){
        if (err) {
         console.log(err);
         listingsNashville.find({city: 'NASHVILLE'}, {limit: 25, skip: 0} , function(err, listing){
@@ -642,8 +642,8 @@ listingsCollegeStation.insert({
 
 
 router.get('/collegeStation', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-  listingsCollegeStation.find({}, function(err, listing){
+    return Favs.find({email: req.session.user}, function(err, user){
+  return listingsCollegeStation.find({}, function(err, listing){
      if (err) {
       console.log(err);
      listingsCollegeStation.find({}, function(err, listing){
@@ -951,8 +951,8 @@ listingsAustin.insert({
 
 
 router.get('/austin', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-  listingsAustin.find({}, function(err, listing){
+    return Favs.find({email: req.session.user}, function(err, user){
+  return listingsAustin.find({}, function(err, listing){
     res.render('searchPageAustin', { title: 'Austin Listings', listings: listing, theUser: user, cookies: [req.session.user]});
   })
 })
@@ -1062,8 +1062,8 @@ listingsOrlando.insert({
 
 
 router.get('/orlando', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-  listingsOrlando.find({city: 'ORLANDO', price: { $gte: 250000} }, {limit: 25, skip: 0}, function(err, listing) {
+    return Favs.find({email: req.session.user}, function(err, user){
+  return listingsOrlando.find({city: 'ORLANDO', price: { $gte: 250000} }, {limit: 25, skip: 0}, function(err, listing) {
      if (err) {
       console.log(err);
    listingsOrlando.find({city: 'ORLANDO', price: { $gte: 250000} }, {limit: 25, skip: 0}, function(err, listing) {
@@ -1277,16 +1277,10 @@ listingsChicago.insert({
 
 
 router.get('/chicago', function(req, res, next){
-    Favs.find({email: req.session.user}, function(err, user){
-        if (err) {
-      console.log(err);
-    listingsChicago.find({city: 'CHICAGO', price: { $gte: 250000}, appxsqft: { $gte: 1000} }, {limit: 25, skip: 0}, function(err, listing){
-    res.render('searchPageChicago', { title: 'Chicago Listings', listings: listing, theUser: user, cookies: [req.session.user]});      })
-    }
-  listingsChicago.find({city: 'CHICAGO', price: { $gte: 250000}, appxsqft: { $gte: 1000} }, {limit: 25, skip: 0}, function(err, listing){
+    return Favs.find({email: req.session.user}, function(err, user){
+    return listingsChicago.find({city: 'CHICAGO', price: { $gte: 250000}, appxsqft: { $gte: 1000} }, {limit: 25, skip: 0}, function(err, listing){
     res.render('searchPageChicago', { title: 'Chicago Listings', listings: listing, theUser: user, cookies: [req.session.user]});
   })
-})
 })
 
 
