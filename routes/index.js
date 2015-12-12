@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var userFavs = require('monk')(process.env.MONGOLAB_URI || 'localhost/userFavs')
+var userFavs = require('monk')('localhost/userFavs')
 var Favs = userFavs.get('favs');  
 
 // GET THE HOME PAGE
@@ -138,7 +138,7 @@ router.post('/removeFav', function(req, res, next){
 
 
 // QC DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listings');
+var db = require('monk')('localhost/listings');
 var listings = db.get('listings');
   
 // get QC favorites with promises to render the listings on the page
@@ -346,10 +346,7 @@ router.get('/quadCities/:MLS', function(req, res, next){
   else {
     Favs.findOne({email: req.session.user}, function(err, fav){
       listings.findOne({MLS: req.params.MLS}, function(err, listing){
-      // console.log(fav);
-      // console.log(listing)
-      // console.log('favorites ' + fav.favorites)
-      // console.log('req.params.MLS ' + req.params.MLS)  
+
       var favAlreadyAdded = fav.favorites.indexOf(req.params.MLS)
       res.render('showQC', {theListing: listing, favs: favAlreadyAdded, theUser: fav, cookies: [req.session.user]})
       })
@@ -362,8 +359,8 @@ router.get('/quadCities/:MLS', function(req, res, next){
 
 
 // NASHVILLE DATABASE
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsNashville');
-var listingsNashville = db.get('listingsNashville');
+var db = require('monk')('localhost/listingsNashville');
+var listingsNashville = db.get('listings');
 
 
 // get NASHVILLE favorites with promises to render the listings on the page
@@ -558,8 +555,8 @@ router.get('/nashville/:MLS', function(req, res, next){
 
 
 // COLLEGE STATION
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsCollegeStation');
-var listingsCollegeStation = db.get('listingsCollegeStation');
+var db = require('monk')('localhost/listingsCollegeStation');
+var listingsCollegeStation = db.get('listings');
 
 
 
@@ -725,7 +722,7 @@ router.post('/searchCS', function(req, res, next){
           stories: req.body.stories.split(',')
           }
       }
-    // console.log(req.session.userSearch.city);
+    
     res.redirect('/searchResultsCS/1');
 })
 
@@ -736,8 +733,7 @@ router.post('/searchCS', function(req, res, next){
 router.get('/collegeStation/:MLS', function(req, res, next){
   if (!req.session.user) {
     listingsCollegeStation.findOne({MLS: req.params.MLS}, function(err, listing){
-      // console.log(listing);
-    res.render('showCollegeStation', {theListing: listing, favs: null, theUser: [], cookies: [req.session.user]})
+      res.render('showCollegeStation', {theListing: listing, favs: null, theUser: [], cookies: [req.session.user]})
     })
   }
   else {
@@ -754,8 +750,8 @@ router.get('/collegeStation/:MLS', function(req, res, next){
 
 
 // AUSTIN
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsAustin'); 
-var listingsAustin = db.get('listingsAustin');
+var db = require('monk')('localhost/listingsAustin'); 
+var listingsAustin = db.get('listings');
 
 
 // get AUSTIN favorites with promises to render the listings on the page
@@ -787,18 +783,18 @@ router.get('/searchResultsAustin/:page', function(req, res, next) {
 
      .then(function(user){
       return listingsAustin.find({ $query: {$and: [ 
-        {city: {$in: req.session.userSearch.city } }, 
-        {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-        {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-        {beds: {$gte: req.session.userSearch.beds}},
-        {stories: {$in: req.session.userSearch.stories } },
-        {garage: {$gte: req.session.userSearch.garage }},
-        {baths: {$gte: req.session.userSearch.baths}
+        {city: {$in: req.session.Austin.city } }, 
+        {price: {$gte: Number(req.session.Austin.minprice), $lte: Number(req.session.Austin.maxprice)}},
+        {sqft: {$gte: Number(req.session.Austin.minsqft), $lte: Number(req.session.Austin.maxsqft)}}, 
+        {beds: {$gte: req.session.Austin.beds}},
+        {stories: {$in: req.session.Austin.stories } },
+        {garage: {$gte: req.session.Austin.garage }},
+        {baths: {$gte: req.session.Austin.baths}
         }]}, $orderby: { price : Number(-1) }
           }, 
 
         function(err, listings){
-             totalRecords.push(listings.length);
+             totalRecords.push(listings);
             totalRecords.push(user[0]);
           return totalRecords
         })   
@@ -806,13 +802,13 @@ router.get('/searchResultsAustin/:page', function(req, res, next) {
 
          .then(function(totalRecords) {
             listingsAustin.find({ $query: {$and: [ 
-            {city: {$in: req.session.userSearch.city } },
-            {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-            {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-            {beds: {$gte: req.session.userSearch.beds}},
-            {stories: {$in: req.session.userSearch.stories } },
-            {garage: {$gte: req.session.userSearch.garage }},
-            {baths: {$gte: req.session.userSearch.baths}
+            {city: {$in: req.session.Austin.city } },
+            {price: {$gte: Number(req.session.Austin.minprice), $lte: Number(req.session.Austin.maxprice)}},
+            {sqft: {$gte: Number(req.session.Austin.minsqft), $lte: Number(req.session.Austin.maxsqft)}}, 
+            {beds: {$gte: req.session.Austin.beds}},
+            {stories: {$in: req.session.Austin.stories } },
+            {garage: {$gte: req.session.Austin.garage }},
+            {baths: {$gte: req.session.Austin.baths}
             }]}, $orderby: { price : Number(-1) }
        
           }, {skip: skip, limit: size}, function(err, listing){
@@ -826,7 +822,7 @@ router.get('/searchResultsAustin/:page', function(req, res, next) {
 // THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE AUSTIN HOME SEARCH
 router.post('/searchAustin', function(req, res, next){
         if (typeof req.body.city == 'string') {
-        req.session.userSearch = {
+        req.session.Austin = {
         city: [req.body.city], 
         minprice: Number(req.body.minprice),
         maxprice: Number(req.body.maxprice),
@@ -838,7 +834,7 @@ router.post('/searchAustin', function(req, res, next){
         stories: req.body.stories.split(',')
         }
       } else {
-          req.session.userSearch = {
+          req.session.Austin = {
           city: req.body.city, 
           minprice: Number(req.body.minprice),
           maxprice: Number(req.body.maxprice),
@@ -857,19 +853,27 @@ router.post('/searchAustin', function(req, res, next){
 
 // CREATE A POST REQUEST TO SEARCH BY CITY AUSTIN
 router.post('/citySearchAustin', function(req, res, next){
-      var cityArr = req.body.city.split(' ');
+      var cityArr = req.body.city.trim().split(' ');
       var output = []
       for (var i = 0; i < cityArr.length; i++) {
         output.push(cityArr[i][0].toUpperCase() + cityArr[i].substring(1).toLowerCase());
       }
 
-          req.session.userSearch.city = [output.join(' ')]; 
+          req.session.Austin = {
+          city: [output.join(' ')],
+          minprice: 0,
+          maxprice: 100000000,
+          minsqft: 0,     
+          maxsqft: 99999,
+          beds: '0',
+          baths: '0',
+          garage: '0',
+          stories: [ '1', '2', '3', '4' ] 
+          }
+
 
     res.redirect('/searchResultsAustin/1');
 })
-
-
-
 
 
 // INSERT AUSTIN LISTINGS INTO DATABASE
@@ -967,8 +971,8 @@ router.get('/austin/:MLS', function(req, res, next){
 
 
 // ORLANDO
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsOrlando');
-var listingsOrlando = db.get('listingsOrlando');
+var db = require('monk')('localhost/listingsOrlando');
+var listingsOrlando = db.get('listings');
 
 // get ORLANDO favorites with promises to render the listings on the page
 router.get('/orlandoFavs/:id', function(req, res, next){
@@ -1072,18 +1076,18 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
 
        .then(function(user){
           return listingsOrlando.find({ $query: {$and: [ 
-          {city: {$in: req.session.userSearch.city } }, 
-          {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-          {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-          {beds: {$gte: req.session.userSearch.beds}},
-          {stories: {$lte: req.session.userSearch.stories } },
-          {garage: {$in: req.session.userSearch.garage }},
-          {baths: {$gte: req.session.userSearch.baths}
+          {city: {$in: req.session.Orlando.city } }, 
+          {price: {$gte: Number(req.session.Orlando.minprice), $lte: Number(req.session.Orlando.maxprice)}},
+          {sqft: {$gte: Number(req.session.Orlando.minsqft), $lte: Number(req.session.Orlando.maxsqft)}}, 
+          {beds: {$gte: req.session.Orlando.beds}},
+          {stories: {$lte: req.session.Orlando.stories } },
+          {garage: {$in: req.session.Orlando.garage }},
+          {baths: {$gte: req.session.Orlando.baths}
           }]}, $orderby: { price : Number(-1) }
           }, 
 
         function(err, listings){
-             totalRecords.push(listings.length);
+             totalRecords.push(listings);
             totalRecords.push(user[0]);
           return totalRecords
         })   
@@ -1091,13 +1095,13 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
 
         .then(function(totalRecords) {
           listingsOrlando.find({ $query: {$and: [ 
-            {city: {$in: req.session.userSearch.city } },
-            {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-            {sqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-            {beds: {$gte: req.session.userSearch.beds}},
-            {stories: {$lte: req.session.userSearch.stories } },
-            {garage: {$in: req.session.userSearch.garage }},
-            {baths: {$gte: req.session.userSearch.baths}
+            {city: {$in: req.session.Orlando.city } },
+            {price: {$gte: Number(req.session.Orlando.minprice), $lte: Number(req.session.Orlando.maxprice)}},
+            {sqft: {$gte: Number(req.session.Orlando.minsqft), $lte: Number(req.session.Orlando.maxsqft)}}, 
+            {beds: {$gte: req.session.Orlando.beds}},
+            {stories: {$lte: req.session.Orlando.stories } },
+            {garage: {$in: req.session.Orlando.garage }},
+            {baths: {$gte: req.session.Orlando.baths}
             }]}, $orderby: { price : Number(-1) }
        
           }, {skip: skip, limit: size}, function(err, listing){
@@ -1111,7 +1115,7 @@ router.get('/searchResultsOrlando/:page', function(req, res, next) {
 // THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE ORLANDO HOME SEARCH
 router.post('/searchOrlando', function(req, res, next){
         if (typeof req.body.city == 'string') {
-        req.session.userSearch = {
+        req.session.Orlando = {
         city: [req.body.city], 
         minprice: Number(req.body.minprice),
         maxprice: Number(req.body.maxprice),
@@ -1123,7 +1127,7 @@ router.post('/searchOrlando', function(req, res, next){
         stories: req.body.stories
         }
       } else {
-          req.session.userSearch = {
+          req.session.Orlando = {
           city: req.body.city, 
           minprice: Number(req.body.minprice),
           maxprice: Number(req.body.maxprice),
@@ -1141,7 +1145,29 @@ router.post('/searchOrlando', function(req, res, next){
 
 // CREATE A POST REQUEST TO SEARCH BY CITY ORLANDO
 router.post('/citySearchOrlando', function(req, res, next){
-          req.session.userSearch.city = [req.body.city.toUpperCase()]; 
+          // req.session.Orlando.city = [req.body.city.trim().toUpperCase()];
+
+          req.session.Orlando = { 
+            city: [req.body.city.trim().toUpperCase()],
+            minprice: 0,
+            maxprice: 999999999,
+            minsqft: 0,
+            maxsqft: 99999,
+            beds: '0',
+            baths: '0',
+            garage: 
+             [ '1CarGarage',
+               '2CarGarage',
+               '3CarGarage',
+               '4CarGarage',
+               '5PlusCarGarage',
+               'None',
+               '1CarCarport',
+               '2CarCarport',
+               '3CarCarport' ],
+            stories: '200' 
+          }
+
 
     res.redirect('/searchResultsOrlando/1');
 })
@@ -1169,8 +1195,8 @@ router.get('/orlando/:MLS', function(req, res, next){
 
 
 // CHICAGO
-var db = require('monk')(process.env.MONGOLAB_URI ||'localhost/listingsChicago');
-var listingsChicago = db.get('listingsChicago');
+var db = require('monk')('localhost/listingsChicago');
+var listingsChicago = db.get('listings');
 
 
 // get CHICAGO favorites with promises to render the listings on the page
@@ -1268,7 +1294,7 @@ router.get('/chicago', function(req, res, next){
 
 // / THIS IS A ROUTE WITH PAGINATION FOR ALL CHICAGO LISTINGS
 router.get('/searchResultsChicago/:page', function(req, res, next) {
-  // console.log(req.session.userSearch);
+
       var page = parseInt(req.params.page);
       var size = 25;
       var skip = page > 0 ? ((page - 1) * size) : 0;
@@ -1281,17 +1307,17 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
 
     .then(function(user){
           return listingsChicago.find({ $query: {$and: [ 
-          {city: {$in: req.session.userSearch.city } }, 
-          {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-          {appxsqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-          {beds: {$gte: req.session.userSearch.beds}},
-          {garage: {$gte: req.session.userSearch.garage }},
-          {fullBaths: {$gte: req.session.userSearch.baths}
+          {city: {$in: req.session.Chicago.city } }, 
+          {price: {$gte: Number(req.session.Chicago.minprice), $lte: Number(req.session.Chicago.maxprice)}},
+          {appxsqft: {$gte: Number(req.session.Chicago.minsqft), $lte: Number(req.session.Chicago.maxsqft)}}, 
+          {beds: {$gte: req.session.Chicago.beds}},
+          {garage: {$gte: req.session.Chicago.garage }},
+          {fullBaths: {$gte: req.session.Chicago.baths}
         }]}, $orderby: { price : Number(-1) }
           }, 
 
         function(err, listings){
-             totalRecords.push(listings.length);
+             totalRecords.push(listings);
             totalRecords.push(user[0]);
           return totalRecords
         })   
@@ -1299,12 +1325,12 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
 
         .then(function(totalRecords) {
           listingsChicago.find({ $query: {$and: [ 
-            {city: {$in: req.session.userSearch.city } },
-            {price: {$gte: Number(req.session.userSearch.minprice), $lte: Number(req.session.userSearch.maxprice)}},
-            {appxsqft: {$gte: Number(req.session.userSearch.minsqft), $lte: Number(req.session.userSearch.maxsqft)}}, 
-            {beds: {$gte: req.session.userSearch.beds}},
-            {garage: {$gte: req.session.userSearch.garage }},
-            {fullBaths: {$gte: req.session.userSearch.baths}
+            {city: {$in: req.session.Chicago.city } },
+            {price: {$gte: Number(req.session.Chicago.minprice), $lte: Number(req.session.Chicago.maxprice)}},
+            {appxsqft: {$gte: Number(req.session.Chicago.minsqft), $lte: Number(req.session.Chicago.maxsqft)}}, 
+            {beds: {$gte: req.session.Chicago.beds}},
+            {garage: {$gte: req.session.Chicago.garage }},
+            {fullBaths: {$gte: req.session.Chicago.baths}
           }]}, $orderby: { price : Number(-1) }
        
           }, {skip: skip, limit: size}, function(err, listing){
@@ -1318,7 +1344,7 @@ router.get('/searchResultsChicago/:page', function(req, res, next) {
 // THIS IS THE POST ROUTE TO SAVE SEARCH SETTINGS IN A SESSION FOR THE CHICAGO HOME SEARCH
 router.post('/searchChicago', function(req, res, next){
         if (typeof req.body.city == 'string') {
-        req.session.userSearch = {
+        req.session.Chicago = {
         city: [req.body.city], 
         minprice: Number(req.body.minprice),
         maxprice: Number(req.body.maxprice),
@@ -1330,7 +1356,7 @@ router.post('/searchChicago', function(req, res, next){
         stories: req.body.stories
         }
       } else {
-          req.session.userSearch = {
+          req.session.Chicago = {
           city: req.body.city, 
           minprice: Number(req.body.minprice),
           maxprice: Number(req.body.maxprice),
@@ -1348,8 +1374,18 @@ router.post('/searchChicago', function(req, res, next){
 
 
 // CREATE A POST REQUEST TO SEARCH BY CITY CHICAGO
-router.post('/citySearchChicago', function(req, res, next){
-          req.session.userSearch.city = [req.body.city.toUpperCase()]; 
+router.post('/citySearchChicago', function(req, res, next){ 
+
+          req.session.Chicago = { 
+            city: [req.body.city.trim().toUpperCase()],
+            minprice: 0,
+            maxprice: 999999999,
+            minsqft: 0,
+            maxsqft: 99999,
+            beds: '0',
+            baths: '0',
+            garage: '0' }
+          // console.log(req.session.userSearch);
 
     res.redirect('/searchResultsChicago/1');
 })
