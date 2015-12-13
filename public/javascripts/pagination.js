@@ -8,7 +8,7 @@ var min = Number(window.location.href.split('/')[4]) - 5;
   for (var i = Number(window.location.href.split('/')[4] - 4); i <= max; i++) {
     $('.pageNumber').eq(i).show();
   }
-console.log(Number(window.location.href.split('/')[4]));
+// console.log(Number(window.location.href.split('/')[4]));
 
 $('.pageNumber').eq(Number(window.location.href.split('/')[4] - 1)).addClass('active');
 

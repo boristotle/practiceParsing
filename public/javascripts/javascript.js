@@ -273,6 +273,9 @@ $('#storiesQC').on('change', function (){ localStorage.setItem('storiesQC', this
 
 
 
+
+
+
 });
 
 
